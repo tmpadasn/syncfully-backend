@@ -255,4 +255,44 @@ router.post("/:userId/ratings", (req, res) => {
   });
 });
 
+// Temporary dummy works for recommendations (until /works is implemented)
+function generateFakeWork(id) {
+  return {
+    workId: id,
+    title: `Work ${id}`,
+    description: `Description for work ${id}`,
+    category: "movie",
+    releaseYear: 2024
+  };
+}
+
+/**
+ * GET /users/:userId/recommendations
+ * Retrieve categorized work recommendations for a user
+ */
+router.get("/:userId/recommendations", (req, res) => {
+  const userId = parseInt(req.params.userId);
+  const user = users.find(u => u.id === userId);
+
+  if (!user) {
+    return res.status(404).json({
+      error: "User not found",
+      details: `User with ID ${userId} does not exist`
+    });
+  }
+
+  // Generate dummy lists for now
+  const recommendations = {
+    current: [
+      generateFakeWork(1),
+      generateFakeWork(2)
+    ],
+    profile: [
+      generateFakeWork(3),
+      generateFakeWork(4)
+    ]
+  };
+
+  res.json(recommendations);
+});
 module.exports = router;
