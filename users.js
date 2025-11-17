@@ -70,7 +70,7 @@ router.post("/", (req, res) => {
     email,
     password, // later replace with hashed
     profilePictureUrl: null, // default
-    ratedWorks: []           // empty initially
+    ratedWorks: {}           // empty initially
   };
 
   users.push(newUser);
@@ -186,6 +186,73 @@ router.delete("/:userId", (req, res) => {
 
   users.splice(idx, 1);
   res.status(204).send();
+});
+
+/**
+ * GET /users/:userId/ratings
+ * Retrieve all rated works for the user
+ */
+router.get("/:userId/ratings", (req, res) => {
+  const userId = parseInt(req.params.userId);
+  const user = users.find(u => u.id === userId);
+
+  if (!user) {
+    return res.status(404).json({
+      error: "User not found",
+      details: `User with ID ${userId} does not exist`
+    });
+  }
+
+  // OpenAPI requires a map of workId -> rating object
+  res.json(user.ratedWorks);
+});
+
+/**
+ * POST /users/:userId/ratings
+ * Rate a work for a user
+ */
+/* NEED TO VALIDATE IF workID is available (After work.js is final) */
+router.post("/:userId/ratings", (req, res) => {
+  const userId = parseInt(req.params.userId);
+  const user = users.find(u => u.id === userId);
+
+  if (!user) {
+    return res.status(404).json({
+      error: "User not found",
+      details: `User with ID ${userId} does not exist`
+    });
+  }
+
+  const { workId, ratingValue } = req.body;
+  let errors = [];
+
+  // Validation
+  if (workId === undefined) errors.push("workId is required");
+  if (ratingValue === undefined) errors.push("ratingValue is required");
+
+  if (typeof workId !== "number") errors.push("workId must be a number");
+  if (typeof ratingValue !== "number") errors.push("ratingValue must be a number");
+
+  if (ratingValue < 1 || ratingValue > 5) {
+    errors.push("ratingValue must be between 1 and 5");
+  }
+
+  if (errors.length > 0) {
+    return res.status(400).json({
+      error: "Invalid input",
+      details: errors
+    });
+  }
+
+  // Save rating (as map entry)
+  user.ratedWorks[workId] = {
+    ratingValue,
+    ratedAt: new Date().toISOString()
+  };
+
+  return res.status(200).json({
+    message: "Work rated successfully"
+  });
 });
 
 module.exports = router;
