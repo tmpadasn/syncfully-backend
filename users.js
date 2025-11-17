@@ -1,5 +1,5 @@
-const express = require("express");
-const router = express.Router();
+import { Router } from "express";
+const router = Router();
 
 // Temporary in-memory "database"
 let users = [];
@@ -83,7 +83,7 @@ router.post("/", (req, res) => {
  * GET /users
  * Retrieve all users
  */
-router.get("/", (req, res) => {
+router.get("/", (_req, res) => {
   res.json(users.map(formatUser));
 });
 
@@ -295,4 +295,4 @@ router.get("/:userId/recommendations", (req, res) => {
 
   res.json(recommendations);
 });
-module.exports = router;
+export default router;

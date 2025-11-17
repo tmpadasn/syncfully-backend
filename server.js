@@ -1,19 +1,19 @@
-const express = require("express");
-const cors = require("cors");
+import express, { json } from "express";
+import cors from "cors";
 
-const usersRoutes = require("./users");
+import usersRoutes from "./users";
 
 const app = express();
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+app.use(json());
 
 // Mount users.js on /users
 app.use("/users", usersRoutes);
 
 // Root test route
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
   res.json({ message: "SyncFully API is running!" });
 });
 
@@ -22,3 +22,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+
