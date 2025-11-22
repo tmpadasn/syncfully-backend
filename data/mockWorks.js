@@ -7,7 +7,7 @@ export const mockWorks = [
         year: 2003,
         genres: ['Adventure', 'Drama', 'Fantasy'],
         creator: 'Peter Jackson',
-        coverUrl: 'http://localhost:3000/uploads/covers/lord_of_the-rings.jpg',
+        coverUrl: 'http://localhost:3000/uploads/covers/lord_of_the_rings.jpg',
         foundAt: 'https://www.imdb.com/title/tt0167260/'
     },
     {
