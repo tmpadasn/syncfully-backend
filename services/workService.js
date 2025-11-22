@@ -3,6 +3,7 @@ import { mockWorks, getNextWorkId } from '../data/mockWorks.js';
 import { mockRatings } from '../data/mockRatings.js';
 import { isMongoConnected } from '../config/database.js';
 import { calculateAverageRating } from '../utils/helpers.js';
+import { buildImageUrl } from '../utils/imageHelpers.js';
 
 /**
  * Get work by ID
@@ -14,9 +15,9 @@ export const getWorkById = async (workId) => {
         const work = await Work.findById(workId);
         if (!work) return null;
 
-        // TODO: Calculate rating from ratings collection
         const workData = work.toJSON();
-        workData.rating = 0; // Placeholder
+        workData.rating = 0;
+        workData.coverUrl = buildImageUrl(workData.coverUrl, workData.type);
 
         return workData;
     }
@@ -25,7 +26,6 @@ export const getWorkById = async (workId) => {
     const work = mockWorks.find(w => w.id === parseInt(workId));
     if (!work) return null;
 
-    // Calculate average rating from mock ratings
     const workRatings = mockRatings.filter(r => r.workId === parseInt(workId));
     const rating = calculateAverageRating(workRatings);
 
@@ -38,7 +38,7 @@ export const getWorkById = async (workId) => {
         genres: work.genres,
         creator: work.creator,
         rating,
-        coverUrl: work.coverUrl,
+        coverUrl: buildImageUrl(work.coverUrl, work.type), // Use helper
         foundAt: work.foundAt
     };
 };
