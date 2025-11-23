@@ -90,7 +90,7 @@ export const createUser = async (userData) => {
       username,
       email,
       password,
-      profilePictureUrl: profilePictureUrl || null
+      profilePictureUrl: "http://localhost:3000/uploads/profiles/profile_picture.jpg",
     });
 
     await user.save();
