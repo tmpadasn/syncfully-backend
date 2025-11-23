@@ -307,3 +307,32 @@ export const addUserRating = async (userId, workId, score) => {
     ratedAt: new Date().toISOString()
   };
 };
+
+/**
+ * Authenticate user using mock data (email or username + plain password)
+ * @param {string} identifier - email OR username
+ * @param {string} password - plain text password
+ * @returns {Promise<Object|null>}
+ */
+export const authenticateUser = async (identifier, password) => {
+  // We ignore Mongo here and always use mockUsers, as requested
+  const ident = (identifier || '').toLowerCase();
+
+  const user = mockUsers.find(
+    (u) =>
+      u.email.toLowerCase() === ident ||
+      u.username.toLowerCase() === ident
+  );
+
+  if (!user) return null;
+  if (user.password !== password) return null;
+
+  // Return user in the same shape as getUserById
+  return {
+    userId: user.id,
+    username: user.username,
+    email: user.email,
+    profilePictureUrl: buildImageUrl(user.profilePictureUrl, 'profile'),
+    ratedWorks: Object.keys(user.ratedWorks).length
+  };
+};
