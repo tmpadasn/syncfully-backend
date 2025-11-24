@@ -312,7 +312,7 @@ export const addUserRating = async (userId, workId, score) => {
  * Authenticate user using mock data (email or username + plain password)
  * @param {string} identifier - email OR username
  * @param {string} password - plain text password
- * @returns {Promise<Object|null>}
+ * @returns {Promise<Object>}
  */
 export const authenticateUser = async (identifier, password) => {
   // We ignore Mongo here and always use mockUsers, as requested
@@ -324,8 +324,15 @@ export const authenticateUser = async (identifier, password) => {
       u.username.toLowerCase() === ident
   );
 
-  if (!user) return null;
-  if (user.password !== password) return null;
+  if (!user) {
+    // User not found
+    throw new Error('The user does not exist, please create an account');
+  }
+  
+  if (user.password !== password) {
+    // Wrong password
+    throw new Error('The credentials dont match');
+  }
 
   // Return user in the same shape as getUserById
   return {

@@ -20,14 +20,14 @@ export const login = async (req, res, next) => {
       );
     }
 
-    const user = await authenticateUser(identifier, password);
-
-    if (!user) {
-      return sendError(res, HTTP_STATUS.UNAUTHORIZED, 'Invalid credentials');
+    try {
+      const user = await authenticateUser(identifier, password);
+      // No session, no JWT – just return the user
+      return sendSuccess(res, HTTP_STATUS.OK, user, 'Login successful');
+    } catch (authError) {
+      // authenticateUser throws specific errors for missing user or wrong password
+      return sendError(res, HTTP_STATUS.UNAUTHORIZED, authError.message);
     }
-
-    // No session, no JWT – just return the user
-    return sendSuccess(res, HTTP_STATUS.OK, user, 'Login successful');
   } catch (error) {
     next(error);
   }
