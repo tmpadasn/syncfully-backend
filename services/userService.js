@@ -121,7 +121,7 @@ export const createUser = async (userData) => {
     username,
     email,
     password, // In production, this would be hashed
-    profilePictureUrl: profilePictureUrl || null,
+    profilePictureUrl: profilePictureUrl || "http://localhost:3000/uploads/profiles/profile_picture.jpg",
     ratedWorks: {}
   };
 

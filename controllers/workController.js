@@ -15,7 +15,7 @@ export const getWorkById = async (req, res, next) => {
             return sendError(res, HTTP_STATUS.NOT_FOUND, 'Work not found');
         }
 
-        sendSuccess(res, HTTP_STATUS.OK, { works: [work] });
+        sendSuccess(res, HTTP_STATUS.OK, work);
     } catch (error) {
         next(error);
     }

@@ -89,6 +89,9 @@ export const signup = async (req, res, next) => {
     if (error.message.includes('already exists')) {
       return sendError(res, HTTP_STATUS.BAD_REQUEST, error.message);
     }
+    if (error.message.includes('Invalid email format')) {
+      return sendError(res, HTTP_STATUS.BAD_REQUEST, 'Invalid email format');
+    }
     next(error);
   }
 };
