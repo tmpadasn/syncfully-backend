@@ -57,6 +57,8 @@ export const validateRatingScore = (score) => {
         errors.push('score is required');
     } else if (typeof score !== 'number') {
         errors.push('score must be a number');
+    } else if (!Number.isInteger(score)) {
+        errors.push('score must be an integer (no decimals)');
     } else if (score < RATING_CONSTRAINTS.MIN || score > RATING_CONSTRAINTS.MAX) {
         errors.push(`score must be between ${RATING_CONSTRAINTS.MIN} and ${RATING_CONSTRAINTS.MAX}`);
     }

@@ -10,7 +10,7 @@ export const mockRatings = [
         id: 2,
         userId: 1,
         workId: 25,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-10-07T02:55:04.687Z"
     },
     {
@@ -38,21 +38,21 @@ export const mockRatings = [
         id: 6,
         userId: 1,
         workId: 40,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-29T23:07:45.737Z"
     },
     {
         id: 7,
         userId: 1,
         workId: 3,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-13T02:13:24.815Z"
     },
     {
         id: 8,
         userId: 1,
         workId: 56,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-05-27T07:48:08.240Z"
     },
     {
@@ -66,7 +66,7 @@ export const mockRatings = [
         id: 10,
         userId: 1,
         workId: 67,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-29T14:36:55.886Z"
     },
     {
@@ -87,28 +87,28 @@ export const mockRatings = [
         id: 13,
         userId: 1,
         workId: 61,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-09-11T18:55:00.684Z"
     },
     {
         id: 14,
         userId: 1,
         workId: 15,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-11T11:47:06.199Z"
     },
     {
         id: 15,
         userId: 1,
         workId: 55,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-16T02:46:31.899Z"
     },
     {
         id: 16,
         userId: 1,
         workId: 86,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-28T21:08:14.814Z"
     },
     {
@@ -129,14 +129,14 @@ export const mockRatings = [
         id: 19,
         userId: 1,
         workId: 57,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-27T06:25:37.622Z"
     },
     {
         id: 20,
         userId: 1,
         workId: 52,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-21T09:35:11.183Z"
     },
     {
@@ -164,7 +164,7 @@ export const mockRatings = [
         id: 24,
         userId: 1,
         workId: 90,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-23T13:23:54.752Z"
     },
     {
@@ -185,7 +185,7 @@ export const mockRatings = [
         id: 27,
         userId: 1,
         workId: 35,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-23T06:51:34.998Z"
     },
     {
@@ -199,7 +199,7 @@ export const mockRatings = [
         id: 29,
         userId: 1,
         workId: 2,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-11-23T04:48:25.251Z"
     },
     {
@@ -213,14 +213,14 @@ export const mockRatings = [
         id: 31,
         userId: 1,
         workId: 81,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-11-03T12:45:43.461Z"
     },
     {
         id: 32,
         userId: 1,
         workId: 21,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-18T17:19:59.915Z"
     },
     {
@@ -269,7 +269,7 @@ export const mockRatings = [
         id: 39,
         userId: 1,
         workId: 84,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-05-28T00:04:08.838Z"
     },
     {
@@ -290,7 +290,7 @@ export const mockRatings = [
         id: 42,
         userId: 1,
         workId: 33,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-24T02:38:21.198Z"
     },
     {
@@ -304,14 +304,14 @@ export const mockRatings = [
         id: 44,
         userId: 1,
         workId: 45,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-14T16:31:20.767Z"
     },
     {
         id: 45,
         userId: 1,
         workId: 54,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-24T16:40:04.727Z"
     },
     {
@@ -325,7 +325,7 @@ export const mockRatings = [
         id: 47,
         userId: 1,
         workId: 23,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-05-26T12:16:45.404Z"
     },
     {
@@ -339,21 +339,21 @@ export const mockRatings = [
         id: 49,
         userId: 1,
         workId: 47,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-06T21:34:35.347Z"
     },
     {
         id: 50,
         userId: 1,
         workId: 82,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-31T09:23:50.320Z"
     },
     {
         id: 51,
         userId: 1,
         workId: 41,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-01T09:52:33.672Z"
     },
     {
@@ -374,7 +374,7 @@ export const mockRatings = [
         id: 54,
         userId: 1,
         workId: 24,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-23T16:12:51.537Z"
     },
     {
@@ -388,14 +388,14 @@ export const mockRatings = [
         id: 56,
         userId: 1,
         workId: 85,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-17T05:34:29.334Z"
     },
     {
         id: 57,
         userId: 1,
         workId: 96,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-16T13:33:03.611Z"
     },
     {
@@ -409,14 +409,14 @@ export const mockRatings = [
         id: 59,
         userId: 1,
         workId: 29,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-08-06T13:31:52.981Z"
     },
     {
         id: 60,
         userId: 1,
         workId: 74,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-13T07:12:47.681Z"
     },
     {
@@ -437,28 +437,28 @@ export const mockRatings = [
         id: 63,
         userId: 1,
         workId: 17,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-03T21:42:29.344Z"
     },
     {
         id: 64,
         userId: 1,
         workId: 31,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-25T13:51:00.400Z"
     },
     {
         id: 65,
         userId: 1,
         workId: 12,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-12T18:43:23.386Z"
     },
     {
         id: 66,
         userId: 1,
         workId: 68,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-09T03:31:35.279Z"
     },
     {
@@ -486,28 +486,28 @@ export const mockRatings = [
         id: 70,
         userId: 1,
         workId: 66,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-20T00:03:57.962Z"
     },
     {
         id: 71,
         userId: 1,
         workId: 39,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-02T15:28:37.762Z"
     },
     {
         id: 72,
         userId: 1,
         workId: 22,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-23T19:44:39.289Z"
     },
     {
         id: 73,
         userId: 1,
         workId: 26,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-08-27T17:53:17.530Z"
     },
     {
@@ -535,21 +535,21 @@ export const mockRatings = [
         id: 77,
         userId: 2,
         workId: 94,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-25T03:05:34.937Z"
     },
     {
         id: 78,
         userId: 2,
         workId: 72,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-05-30T03:16:43.288Z"
     },
     {
         id: 79,
         userId: 2,
         workId: 78,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-06-02T06:04:36.399Z"
     },
     {
@@ -563,14 +563,14 @@ export const mockRatings = [
         id: 81,
         userId: 2,
         workId: 3,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-08-28T02:38:34.784Z"
     },
     {
         id: 82,
         userId: 2,
         workId: 31,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-11-25T06:14:20.683Z"
     },
     {
@@ -591,28 +591,28 @@ export const mockRatings = [
         id: 85,
         userId: 2,
         workId: 79,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-07T14:55:45.176Z"
     },
     {
         id: 86,
         userId: 2,
         workId: 26,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-03T00:41:38.118Z"
     },
     {
         id: 87,
         userId: 2,
         workId: 60,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-07-20T11:02:24.882Z"
     },
     {
         id: 88,
         userId: 2,
         workId: 2,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-11-02T04:29:10.240Z"
     },
     {
@@ -626,14 +626,14 @@ export const mockRatings = [
         id: 90,
         userId: 2,
         workId: 56,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-11-16T11:52:12.198Z"
     },
     {
         id: 91,
         userId: 2,
         workId: 23,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-25T05:43:11.915Z"
     },
     {
@@ -647,14 +647,14 @@ export const mockRatings = [
         id: 93,
         userId: 2,
         workId: 4,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-21T15:05:05.845Z"
     },
     {
         id: 94,
         userId: 2,
         workId: 12,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-03T15:14:14.897Z"
     },
     {
@@ -668,7 +668,7 @@ export const mockRatings = [
         id: 96,
         userId: 2,
         workId: 17,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-09-06T16:20:54.298Z"
     },
     {
@@ -696,14 +696,14 @@ export const mockRatings = [
         id: 100,
         userId: 2,
         workId: 77,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-06-25T13:53:45.765Z"
     },
     {
         id: 101,
         userId: 2,
         workId: 38,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-05-28T01:26:11.062Z"
     },
     {
@@ -717,7 +717,7 @@ export const mockRatings = [
         id: 103,
         userId: 2,
         workId: 59,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-21T06:46:40.271Z"
     },
     {
@@ -738,21 +738,21 @@ export const mockRatings = [
         id: 106,
         userId: 2,
         workId: 91,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-08T06:00:10.577Z"
     },
     {
         id: 107,
         userId: 2,
         workId: 75,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-28T04:54:57.640Z"
     },
     {
         id: 108,
         userId: 2,
         workId: 25,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-05-26T08:59:10.707Z"
     },
     {
@@ -787,14 +787,14 @@ export const mockRatings = [
         id: 113,
         userId: 2,
         workId: 64,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-07-18T05:17:42.251Z"
     },
     {
         id: 114,
         userId: 2,
         workId: 18,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-08T10:10:05.725Z"
     },
     {
@@ -808,7 +808,7 @@ export const mockRatings = [
         id: 116,
         userId: 2,
         workId: 71,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-24T23:09:21.641Z"
     },
     {
@@ -822,7 +822,7 @@ export const mockRatings = [
         id: 118,
         userId: 2,
         workId: 13,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-01T15:49:37.267Z"
     },
     {
@@ -850,7 +850,7 @@ export const mockRatings = [
         id: 122,
         userId: 2,
         workId: 9,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-08-02T09:01:24.329Z"
     },
     {
@@ -871,28 +871,28 @@ export const mockRatings = [
         id: 125,
         userId: 2,
         workId: 62,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-08T11:43:29.259Z"
     },
     {
         id: 126,
         userId: 2,
         workId: 76,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-10-19T13:31:50.253Z"
     },
     {
         id: 127,
         userId: 2,
         workId: 55,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-13T16:12:54.989Z"
     },
     {
         id: 128,
         userId: 2,
         workId: 67,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-06T17:58:07.382Z"
     },
     {
@@ -906,14 +906,14 @@ export const mockRatings = [
         id: 130,
         userId: 2,
         workId: 70,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-18T05:53:25.158Z"
     },
     {
         id: 131,
         userId: 2,
         workId: 51,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-08T13:18:28.838Z"
     },
     {
@@ -927,7 +927,7 @@ export const mockRatings = [
         id: 133,
         userId: 2,
         workId: 58,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-28T00:39:24.011Z"
     },
     {
@@ -969,28 +969,28 @@ export const mockRatings = [
         id: 139,
         userId: 2,
         workId: 11,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-11-10T18:27:18.774Z"
     },
     {
         id: 140,
         userId: 2,
         workId: 88,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-10-15T10:35:41.375Z"
     },
     {
         id: 141,
         userId: 2,
         workId: 10,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-10-05T00:03:21.778Z"
     },
     {
         id: 142,
         userId: 2,
         workId: 46,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-24T16:17:31.564Z"
     },
     {
@@ -1018,14 +1018,14 @@ export const mockRatings = [
         id: 146,
         userId: 2,
         workId: 42,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-08T02:56:45.291Z"
     },
     {
         id: 147,
         userId: 2,
         workId: 89,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-29T05:14:32.447Z"
     },
     {
@@ -1039,21 +1039,21 @@ export const mockRatings = [
         id: 149,
         userId: 2,
         workId: 90,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-19T01:49:27.081Z"
     },
     {
         id: 150,
         userId: 2,
         workId: 98,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-19T00:24:59.104Z"
     },
     {
         id: 151,
         userId: 2,
         workId: 81,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-08-12T20:43:05.252Z"
     },
     {
@@ -1067,7 +1067,7 @@ export const mockRatings = [
         id: 153,
         userId: 2,
         workId: 93,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-06T22:01:35.771Z"
     },
     {
@@ -1081,7 +1081,7 @@ export const mockRatings = [
         id: 155,
         userId: 2,
         workId: 43,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-25T23:00:30.740Z"
     },
     {
@@ -1095,7 +1095,7 @@ export const mockRatings = [
         id: 157,
         userId: 2,
         workId: 68,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-08-28T01:04:11.960Z"
     },
     {
@@ -1109,7 +1109,7 @@ export const mockRatings = [
         id: 159,
         userId: 2,
         workId: 87,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-21T12:19:58.719Z"
     },
     {
@@ -1123,7 +1123,7 @@ export const mockRatings = [
         id: 161,
         userId: 2,
         workId: 44,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-07T18:07:35.405Z"
     },
     {
@@ -1151,7 +1151,7 @@ export const mockRatings = [
         id: 165,
         userId: 3,
         workId: 58,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-09T17:33:27.383Z"
     },
     {
@@ -1200,7 +1200,7 @@ export const mockRatings = [
         id: 172,
         userId: 3,
         workId: 21,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-08-19T16:27:11.471Z"
     },
     {
@@ -1214,14 +1214,14 @@ export const mockRatings = [
         id: 174,
         userId: 3,
         workId: 73,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-21T09:16:16.623Z"
     },
     {
         id: 175,
         userId: 3,
         workId: 82,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-08-04T15:59:11.324Z"
     },
     {
@@ -1235,14 +1235,14 @@ export const mockRatings = [
         id: 177,
         userId: 3,
         workId: 98,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-01T02:51:29.875Z"
     },
     {
         id: 178,
         userId: 3,
         workId: 62,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-07-24T22:38:05.050Z"
     },
     {
@@ -1284,7 +1284,7 @@ export const mockRatings = [
         id: 184,
         userId: 3,
         workId: 97,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-10-07T08:27:24.202Z"
     },
     {
@@ -1298,7 +1298,7 @@ export const mockRatings = [
         id: 186,
         userId: 3,
         workId: 53,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-05-27T14:38:37.665Z"
     },
     {
@@ -1326,7 +1326,7 @@ export const mockRatings = [
         id: 190,
         userId: 3,
         workId: 39,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-30T07:16:55.456Z"
     },
     {
@@ -1340,14 +1340,14 @@ export const mockRatings = [
         id: 192,
         userId: 3,
         workId: 36,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-07-03T04:18:47.018Z"
     },
     {
         id: 193,
         userId: 3,
         workId: 86,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-06-13T08:25:03.829Z"
     },
     {
@@ -1361,14 +1361,14 @@ export const mockRatings = [
         id: 195,
         userId: 3,
         workId: 18,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-18T20:10:33.828Z"
     },
     {
         id: 196,
         userId: 3,
         workId: 77,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-11-04T01:49:55.301Z"
     },
     {
@@ -1389,7 +1389,7 @@ export const mockRatings = [
         id: 199,
         userId: 3,
         workId: 50,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-10-17T10:01:16.375Z"
     },
     {
@@ -1424,21 +1424,21 @@ export const mockRatings = [
         id: 204,
         userId: 3,
         workId: 35,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-11-02T06:32:50.875Z"
     },
     {
         id: 205,
         userId: 3,
         workId: 67,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-08-14T18:20:15.268Z"
     },
     {
         id: 206,
         userId: 3,
         workId: 59,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-11-25T20:43:28.847Z"
     },
     {
@@ -1452,28 +1452,28 @@ export const mockRatings = [
         id: 208,
         userId: 3,
         workId: 55,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-07-23T14:49:52.896Z"
     },
     {
         id: 209,
         userId: 3,
         workId: 64,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-30T17:11:01.275Z"
     },
     {
         id: 210,
         userId: 3,
         workId: 66,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-08T04:31:23.577Z"
     },
     {
         id: 211,
         userId: 3,
         workId: 54,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-07-19T08:45:48.853Z"
     },
     {
@@ -1487,21 +1487,21 @@ export const mockRatings = [
         id: 213,
         userId: 3,
         workId: 80,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-08-03T08:20:28.137Z"
     },
     {
         id: 214,
         userId: 3,
         workId: 7,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-29T19:26:51.333Z"
     },
     {
         id: 215,
         userId: 3,
         workId: 27,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-06T01:50:10.437Z"
     },
     {
@@ -1515,21 +1515,21 @@ export const mockRatings = [
         id: 217,
         userId: 3,
         workId: 72,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-04T10:54:33.050Z"
     },
     {
         id: 218,
         userId: 3,
         workId: 94,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-03T11:49:01.426Z"
     },
     {
         id: 219,
         userId: 3,
         workId: 89,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-11-05T14:05:11.712Z"
     },
     {
@@ -1543,7 +1543,7 @@ export const mockRatings = [
         id: 221,
         userId: 3,
         workId: 60,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-22T03:12:34.872Z"
     },
     {
@@ -1557,7 +1557,7 @@ export const mockRatings = [
         id: 223,
         userId: 3,
         workId: 68,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-15T14:28:34.548Z"
     },
     {
@@ -1571,42 +1571,42 @@ export const mockRatings = [
         id: 225,
         userId: 3,
         workId: 85,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-12T13:41:05.786Z"
     },
     {
         id: 226,
         userId: 3,
         workId: 10,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-16T07:53:53.204Z"
     },
     {
         id: 227,
         userId: 3,
         workId: 61,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-08T20:02:35.950Z"
     },
     {
         id: 228,
         userId: 3,
         workId: 63,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-17T02:24:43.209Z"
     },
     {
         id: 229,
         userId: 3,
         workId: 57,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-10T06:38:37.364Z"
     },
     {
         id: 230,
         userId: 3,
         workId: 51,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-10-29T01:06:20.059Z"
     },
     {
@@ -1627,21 +1627,21 @@ export const mockRatings = [
         id: 233,
         userId: 3,
         workId: 13,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-10-16T18:06:16.418Z"
     },
     {
         id: 234,
         userId: 3,
         workId: 84,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-07-07T15:38:23.898Z"
     },
     {
         id: 235,
         userId: 3,
         workId: 91,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-01T16:51:55.977Z"
     },
     {
@@ -1662,7 +1662,7 @@ export const mockRatings = [
         id: 238,
         userId: 3,
         workId: 28,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-11T02:12:35.364Z"
     },
     {
@@ -1697,7 +1697,7 @@ export const mockRatings = [
         id: 243,
         userId: 4,
         workId: 3,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-11-03T12:49:38.927Z"
     },
     {
@@ -1725,7 +1725,7 @@ export const mockRatings = [
         id: 247,
         userId: 4,
         workId: 36,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-14T14:53:54.888Z"
     },
     {
@@ -1739,14 +1739,14 @@ export const mockRatings = [
         id: 249,
         userId: 4,
         workId: 28,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-06-24T00:03:35.472Z"
     },
     {
         id: 250,
         userId: 4,
         workId: 58,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-19T02:44:03.420Z"
     },
     {
@@ -1774,28 +1774,28 @@ export const mockRatings = [
         id: 254,
         userId: 4,
         workId: 80,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-29T12:44:41.992Z"
     },
     {
         id: 255,
         userId: 4,
         workId: 68,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-09T14:32:39.488Z"
     },
     {
         id: 256,
         userId: 4,
         workId: 2,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-10-31T07:08:00.215Z"
     },
     {
         id: 257,
         userId: 4,
         workId: 73,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-17T06:26:49.430Z"
     },
     {
@@ -1809,7 +1809,7 @@ export const mockRatings = [
         id: 259,
         userId: 4,
         workId: 32,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-27T05:20:49.202Z"
     },
     {
@@ -1837,7 +1837,7 @@ export const mockRatings = [
         id: 263,
         userId: 4,
         workId: 84,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-11-12T23:17:25.964Z"
     },
     {
@@ -1858,21 +1858,21 @@ export const mockRatings = [
         id: 266,
         userId: 4,
         workId: 66,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-21T14:10:01.214Z"
     },
     {
         id: 267,
         userId: 4,
         workId: 6,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-28T08:17:23.430Z"
     },
     {
         id: 268,
         userId: 4,
         workId: 57,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-11T19:19:09.670Z"
     },
     {
@@ -1907,14 +1907,14 @@ export const mockRatings = [
         id: 273,
         userId: 4,
         workId: 38,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-10T17:13:05.457Z"
     },
     {
         id: 274,
         userId: 4,
         workId: 56,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-11-14T16:56:29.108Z"
     },
     {
@@ -1928,14 +1928,14 @@ export const mockRatings = [
         id: 276,
         userId: 4,
         workId: 65,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-15T05:29:24.473Z"
     },
     {
         id: 277,
         userId: 4,
         workId: 77,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-13T02:39:37.508Z"
     },
     {
@@ -1977,70 +1977,70 @@ export const mockRatings = [
         id: 283,
         userId: 4,
         workId: 20,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-09T02:51:40.045Z"
     },
     {
         id: 284,
         userId: 4,
         workId: 62,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-01T08:40:33.727Z"
     },
     {
         id: 285,
         userId: 4,
         workId: 33,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-21T14:19:14.590Z"
     },
     {
         id: 286,
         userId: 4,
         workId: 12,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-09T18:14:10.250Z"
     },
     {
         id: 287,
         userId: 4,
         workId: 54,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-09-17T19:19:19.747Z"
     },
     {
         id: 288,
         userId: 4,
         workId: 61,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-07-03T04:49:30.630Z"
     },
     {
         id: 289,
         userId: 4,
         workId: 43,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-20T16:48:15.091Z"
     },
     {
         id: 290,
         userId: 4,
         workId: 16,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-11T17:12:30.145Z"
     },
     {
         id: 291,
         userId: 4,
         workId: 37,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-10-20T14:11:04.625Z"
     },
     {
         id: 292,
         userId: 4,
         workId: 48,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-13T10:43:08.222Z"
     },
     {
@@ -2096,7 +2096,7 @@ export const mockRatings = [
         id: 300,
         userId: 4,
         workId: 18,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-25T06:03:31.438Z"
     },
     {
@@ -2110,7 +2110,7 @@ export const mockRatings = [
         id: 302,
         userId: 4,
         workId: 42,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-06-22T17:53:02.604Z"
     },
     {
@@ -2131,14 +2131,14 @@ export const mockRatings = [
         id: 305,
         userId: 4,
         workId: 1,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-11-16T21:45:23.102Z"
     },
     {
         id: 306,
         userId: 4,
         workId: 47,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-08-21T17:07:21.124Z"
     },
     {
@@ -2159,21 +2159,21 @@ export const mockRatings = [
         id: 309,
         userId: 4,
         workId: 55,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-11-20T13:27:27.122Z"
     },
     {
         id: 310,
         userId: 4,
         workId: 97,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-07-20T08:53:01.736Z"
     },
     {
         id: 311,
         userId: 4,
         workId: 100,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-13T23:30:21.898Z"
     },
     {
@@ -2187,7 +2187,7 @@ export const mockRatings = [
         id: 313,
         userId: 5,
         workId: 49,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-03T11:04:42.021Z"
     },
     {
@@ -2201,14 +2201,14 @@ export const mockRatings = [
         id: 315,
         userId: 5,
         workId: 4,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-10-20T16:55:46.351Z"
     },
     {
         id: 316,
         userId: 5,
         workId: 41,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-06-28T18:04:44.970Z"
     },
     {
@@ -2222,14 +2222,14 @@ export const mockRatings = [
         id: 318,
         userId: 5,
         workId: 24,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-12T19:07:59.042Z"
     },
     {
         id: 319,
         userId: 5,
         workId: 7,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-06-13T04:16:42.458Z"
     },
     {
@@ -2250,7 +2250,7 @@ export const mockRatings = [
         id: 322,
         userId: 5,
         workId: 1,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-28T20:01:44.193Z"
     },
     {
@@ -2271,21 +2271,21 @@ export const mockRatings = [
         id: 325,
         userId: 5,
         workId: 9,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-30T10:26:43.523Z"
     },
     {
         id: 326,
         userId: 5,
         workId: 23,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-26T06:53:53.846Z"
     },
     {
         id: 327,
         userId: 5,
         workId: 15,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-09T07:12:45.561Z"
     },
     {
@@ -2299,7 +2299,7 @@ export const mockRatings = [
         id: 329,
         userId: 5,
         workId: 81,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-07T00:19:20.717Z"
     },
     {
@@ -2313,14 +2313,14 @@ export const mockRatings = [
         id: 331,
         userId: 5,
         workId: 98,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-10-05T12:51:45.641Z"
     },
     {
         id: 332,
         userId: 5,
         workId: 30,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-29T00:27:28.381Z"
     },
     {
@@ -2334,14 +2334,14 @@ export const mockRatings = [
         id: 334,
         userId: 5,
         workId: 91,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-24T14:54:49.068Z"
     },
     {
         id: 335,
         userId: 5,
         workId: 60,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-10-08T21:01:09.277Z"
     },
     {
@@ -2355,7 +2355,7 @@ export const mockRatings = [
         id: 337,
         userId: 5,
         workId: 19,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-10-01T02:53:25.128Z"
     },
     {
@@ -2369,7 +2369,7 @@ export const mockRatings = [
         id: 339,
         userId: 5,
         workId: 79,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-10T22:24:38.787Z"
     },
     {
@@ -2383,14 +2383,14 @@ export const mockRatings = [
         id: 341,
         userId: 5,
         workId: 27,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-10-26T07:59:38.808Z"
     },
     {
         id: 342,
         userId: 5,
         workId: 31,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-25T16:25:43.911Z"
     },
     {
@@ -2411,21 +2411,21 @@ export const mockRatings = [
         id: 345,
         userId: 5,
         workId: 18,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-09-19T04:37:53.191Z"
     },
     {
         id: 346,
         userId: 5,
         workId: 50,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-29T04:14:45.104Z"
     },
     {
         id: 347,
         userId: 5,
         workId: 5,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-09-11T11:33:26.158Z"
     },
     {
@@ -2439,7 +2439,7 @@ export const mockRatings = [
         id: 349,
         userId: 5,
         workId: 62,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-07T06:06:28.245Z"
     },
     {
@@ -2453,21 +2453,21 @@ export const mockRatings = [
         id: 351,
         userId: 5,
         workId: 77,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-26T18:31:01.991Z"
     },
     {
         id: 352,
         userId: 5,
         workId: 34,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-24T20:06:55.782Z"
     },
     {
         id: 353,
         userId: 5,
         workId: 6,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-21T19:06:35.898Z"
     },
     {
@@ -2481,21 +2481,21 @@ export const mockRatings = [
         id: 355,
         userId: 5,
         workId: 33,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-10-28T23:04:07.621Z"
     },
     {
         id: 356,
         userId: 5,
         workId: 96,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-05T07:43:30.475Z"
     },
     {
         id: 357,
         userId: 5,
         workId: 80,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-15T22:20:42.606Z"
     },
     {
@@ -2516,28 +2516,28 @@ export const mockRatings = [
         id: 360,
         userId: 5,
         workId: 47,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-03T22:13:02.250Z"
     },
     {
         id: 361,
         userId: 5,
         workId: 71,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-13T17:26:59.240Z"
     },
     {
         id: 362,
         userId: 5,
         workId: 25,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-22T09:21:09.492Z"
     },
     {
         id: 363,
         userId: 5,
         workId: 43,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-17T02:06:44.864Z"
     },
     {
@@ -2551,7 +2551,7 @@ export const mockRatings = [
         id: 365,
         userId: 5,
         workId: 68,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-10T23:13:34.127Z"
     },
     {
@@ -2565,28 +2565,28 @@ export const mockRatings = [
         id: 367,
         userId: 5,
         workId: 86,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-10-21T01:31:54.109Z"
     },
     {
         id: 368,
         userId: 5,
         workId: 89,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-22T22:19:34.105Z"
     },
     {
         id: 369,
         userId: 5,
         workId: 53,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-21T05:17:57.783Z"
     },
     {
         id: 370,
         userId: 5,
         workId: 66,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-06-19T23:34:16.945Z"
     },
     {
@@ -2614,14 +2614,14 @@ export const mockRatings = [
         id: 374,
         userId: 5,
         workId: 92,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-11-22T04:57:14.397Z"
     },
     {
         id: 375,
         userId: 5,
         workId: 64,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-11-16T20:18:52.912Z"
     },
     {
@@ -2635,7 +2635,7 @@ export const mockRatings = [
         id: 377,
         userId: 5,
         workId: 84,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-28T10:06:26.920Z"
     },
     {
@@ -2649,7 +2649,7 @@ export const mockRatings = [
         id: 379,
         userId: 5,
         workId: 63,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-20T00:33:14.229Z"
     },
     {
@@ -2663,7 +2663,7 @@ export const mockRatings = [
         id: 381,
         userId: 5,
         workId: 11,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-11-17T13:13:19.894Z"
     },
     {
@@ -2705,28 +2705,28 @@ export const mockRatings = [
         id: 387,
         userId: 5,
         workId: 73,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-20T19:32:11.124Z"
     },
     {
         id: 388,
         userId: 5,
         workId: 39,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-08-20T03:39:26.185Z"
     },
     {
         id: 389,
         userId: 5,
         workId: 22,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-18T07:12:24.489Z"
     },
     {
         id: 390,
         userId: 5,
         workId: 72,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-13T14:27:15.317Z"
     },
     {
@@ -2747,21 +2747,21 @@ export const mockRatings = [
         id: 393,
         userId: 5,
         workId: 58,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-09-09T15:20:14.415Z"
     },
     {
         id: 394,
         userId: 6,
         workId: 61,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-27T04:20:18.532Z"
     },
     {
         id: 395,
         userId: 6,
         workId: 23,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-10-21T07:12:22.356Z"
     },
     {
@@ -2775,35 +2775,35 @@ export const mockRatings = [
         id: 397,
         userId: 6,
         workId: 41,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-07-23T23:32:15.447Z"
     },
     {
         id: 398,
         userId: 6,
         workId: 69,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-06T08:13:23.571Z"
     },
     {
         id: 399,
         userId: 6,
         workId: 58,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-10-20T14:34:14.990Z"
     },
     {
         id: 400,
         userId: 6,
         workId: 56,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-14T01:44:11.981Z"
     },
     {
         id: 401,
         userId: 6,
         workId: 86,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-28T18:16:42.325Z"
     },
     {
@@ -2831,7 +2831,7 @@ export const mockRatings = [
         id: 405,
         userId: 6,
         workId: 78,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-30T12:11:41.710Z"
     },
     {
@@ -2866,7 +2866,7 @@ export const mockRatings = [
         id: 410,
         userId: 6,
         workId: 71,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-08-22T00:24:13.425Z"
     },
     {
@@ -2908,28 +2908,28 @@ export const mockRatings = [
         id: 416,
         userId: 6,
         workId: 40,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-09T19:08:04.348Z"
     },
     {
         id: 417,
         userId: 6,
         workId: 48,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-08-30T09:27:16.238Z"
     },
     {
         id: 418,
         userId: 6,
         workId: 59,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-07T23:15:27.199Z"
     },
     {
         id: 419,
         userId: 6,
         workId: 83,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-18T01:57:56.983Z"
     },
     {
@@ -2957,7 +2957,7 @@ export const mockRatings = [
         id: 423,
         userId: 6,
         workId: 35,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-09-20T15:42:27.276Z"
     },
     {
@@ -2985,7 +2985,7 @@ export const mockRatings = [
         id: 427,
         userId: 6,
         workId: 60,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-06T00:50:13.461Z"
     },
     {
@@ -2999,42 +2999,42 @@ export const mockRatings = [
         id: 429,
         userId: 6,
         workId: 99,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-17T14:05:19.510Z"
     },
     {
         id: 430,
         userId: 6,
         workId: 81,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-10-02T07:10:44.675Z"
     },
     {
         id: 431,
         userId: 6,
         workId: 85,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-08-03T05:21:34.016Z"
     },
     {
         id: 432,
         userId: 6,
         workId: 57,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-15T10:54:09.737Z"
     },
     {
         id: 433,
         userId: 6,
         workId: 72,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-11-02T04:07:00.316Z"
     },
     {
         id: 434,
         userId: 6,
         workId: 75,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-09T01:47:00.512Z"
     },
     {
@@ -3055,21 +3055,21 @@ export const mockRatings = [
         id: 437,
         userId: 6,
         workId: 2,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-10-28T21:12:56.770Z"
     },
     {
         id: 438,
         userId: 6,
         workId: 44,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-09-03T19:55:30.171Z"
     },
     {
         id: 439,
         userId: 6,
         workId: 95,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-06-22T10:23:26.738Z"
     },
     {
@@ -3083,7 +3083,7 @@ export const mockRatings = [
         id: 441,
         userId: 6,
         workId: 22,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-10-02T10:01:10.859Z"
     },
     {
@@ -3097,63 +3097,63 @@ export const mockRatings = [
         id: 443,
         userId: 6,
         workId: 54,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-11-09T04:06:22.916Z"
     },
     {
         id: 444,
         userId: 6,
         workId: 11,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-08-18T04:59:35.931Z"
     },
     {
         id: 445,
         userId: 6,
         workId: 43,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-31T17:50:57.357Z"
     },
     {
         id: 446,
         userId: 6,
         workId: 9,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-11-02T17:40:28.189Z"
     },
     {
         id: 447,
         userId: 6,
         workId: 4,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-07-10T14:06:30.818Z"
     },
     {
         id: 448,
         userId: 6,
         workId: 64,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-20T15:39:57.717Z"
     },
     {
         id: 449,
         userId: 6,
         workId: 50,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-08-16T21:37:19.708Z"
     },
     {
         id: 450,
         userId: 6,
         workId: 30,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-13T16:02:26.290Z"
     },
     {
         id: 451,
         userId: 6,
         workId: 90,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-07T04:56:35.548Z"
     },
     {
@@ -3181,7 +3181,7 @@ export const mockRatings = [
         id: 455,
         userId: 6,
         workId: 51,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-27T09:02:00.236Z"
     },
     {
@@ -3195,7 +3195,7 @@ export const mockRatings = [
         id: 457,
         userId: 6,
         workId: 19,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-09-18T23:15:17.164Z"
     },
     {
@@ -3209,21 +3209,21 @@ export const mockRatings = [
         id: 459,
         userId: 6,
         workId: 24,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-07-29T19:01:27.963Z"
     },
     {
         id: 460,
         userId: 6,
         workId: 63,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-11T12:29:31.906Z"
     },
     {
         id: 461,
         userId: 6,
         workId: 76,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-07-21T22:37:14.215Z"
     },
     {
@@ -3237,7 +3237,7 @@ export const mockRatings = [
         id: 463,
         userId: 6,
         workId: 55,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-11-25T21:51:34.549Z"
     },
     {
@@ -3251,28 +3251,28 @@ export const mockRatings = [
         id: 465,
         userId: 6,
         workId: 88,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-22T16:54:07.561Z"
     },
     {
         id: 466,
         userId: 6,
         workId: 6,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-10-19T12:11:04.951Z"
     },
     {
         id: 467,
         userId: 6,
         workId: 26,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-24T21:19:45.428Z"
     },
     {
         id: 468,
         userId: 6,
         workId: 66,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-20T08:28:08.321Z"
     },
     {
@@ -3293,7 +3293,7 @@ export const mockRatings = [
         id: 471,
         userId: 6,
         workId: 36,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-05-30T20:31:50.782Z"
     },
     {
@@ -3307,7 +3307,7 @@ export const mockRatings = [
         id: 473,
         userId: 6,
         workId: 32,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-05-26T16:28:29.535Z"
     },
     {
@@ -3328,21 +3328,21 @@ export const mockRatings = [
         id: 476,
         userId: 6,
         workId: 80,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-10-19T05:30:27.293Z"
     },
     {
         id: 477,
         userId: 6,
         workId: 17,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-11-20T06:21:16.614Z"
     },
     {
         id: 478,
         userId: 6,
         workId: 49,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-08-25T06:42:54.262Z"
     },
     {
@@ -3370,7 +3370,7 @@ export const mockRatings = [
         id: 482,
         userId: 7,
         workId: 32,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-24T13:24:07.873Z"
     },
     {
@@ -3391,7 +3391,7 @@ export const mockRatings = [
         id: 485,
         userId: 7,
         workId: 37,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-09-11T03:56:40.847Z"
     },
     {
@@ -3405,7 +3405,7 @@ export const mockRatings = [
         id: 487,
         userId: 7,
         workId: 4,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-15T00:00:29.237Z"
     },
     {
@@ -3419,7 +3419,7 @@ export const mockRatings = [
         id: 489,
         userId: 7,
         workId: 12,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-08-08T21:05:42.015Z"
     },
     {
@@ -3440,21 +3440,21 @@ export const mockRatings = [
         id: 492,
         userId: 7,
         workId: 95,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-27T16:20:03.678Z"
     },
     {
         id: 493,
         userId: 7,
         workId: 14,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-11T21:38:42.634Z"
     },
     {
         id: 494,
         userId: 7,
         workId: 27,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-10-07T05:27:40.416Z"
     },
     {
@@ -3482,14 +3482,14 @@ export const mockRatings = [
         id: 498,
         userId: 7,
         workId: 97,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-09-03T09:57:12.841Z"
     },
     {
         id: 499,
         userId: 7,
         workId: 59,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-19T16:35:10.229Z"
     },
     {
@@ -3538,28 +3538,28 @@ export const mockRatings = [
         id: 506,
         userId: 7,
         workId: 24,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-22T16:40:03.425Z"
     },
     {
         id: 507,
         userId: 7,
         workId: 35,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-05T02:13:45.332Z"
     },
     {
         id: 508,
         userId: 7,
         workId: 80,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-18T23:54:32.014Z"
     },
     {
         id: 509,
         userId: 7,
         workId: 13,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-07-30T22:54:48.526Z"
     },
     {
@@ -3594,7 +3594,7 @@ export const mockRatings = [
         id: 514,
         userId: 7,
         workId: 30,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-08-31T18:52:38.226Z"
     },
     {
@@ -3608,7 +3608,7 @@ export const mockRatings = [
         id: 516,
         userId: 7,
         workId: 86,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-08T16:13:04.080Z"
     },
     {
@@ -3622,7 +3622,7 @@ export const mockRatings = [
         id: 518,
         userId: 7,
         workId: 5,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-25T06:18:45.063Z"
     },
     {
@@ -3650,7 +3650,7 @@ export const mockRatings = [
         id: 522,
         userId: 7,
         workId: 94,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-06T19:27:30.093Z"
     },
     {
@@ -3678,7 +3678,7 @@ export const mockRatings = [
         id: 526,
         userId: 7,
         workId: 7,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-07-09T17:31:27.990Z"
     },
     {
@@ -3699,7 +3699,7 @@ export const mockRatings = [
         id: 529,
         userId: 7,
         workId: 8,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-07-06T03:08:09.849Z"
     },
     {
@@ -3713,14 +3713,14 @@ export const mockRatings = [
         id: 531,
         userId: 7,
         workId: 99,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-08-11T20:32:48.221Z"
     },
     {
         id: 532,
         userId: 7,
         workId: 84,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-06T21:51:34.190Z"
     },
     {
@@ -3748,28 +3748,28 @@ export const mockRatings = [
         id: 536,
         userId: 7,
         workId: 28,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-10-27T19:59:46.777Z"
     },
     {
         id: 537,
         userId: 7,
         workId: 72,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-08-19T12:59:04.153Z"
     },
     {
         id: 538,
         userId: 7,
         workId: 40,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-10-06T17:24:44.671Z"
     },
     {
         id: 539,
         userId: 7,
         workId: 82,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-17T17:29:23.243Z"
     },
     {
@@ -3783,14 +3783,14 @@ export const mockRatings = [
         id: 541,
         userId: 7,
         workId: 92,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-10T13:02:03.948Z"
     },
     {
         id: 542,
         userId: 7,
         workId: 66,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-09-21T22:18:27.280Z"
     },
     {
@@ -3811,21 +3811,21 @@ export const mockRatings = [
         id: 545,
         userId: 7,
         workId: 68,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-23T07:44:17.779Z"
     },
     {
         id: 546,
         userId: 7,
         workId: 85,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-07-11T14:04:08.439Z"
     },
     {
         id: 547,
         userId: 7,
         workId: 23,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-11-05T15:03:22.858Z"
     },
     {
@@ -3853,7 +3853,7 @@ export const mockRatings = [
         id: 551,
         userId: 7,
         workId: 70,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-08-24T10:57:40.744Z"
     },
     {
@@ -3881,14 +3881,14 @@ export const mockRatings = [
         id: 555,
         userId: 7,
         workId: 69,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-11-08T10:47:14.770Z"
     },
     {
         id: 556,
         userId: 7,
         workId: 50,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-10-25T08:42:19.253Z"
     },
     {
@@ -3902,14 +3902,14 @@ export const mockRatings = [
         id: 558,
         userId: 7,
         workId: 98,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-05-31T16:28:25.500Z"
     },
     {
         id: 559,
         userId: 7,
         workId: 31,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-08-23T05:05:48.411Z"
     },
     {
@@ -3937,7 +3937,7 @@ export const mockRatings = [
         id: 563,
         userId: 7,
         workId: 77,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-05-30T18:40:33.962Z"
     },
     {
@@ -3951,7 +3951,7 @@ export const mockRatings = [
         id: 565,
         userId: 7,
         workId: 19,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-17T19:50:25.237Z"
     },
     {
@@ -3965,7 +3965,7 @@ export const mockRatings = [
         id: 567,
         userId: 7,
         workId: 42,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-06T12:44:05.257Z"
     },
     {
@@ -3979,7 +3979,7 @@ export const mockRatings = [
         id: 569,
         userId: 7,
         workId: 96,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-13T08:52:45.814Z"
     },
     {
@@ -4007,21 +4007,21 @@ export const mockRatings = [
         id: 573,
         userId: 8,
         workId: 57,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-07-06T05:43:46.317Z"
     },
     {
         id: 574,
         userId: 8,
         workId: 16,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-10-23T18:03:53.948Z"
     },
     {
         id: 575,
         userId: 8,
         workId: 8,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-13T01:25:56.584Z"
     },
     {
@@ -4063,14 +4063,14 @@ export const mockRatings = [
         id: 581,
         userId: 8,
         workId: 72,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-09-27T03:27:05.797Z"
     },
     {
         id: 582,
         userId: 8,
         workId: 75,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-08-24T22:02:59.152Z"
     },
     {
@@ -4084,56 +4084,56 @@ export const mockRatings = [
         id: 584,
         userId: 8,
         workId: 71,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-26T06:43:43.467Z"
     },
     {
         id: 585,
         userId: 8,
         workId: 92,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-07-15T12:43:36.590Z"
     },
     {
         id: 586,
         userId: 8,
         workId: 5,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-09-20T00:02:09.733Z"
     },
     {
         id: 587,
         userId: 8,
         workId: 11,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-05T13:39:59.083Z"
     },
     {
         id: 588,
         userId: 8,
         workId: 2,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-09-06T09:55:54.887Z"
     },
     {
         id: 589,
         userId: 8,
         workId: 69,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-09-17T19:34:15.122Z"
     },
     {
         id: 590,
         userId: 8,
         workId: 58,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-03T20:50:24.220Z"
     },
     {
         id: 591,
         userId: 8,
         workId: 73,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-07-11T08:12:58.984Z"
     },
     {
@@ -4161,21 +4161,21 @@ export const mockRatings = [
         id: 595,
         userId: 8,
         workId: 42,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-10-08T02:53:11.441Z"
     },
     {
         id: 596,
         userId: 8,
         workId: 37,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-11-22T17:53:21.013Z"
     },
     {
         id: 597,
         userId: 8,
         workId: 17,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-06-25T09:58:32.013Z"
     },
     {
@@ -4189,7 +4189,7 @@ export const mockRatings = [
         id: 599,
         userId: 8,
         workId: 12,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-08-05T20:22:56.895Z"
     },
     {
@@ -4224,7 +4224,7 @@ export const mockRatings = [
         id: 604,
         userId: 8,
         workId: 88,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-06T09:29:57.124Z"
     },
     {
@@ -4245,14 +4245,14 @@ export const mockRatings = [
         id: 607,
         userId: 8,
         workId: 56,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-08-30T12:27:59.545Z"
     },
     {
         id: 608,
         userId: 8,
         workId: 35,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-11-18T06:56:15.055Z"
     },
     {
@@ -4280,7 +4280,7 @@ export const mockRatings = [
         id: 612,
         userId: 8,
         workId: 36,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-19T04:17:32.693Z"
     },
     {
@@ -4294,7 +4294,7 @@ export const mockRatings = [
         id: 614,
         userId: 8,
         workId: 100,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-07T15:46:28.634Z"
     },
     {
@@ -4308,21 +4308,21 @@ export const mockRatings = [
         id: 616,
         userId: 8,
         workId: 43,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-05-30T19:55:43.651Z"
     },
     {
         id: 617,
         userId: 8,
         workId: 25,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-09-04T17:57:04.557Z"
     },
     {
         id: 618,
         userId: 8,
         workId: 78,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-09-07T23:58:09.537Z"
     },
     {
@@ -4336,7 +4336,7 @@ export const mockRatings = [
         id: 620,
         userId: 8,
         workId: 67,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-07-04T19:09:55.443Z"
     },
     {
@@ -4350,14 +4350,14 @@ export const mockRatings = [
         id: 622,
         userId: 8,
         workId: 15,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-06-28T17:13:34.248Z"
     },
     {
         id: 623,
         userId: 8,
         workId: 55,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-10T12:20:37.110Z"
     },
     {
@@ -4371,14 +4371,14 @@ export const mockRatings = [
         id: 625,
         userId: 8,
         workId: 66,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-07T19:52:02.175Z"
     },
     {
         id: 626,
         userId: 8,
         workId: 24,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-16T01:15:05.817Z"
     },
     {
@@ -4392,7 +4392,7 @@ export const mockRatings = [
         id: 628,
         userId: 8,
         workId: 83,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-11-13T01:25:36.203Z"
     },
     {
@@ -4462,7 +4462,7 @@ export const mockRatings = [
         id: 638,
         userId: 8,
         workId: 52,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-07-02T16:53:06.512Z"
     },
     {
@@ -4483,7 +4483,7 @@ export const mockRatings = [
         id: 641,
         userId: 8,
         workId: 3,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-06-20T12:35:00.167Z"
     },
     {
@@ -4497,14 +4497,14 @@ export const mockRatings = [
         id: 643,
         userId: 8,
         workId: 32,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-09-28T23:38:37.771Z"
     },
     {
         id: 644,
         userId: 8,
         workId: 86,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-28T07:29:36.768Z"
     },
     {
@@ -4525,14 +4525,14 @@ export const mockRatings = [
         id: 647,
         userId: 8,
         workId: 59,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-07-13T00:50:09.501Z"
     },
     {
         id: 648,
         userId: 8,
         workId: 53,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-10-18T04:05:13.662Z"
     },
     {
@@ -4546,14 +4546,14 @@ export const mockRatings = [
         id: 650,
         userId: 9,
         workId: 73,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-03T23:13:44.386Z"
     },
     {
         id: 651,
         userId: 9,
         workId: 4,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-07-14T20:26:56.604Z"
     },
     {
@@ -4567,7 +4567,7 @@ export const mockRatings = [
         id: 653,
         userId: 9,
         workId: 71,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-08-25T14:46:22.590Z"
     },
     {
@@ -4581,14 +4581,14 @@ export const mockRatings = [
         id: 655,
         userId: 9,
         workId: 3,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-07-14T06:55:49.112Z"
     },
     {
         id: 656,
         userId: 9,
         workId: 52,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-07-09T06:22:04.949Z"
     },
     {
@@ -4602,14 +4602,14 @@ export const mockRatings = [
         id: 658,
         userId: 9,
         workId: 24,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-05-31T07:18:54.495Z"
     },
     {
         id: 659,
         userId: 9,
         workId: 53,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-11-02T16:05:07.205Z"
     },
     {
@@ -4644,14 +4644,14 @@ export const mockRatings = [
         id: 664,
         userId: 9,
         workId: 99,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-10-27T22:41:52.355Z"
     },
     {
         id: 665,
         userId: 9,
         workId: 21,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-14T07:26:29.639Z"
     },
     {
@@ -4665,7 +4665,7 @@ export const mockRatings = [
         id: 667,
         userId: 9,
         workId: 76,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-18T10:48:07.610Z"
     },
     {
@@ -4700,7 +4700,7 @@ export const mockRatings = [
         id: 672,
         userId: 9,
         workId: 62,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-18T08:52:37.199Z"
     },
     {
@@ -4735,28 +4735,28 @@ export const mockRatings = [
         id: 677,
         userId: 9,
         workId: 6,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-08-28T08:20:16.492Z"
     },
     {
         id: 678,
         userId: 9,
         workId: 26,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-15T19:39:07.956Z"
     },
     {
         id: 679,
         userId: 9,
         workId: 56,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-09-29T11:28:00.564Z"
     },
     {
         id: 680,
         userId: 9,
         workId: 19,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-07-03T02:34:01.101Z"
     },
     {
@@ -4770,14 +4770,14 @@ export const mockRatings = [
         id: 682,
         userId: 9,
         workId: 13,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-22T00:21:41.290Z"
     },
     {
         id: 683,
         userId: 9,
         workId: 55,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-08-26T00:11:11.593Z"
     },
     {
@@ -4805,7 +4805,7 @@ export const mockRatings = [
         id: 687,
         userId: 9,
         workId: 14,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-05T15:21:23.719Z"
     },
     {
@@ -4819,7 +4819,7 @@ export const mockRatings = [
         id: 689,
         userId: 9,
         workId: 90,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-08-31T06:49:05.733Z"
     },
     {
@@ -4833,7 +4833,7 @@ export const mockRatings = [
         id: 691,
         userId: 9,
         workId: 96,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-08-09T18:54:21.204Z"
     },
     {
@@ -4854,14 +4854,14 @@ export const mockRatings = [
         id: 694,
         userId: 9,
         workId: 93,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-21T15:43:27.626Z"
     },
     {
         id: 695,
         userId: 9,
         workId: 70,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-22T00:57:01.435Z"
     },
     {
@@ -4875,14 +4875,14 @@ export const mockRatings = [
         id: 697,
         userId: 9,
         workId: 91,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-31T17:46:48.124Z"
     },
     {
         id: 698,
         userId: 9,
         workId: 59,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-07-04T03:41:34.903Z"
     },
     {
@@ -4896,7 +4896,7 @@ export const mockRatings = [
         id: 700,
         userId: 9,
         workId: 66,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-13T07:52:19.776Z"
     },
     {
@@ -4910,21 +4910,21 @@ export const mockRatings = [
         id: 702,
         userId: 9,
         workId: 15,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-26T22:10:10.331Z"
     },
     {
         id: 703,
         userId: 9,
         workId: 30,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-29T17:31:46.215Z"
     },
     {
         id: 704,
         userId: 9,
         workId: 34,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-10-17T20:42:39.582Z"
     },
     {
@@ -4945,7 +4945,7 @@ export const mockRatings = [
         id: 707,
         userId: 9,
         workId: 48,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-07-14T15:49:02.271Z"
     },
     {
@@ -4966,35 +4966,35 @@ export const mockRatings = [
         id: 710,
         userId: 9,
         workId: 78,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-09T16:53:09.826Z"
     },
     {
         id: 711,
         userId: 9,
         workId: 22,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-22T09:51:48.200Z"
     },
     {
         id: 712,
         userId: 9,
         workId: 51,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-10-18T21:35:59.659Z"
     },
     {
         id: 713,
         userId: 9,
         workId: 35,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-06-28T15:22:55.871Z"
     },
     {
         id: 714,
         userId: 9,
         workId: 29,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-09-05T17:22:07.604Z"
     },
     {
@@ -5008,21 +5008,21 @@ export const mockRatings = [
         id: 716,
         userId: 9,
         workId: 7,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-08-27T04:18:49.234Z"
     },
     {
         id: 717,
         userId: 9,
         workId: 31,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-28T00:04:59.419Z"
     },
     {
         id: 718,
         userId: 9,
         workId: 65,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-22T22:36:38.240Z"
     },
     {
@@ -5043,7 +5043,7 @@ export const mockRatings = [
         id: 721,
         userId: 9,
         workId: 54,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-11-12T03:31:03.742Z"
     },
     {
@@ -5064,28 +5064,28 @@ export const mockRatings = [
         id: 724,
         userId: 9,
         workId: 42,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-15T01:09:58.532Z"
     },
     {
         id: 725,
         userId: 9,
         workId: 12,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-09-16T07:00:58.739Z"
     },
     {
         id: 726,
         userId: 9,
         workId: 92,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-07T09:06:03.182Z"
     },
     {
         id: 727,
         userId: 9,
         workId: 18,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-08T03:25:36.925Z"
     },
     {
@@ -5127,14 +5127,14 @@ export const mockRatings = [
         id: 733,
         userId: 9,
         workId: 98,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-06-22T00:14:26.636Z"
     },
     {
         id: 734,
         userId: 9,
         workId: 64,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-21T05:14:42.678Z"
     },
     {
@@ -5162,7 +5162,7 @@ export const mockRatings = [
         id: 738,
         userId: 10,
         workId: 95,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-08-11T09:49:07.538Z"
     },
     {
@@ -5183,35 +5183,35 @@ export const mockRatings = [
         id: 741,
         userId: 10,
         workId: 86,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-28T07:12:51.150Z"
     },
     {
         id: 742,
         userId: 10,
         workId: 87,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-06-28T08:47:08.059Z"
     },
     {
         id: 743,
         userId: 10,
         workId: 50,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-09-07T13:25:41.560Z"
     },
     {
         id: 744,
         userId: 10,
         workId: 45,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-08-08T16:48:35.041Z"
     },
     {
         id: 745,
         userId: 10,
         workId: 17,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-14T05:23:18.567Z"
     },
     {
@@ -5225,7 +5225,7 @@ export const mockRatings = [
         id: 747,
         userId: 10,
         workId: 98,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-06T22:06:04.303Z"
     },
     {
@@ -5239,7 +5239,7 @@ export const mockRatings = [
         id: 749,
         userId: 10,
         workId: 20,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-17T08:24:48.215Z"
     },
     {
@@ -5267,28 +5267,28 @@ export const mockRatings = [
         id: 753,
         userId: 10,
         workId: 13,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-19T01:13:28.542Z"
     },
     {
         id: 754,
         userId: 10,
         workId: 90,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-07T19:29:32.808Z"
     },
     {
         id: 755,
         userId: 10,
         workId: 42,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-19T03:45:59.587Z"
     },
     {
         id: 756,
         userId: 10,
         workId: 76,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-06-16T17:25:47.291Z"
     },
     {
@@ -5302,35 +5302,35 @@ export const mockRatings = [
         id: 758,
         userId: 10,
         workId: 2,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-24T09:40:46.952Z"
     },
     {
         id: 759,
         userId: 10,
         workId: 58,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-30T21:24:11.692Z"
     },
     {
         id: 760,
         userId: 10,
         workId: 8,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-11-22T17:38:52.657Z"
     },
     {
         id: 761,
         userId: 10,
         workId: 89,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-14T08:06:22.428Z"
     },
     {
         id: 762,
         userId: 10,
         workId: 7,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-11-14T01:24:56.956Z"
     },
     {
@@ -5351,7 +5351,7 @@ export const mockRatings = [
         id: 765,
         userId: 10,
         workId: 91,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-19T18:09:28.050Z"
     },
     {
@@ -5372,7 +5372,7 @@ export const mockRatings = [
         id: 768,
         userId: 10,
         workId: 61,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-21T01:07:32.287Z"
     },
     {
@@ -5386,21 +5386,21 @@ export const mockRatings = [
         id: 770,
         userId: 10,
         workId: 19,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-07-11T03:10:09.100Z"
     },
     {
         id: 771,
         userId: 10,
         workId: 63,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-14T11:07:09.440Z"
     },
     {
         id: 772,
         userId: 10,
         workId: 66,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-10T09:02:06.407Z"
     },
     {
@@ -5421,21 +5421,21 @@ export const mockRatings = [
         id: 775,
         userId: 10,
         workId: 47,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-20T04:27:05.044Z"
     },
     {
         id: 776,
         userId: 10,
         workId: 18,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-25T21:05:11.829Z"
     },
     {
         id: 777,
         userId: 10,
         workId: 35,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-10-24T08:14:51.702Z"
     },
     {
@@ -5449,14 +5449,14 @@ export const mockRatings = [
         id: 779,
         userId: 10,
         workId: 54,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-09-24T07:09:04.129Z"
     },
     {
         id: 780,
         userId: 10,
         workId: 14,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-14T05:26:58.964Z"
     },
     {
@@ -5484,7 +5484,7 @@ export const mockRatings = [
         id: 784,
         userId: 10,
         workId: 74,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-07T21:41:22.590Z"
     },
     {
@@ -5498,7 +5498,7 @@ export const mockRatings = [
         id: 786,
         userId: 10,
         workId: 46,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-07-13T03:46:21.856Z"
     },
     {
@@ -5512,7 +5512,7 @@ export const mockRatings = [
         id: 788,
         userId: 10,
         workId: 3,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-08-29T23:41:20.258Z"
     },
     {
@@ -5547,14 +5547,14 @@ export const mockRatings = [
         id: 793,
         userId: 10,
         workId: 29,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-11T20:33:11.425Z"
     },
     {
         id: 794,
         userId: 10,
         workId: 44,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-11-03T09:56:21.948Z"
     },
     {
@@ -5575,21 +5575,21 @@ export const mockRatings = [
         id: 797,
         userId: 10,
         workId: 38,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-23T07:31:08.506Z"
     },
     {
         id: 798,
         userId: 10,
         workId: 5,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-09T12:00:36.900Z"
     },
     {
         id: 799,
         userId: 10,
         workId: 96,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-10-13T13:12:23.154Z"
     },
     {
@@ -5610,14 +5610,14 @@ export const mockRatings = [
         id: 802,
         userId: 10,
         workId: 82,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-09-26T15:41:25.987Z"
     },
     {
         id: 803,
         userId: 10,
         workId: 73,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-11-13T01:48:25.415Z"
     },
     {
@@ -5638,7 +5638,7 @@ export const mockRatings = [
         id: 806,
         userId: 10,
         workId: 37,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-13T11:29:47.354Z"
     },
     {
@@ -5666,7 +5666,7 @@ export const mockRatings = [
         id: 810,
         userId: 10,
         workId: 41,
-        score: 1.5,
+        score: 2,
         ratedAt: "2025-06-19T16:14:41.184Z"
     },
     {
@@ -5680,14 +5680,14 @@ export const mockRatings = [
         id: 812,
         userId: 10,
         workId: 60,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-11-02T00:25:22.228Z"
     },
     {
         id: 813,
         userId: 10,
         workId: 84,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-10-13T00:07:50.810Z"
     },
     {
@@ -5736,28 +5736,28 @@ export const mockRatings = [
         id: 820,
         userId: 10,
         workId: 21,
-        score: 2.5,
+        score: 3,
         ratedAt: "2025-06-26T07:47:58.120Z"
     },
     {
         id: 821,
         userId: 10,
         workId: 93,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-06-29T21:44:58.719Z"
     },
     {
         id: 822,
         userId: 10,
         workId: 85,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-09-19T12:48:36.916Z"
     },
     {
         id: 823,
         userId: 10,
         workId: 53,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-14T03:34:16.522Z"
     },
     {
@@ -5771,14 +5771,14 @@ export const mockRatings = [
         id: 825,
         userId: 10,
         workId: 6,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-08-26T09:03:08.210Z"
     },
     {
         id: 826,
         userId: 10,
         workId: 40,
-        score: 3.5,
+        score: 4,
         ratedAt: "2025-10-27T22:48:31.323Z"
     },
     {
@@ -5799,14 +5799,14 @@ export const mockRatings = [
         id: 829,
         userId: 10,
         workId: 26,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-27T07:07:19.774Z"
     },
     {
         id: 830,
         userId: 10,
         workId: 16,
-        score: 4.5,
+        score: 5,
         ratedAt: "2025-07-31T15:34:02.353Z"
     }
 ];

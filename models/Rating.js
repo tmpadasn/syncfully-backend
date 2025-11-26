@@ -16,7 +16,11 @@ const ratingSchema = new mongoose.Schema({
         type: Number,
         required: [true, 'Score is required'],
         min: [RATING_CONSTRAINTS.MIN, `Score must be at least ${RATING_CONSTRAINTS.MIN}`],
-        max: [RATING_CONSTRAINTS.MAX, `Score must not exceed ${RATING_CONSTRAINTS.MAX}`]
+        max: [RATING_CONSTRAINTS.MAX, `Score must not exceed ${RATING_CONSTRAINTS.MAX}`],
+        validate: {
+            validator: Number.isInteger,
+            message: 'Score must be an integer (no decimals allowed)'
+        }
     },
     ratedAt: {
         type: Date,
