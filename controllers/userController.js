@@ -1,4 +1,5 @@
 import * as userService from '../services/userService.js';
+import * as workService from '../services/workService.js';
 import { sendSuccess, sendError } from '../utils/responses.js';
 import { HTTP_STATUS } from '../config/constants.js';
 import { validateUsername, validatePassword, validateRatingScore } from '../utils/validators.js';
@@ -205,11 +206,21 @@ export const getUserRecommendations = async (req, res, next) => {
       return sendError(res, HTTP_STATUS.NOT_FOUND, 'User not found');
     }
     
-    // TODO: Implement actual recommendation algorithm
-    // For now, return mock recommendations
+    // Get all works to randomize
+    const allWorks = await workService.getAllWorks();
+    
+    // Shuffle and pick random works
+    const shuffled = [...allWorks].sort(() => Math.random() - 0.5);
+    const current = shuffled.slice(0, 5);
+    const profile = shuffled.slice(5, 10);
+    
+    // Get recommendation version for this user
+    const version = await userService.getRecommendationVersion(userId);
+    
     const recommendations = {
-      current: [],
-      profile: []
+      current,
+      profile,
+      version // Include version so frontend can detect changes
     };
     
     sendSuccess(res, HTTP_STATUS.OK, recommendations, 'Recommendations retrieved');
