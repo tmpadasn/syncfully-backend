@@ -282,6 +282,9 @@ export const addUserRating = async (userId, workId, score) => {
     });
 
     await user.save();
+    
+    // Update recommendation version to trigger new recommendations
+    await updateRecommendationVersion(userId);
 
     return {
       userId: user._id,
@@ -299,6 +302,9 @@ export const addUserRating = async (userId, workId, score) => {
     score,
     ratedAt: new Date().toISOString()
   };
+  
+  // Update recommendation version to trigger new recommendations
+  await updateRecommendationVersion(userId);
 
   return {
     userId: user.id,
@@ -342,4 +348,43 @@ export const authenticateUser = async (identifier, password) => {
     profilePictureUrl: buildImageUrl(user.profilePictureUrl, 'profile'),
     ratedWorks: Object.keys(user.ratedWorks).length
   };
+};
+
+/**
+ * Get recommendation version for a user
+ * @param {number|string} userId - User ID
+ * @returns {Promise<number>}
+ */
+export const getRecommendationVersion = async (userId) => {
+  if (isMongoConnected()) {
+    const user = await User.findById(userId);
+    if (!user) return Date.now();
+    return user.recommendationVersion || Date.now();
+  }
+
+  // Use mock data
+  const user = mockUsers.find(u => u.id === parseInt(userId));
+  if (!user) return Date.now();
+  return user.recommendationVersion || Date.now();
+};
+
+/**
+ * Update recommendation version for a user (triggers new recommendations)
+ * @param {number|string} userId - User ID
+ * @returns {Promise<number>}
+ */
+export const updateRecommendationVersion = async (userId) => {
+  const newVersion = Date.now();
+  
+  if (isMongoConnected()) {
+    await User.findByIdAndUpdate(userId, { recommendationVersion: newVersion });
+    return newVersion;
+  }
+
+  // Use mock data
+  const user = mockUsers.find(u => u.id === parseInt(userId));
+  if (user) {
+    user.recommendationVersion = newVersion;
+  }
+  return newVersion;
 };

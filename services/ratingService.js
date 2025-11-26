@@ -4,6 +4,7 @@ import { mockUsers } from '../data/mockUsers.js';
 import { mockWorks } from '../data/mockWorks.js';
 import { isMongoConnected } from '../config/database.js';
 import { calculateAverageRating } from '../utils/helpers.js';
+import { updateRecommendationVersion } from './userService.js';
 
 /**
  * Get rating by ID
@@ -80,6 +81,9 @@ export const createOrUpdateRating = async (userId, workId, score) => {
             { score, ratedAt: new Date() },
             { new: true, upsert: true, runValidators: true }
         );
+        
+        // Update recommendation version to trigger new recommendations
+        await updateRecommendationVersion(userId);
 
         return rating.toJSON();
     }
@@ -108,6 +112,9 @@ export const createOrUpdateRating = async (userId, workId, score) => {
             score,
             ratedAt: mockRatings[existingRatingIndex].ratedAt
         };
+        
+        // Update recommendation version to trigger new recommendations
+        await updateRecommendationVersion(userId);
 
         return {
             ratingId: mockRatings[existingRatingIndex].id,
@@ -134,6 +141,9 @@ export const createOrUpdateRating = async (userId, workId, score) => {
         score,
         ratedAt: newRating.ratedAt
     };
+    
+    // Update recommendation version to trigger new recommendations
+    await updateRecommendationVersion(userId);
 
     return {
         ratingId: newRating.id,
@@ -159,6 +169,9 @@ export const updateRating = async (ratingId, score) => {
         );
 
         if (!rating) return null;
+        
+        // Update recommendation version to trigger new recommendations
+        await updateRecommendationVersion(rating.userId);
 
         return rating.toJSON();
     }
@@ -179,6 +192,9 @@ export const updateRating = async (ratingId, score) => {
             ratedAt: rating.ratedAt
         };
     }
+    
+    // Update recommendation version to trigger new recommendations
+    await updateRecommendationVersion(rating.userId);
 
     return {
         ratingId: rating.id,
