@@ -1,36 +1,86 @@
 export const mockUsers = [
     {
         id: 1,
-        username: 'spiros',
-        email: 'spiros@example.com',
-        password: 'password123',
+        username: 'alice',
+        email: 'alice@example.com',
+        password: 'alice',
         profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
         ratedWorks: {}
     },
     {
         id: 2,
-        username: 'maria',
-        email: 'maria@example.com',
-        password: 'password123',
+        username: 'bob',
+        email: 'bob@example.com',
+        password: 'bob',
         profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
-        ratedWorks: {
-            1: { score: 4.5, ratedAt: '2025-01-10T10:00:00Z' },
-            2: { score: 5.0, ratedAt: '2025-01-11T14:30:00Z' }
-        }
+        ratedWorks: {}
     },
     {
         id: 3,
-        username: 'john',
-        email: 'john@example.com',
-        password: 'password123',
+        username: 'carol',
+        email: 'carol@example.com',
+        password: 'carol',
         profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
-        ratedWorks: {
-            1: { score: 3.5, ratedAt: '2025-01-09T08:15:00Z' },
-            3: { score: 4.0, ratedAt: '2025-01-12T16:45:00Z' }
-        }
+        ratedWorks: {}
+    },
+    {
+        id: 4,
+        username: 'david',
+        email: 'david@example.com',
+        password: 'david',
+        profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
+        ratedWorks: {}
+    },
+    {
+        id: 5,
+        username: 'emma',
+        email: 'emma@example.com',
+        password: 'emma',
+        profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
+        ratedWorks: {}
+    },
+    {
+        id: 6,
+        username: 'frank',
+        email: 'frank@example.com',
+        password: 'frank',
+        profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
+        ratedWorks: {}
+    },
+    {
+        id: 7,
+        username: 'grace',
+        email: 'grace@example.com',
+        password: 'grace',
+        profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
+        ratedWorks: {}
+    },
+    {
+        id: 8,
+        username: 'henry',
+        email: 'henry@example.com',
+        password: 'henry',
+        profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
+        ratedWorks: {}
+    },
+    {
+        id: 9,
+        username: 'iris',
+        email: 'iris@example.com',
+        password: 'iris',
+        profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
+        ratedWorks: {}
+    },
+    {
+        id: 10,
+        username: 'jack',
+        email: 'jack@example.com',
+        password: 'jack',
+        profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
+        ratedWorks: {}
     }
 ];
 
-let nextUserId = 4;
+let nextUserId = 11;
 
 export const getNextUserId = () => nextUserId++;
