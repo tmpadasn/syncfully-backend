@@ -7,6 +7,8 @@ info:
 tags:
   - name: users
     description: Operations related to user account creation, retrieval, update, and deletion
+  - name: shelves
+    description: Manage user shelves for organizing works
   - name: works
     description: Manage works (e.g., books, movies, music albums)
 paths:
@@ -194,6 +196,197 @@ paths:
                   - following
         '404':
           description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFoundResponse'
+  /users/{userId}/shelves:
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        description: Unique ID of the user
+        schema:
+          type: integer
+    get:
+      summary: Retrieve all shelves for current user
+      description: Fetches all shelves that belong to the currently authenticated user.
+      tags:
+        - shelves
+      responses:
+        '200':
+          description: List of user shelves
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  shelves:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Shelf'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFoundResponse'
+    post:
+      summary: Create a new shelf
+      description: Creates a new shelf for organizing works.
+      tags:
+        - shelves
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShelfInput'
+      responses:
+        '200':
+          description: Shelf successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shelf'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequestResponse'
+  /shelves/{shelfId}:
+    parameters:
+      - name: shelfId
+        in: path
+        description: Unique ID of the shelf
+        required: true
+        schema:
+          type: integer
+          format: int64
+    get:
+      summary: Retrieve a specific shelf
+      description: Returns the shelf identified by the provided shelfId.
+      tags:
+        - shelves
+      responses:
+        '200':
+          description: Shelf found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shelf'
+        '404':
+          description: Shelf not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFoundResponse'
+    put:
+      summary: Update a specific shelf
+      description: Updates the details of a shelf.
+      tags:
+        - shelves
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShelfInput'
+      responses:
+        '200':
+          description: Shelf successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shelf'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBadRequestResponse'
+        '404':
+          description: Shelf not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFoundResponse'
+    delete:
+      summary: Delete a specific shelf
+      description: Permanently deletes the shelf with the given ID.
+      tags:
+        - shelves
+      responses:
+        '204':
+          description: Shelf deleted successfully
+        '404':
+          description: Shelf not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorNotFoundResponse'
+  /shelves/{shelfId}/works:
+    parameters:
+      - name: shelfId
+        in: path
+        description: ID of the shelf to retrieve works from
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: work-type
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+            - book
+            - graphic-novel
+            - series
+            - movie
+            - music
+        description: Filter results based on the type of work (e.g., book, movie, series, music).
+      - name: genre
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by genre (e.g., Drama, Sci-fi, Comedy).
+      - name: rating
+        in: query
+        required: false
+        schema:
+          type: number
+          format: float
+        description: Minimum average rating to include as a lower limit
+      - name: year
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1960
+          maximum: 2025
+        description: Filter works released in a specific year.
+    get:
+      summary: Retrieve all works in a shelf (with optional filters)
+      description: Returns all works stored in the specified shelf. Supports filters like the type of work, the genre, creator etc
+      tags:
+        - shelves
+      responses:
+        '200':
+          description: List of works in the shelf
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  works:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Work'
+        '404':
+          description: Shelf not found
           content:
             application/json:
               schema:
@@ -573,6 +766,58 @@ components:
           format: url
           description: Places where a user can find the work
           example: https://amazon.com/lord-of-the-rings
+    Shelf:
+      type: object
+      required:
+        - shelfId
+        - userId
+        - name
+      properties:
+        shelfId:
+          type: integer
+          description: Unique identifier of the shelf
+          example: 1
+        userId:
+          type: integer
+          description: ID of the user who owns this shelf
+          example: 42
+        name:
+          type: string
+          description: Name of the shelf
+          example: To Watch
+        description:
+          type: string
+          description: Description of the shelf
+          example: Movies and series I want to watch
+        works:
+          type: array
+          description: Array of work IDs in the shelf
+          items:
+            type: integer
+          example: [1, 3, 5]
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the shelf was created
+          example: '2024-01-15T10:30:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the shelf was last updated
+          example: '2024-01-20T14:45:00Z'
+    ShelfInput:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the shelf
+          example: To Watch
+        description:
+          type: string
+          description: Description of the shelf
+          example: Movies and series I want to watch
     Item:
       type: object
       properties:

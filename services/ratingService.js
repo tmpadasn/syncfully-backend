@@ -103,6 +103,12 @@ export const createOrUpdateRating = async (userId, workId, score) => {
         mockRatings[existingRatingIndex].score = score;
         mockRatings[existingRatingIndex].ratedAt = new Date().toISOString();
 
+        // Update user's ratedWorks
+        user.ratedWorks[workId] = {
+            score,
+            ratedAt: mockRatings[existingRatingIndex].ratedAt
+        };
+
         return {
             ratingId: mockRatings[existingRatingIndex].id,
             userId: parseInt(userId),
@@ -178,7 +184,7 @@ export const updateRating = async (ratingId, score) => {
         ratingId: rating.id,
         userId: rating.userId,
         workId: rating.workId,
-        score: rating.score,
+        score: score,  // Use the new score parameter instead of rating.score
         ratedAt: rating.ratedAt
     };
 };

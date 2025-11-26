@@ -3,7 +3,7 @@ export const mockUsers = [
         id: 1,
         username: 'spiros',
         email: 'spiros@example.com',
-        password: 'password1',
+        password: 'password123',
         profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
         ratedWorks: {}
     },
@@ -11,7 +11,7 @@ export const mockUsers = [
         id: 2,
         username: 'maria',
         email: 'maria@example.com',
-        password: 'password2',
+        password: 'password123',
         profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
         ratedWorks: {
             1: { score: 4.5, ratedAt: '2025-01-10T10:00:00Z' },
@@ -22,7 +22,7 @@ export const mockUsers = [
         id: 3,
         username: 'john',
         email: 'john@example.com',
-        password: 'password3',
+        password: 'password123',
         profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
         ratedWorks: {
             1: { score: 3.5, ratedAt: '2025-01-09T08:15:00Z' },
