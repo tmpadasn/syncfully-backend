@@ -301,7 +301,7 @@ function buildMongoQuery(filters) {
     }
 
     if (filters.year) {
-        query.year = parseInt(filters.year);
+        query.year = { $gte: parseInt(filters.year) }; // Changed to >= for "from year onwards"
     }
 
     if (filters.rating) {

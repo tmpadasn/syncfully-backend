@@ -57,7 +57,7 @@ export const getAllWorks = async (filters = {}) => {
         }
 
         if (filters.year) {
-            query.year = parseInt(filters.year);
+            query.year = { $gte: parseInt(filters.year) }; // Changed to >= for "from year onwards"
         }
 
         if (filters.genres && filters.genres.length > 0) {
@@ -88,7 +88,7 @@ export const getAllWorks = async (filters = {}) => {
     // Apply year filter
     if (filters.year) {
         console.log('Filtering by year:', filters.year); // Debug
-        works = works.filter(w => w.year === parseInt(filters.year));
+        works = works.filter(w => w.year >= parseInt(filters.year)); // Changed to >= for "from year onwards"
         console.log('Works after year filter:', works.length); // Debug
     }
 

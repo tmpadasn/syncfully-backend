@@ -37,7 +37,7 @@ const searchWorksDb = async ({ query, workType, genre, minRating, year }) => {
     }
 
     if (typeof year === 'number') {
-        match.year = year;
+        match.year = { $gte: year }; // Changed from exact match to >= (from year onwards)
     }
 
     const pipeline = [
@@ -130,7 +130,7 @@ const searchWorksMock = ({ query, workType, genre, minRating, year }) => {
     }
 
     if (typeof year === 'number') {
-        works = works.filter((w) => w.year === year);
+        works = works.filter((w) => w.year >= year); // Changed from exact match to >= (from year onwards)
     }
 
     const withRatings = works.map((w) => {
