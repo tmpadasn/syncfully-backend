@@ -49,8 +49,27 @@ export const signup = async (req, res, next) => {
       return sendError(
         res,
         HTTP_STATUS.BAD_REQUEST,
-        'Invalid input',
-        validation.errors
+        'Invalid username',
+        usernameValidation.errors
+      );
+    }
+
+    const passwordValidation = validatePassword(password);
+    if (!passwordValidation.valid) {
+      return sendError(
+        res,
+        HTTP_STATUS.BAD_REQUEST,
+        'Invalid password',
+        passwordValidation.errors
+      );
+    }
+
+    if (!email) {
+      return sendError(
+        res,
+        HTTP_STATUS.BAD_REQUEST,
+        'Invalid email',
+        ['email is required']
       );
     }
 
