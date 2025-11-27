@@ -418,7 +418,7 @@ export const updateRecommendationVersion = async (userId) => {
  */
 export const getUserFollowing = async (userId) => {
   if (isMongoConnected()) {
-    const user = await User.findById(userId).populate('following', 'userId username email createdAt');
+    const user = await User.findById(userId).populate('following', 'userId username email profilePictureUrl createdAt');
     if (!user) {
       throw new Error('User not found');
     }
@@ -427,6 +427,7 @@ export const getUserFollowing = async (userId) => {
       userId: followedUser._id,
       username: followedUser.username,
       email: followedUser.email,
+      profilePictureUrl: followedUser.profilePictureUrl,
       createdAt: followedUser.createdAt
     }));
   }
@@ -448,6 +449,7 @@ export const getUserFollowing = async (userId) => {
         userId: followedUser.id,
         username: followedUser.username,
         email: followedUser.email,
+        profilePictureUrl: followedUser.profilePictureUrl,
         createdAt: followedUser.createdAt || new Date().toISOString()
       };
     }
@@ -462,7 +464,7 @@ export const getUserFollowing = async (userId) => {
  */
 export const getUserFollowers = async (userId) => {
   if (isMongoConnected()) {
-    const user = await User.findById(userId).populate('followers', 'userId username email createdAt');
+    const user = await User.findById(userId).populate('followers', 'userId username email profilePictureUrl createdAt');
     if (!user) {
       throw new Error('User not found');
     }
@@ -471,6 +473,7 @@ export const getUserFollowers = async (userId) => {
       userId: followerUser._id,
       username: followerUser.username,
       email: followerUser.email,
+      profilePictureUrl: followerUser.profilePictureUrl,
       createdAt: followerUser.createdAt
     }));
   }
@@ -492,6 +495,7 @@ export const getUserFollowers = async (userId) => {
         userId: followerUser.id,
         username: followerUser.username,
         email: followerUser.email,
+        profilePictureUrl: followerUser.profilePictureUrl,
         createdAt: followerUser.createdAt || new Date().toISOString()
       };
     }
