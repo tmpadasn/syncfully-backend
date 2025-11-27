@@ -2,7 +2,7 @@ import * as userService from '../services/userService.js';
 import * as workService from '../services/workService.js';
 import { sendSuccess, sendError } from '../utils/responses.js';
 import { HTTP_STATUS } from '../config/constants.js';
-import { validateUserData, validateRatingScore } from '../utils/validators.js';
+import { validateUserData, validateRatingScore, validateUsername, validatePassword } from '../utils/validators.js';
 
 /**
  * Get all users
