@@ -16,7 +16,8 @@ export const login = async (req, res, next) => {
       return sendError(
         res,
         HTTP_STATUS.BAD_REQUEST,
-        'identifier and password are required'
+        'Missing required fields',
+        ['identifier and password are required']
       );
     }
 

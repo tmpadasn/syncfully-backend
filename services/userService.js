@@ -333,12 +333,12 @@ export const authenticateUser = async (identifier, password) => {
 
   if (!user) {
     // User not found
-    throw new Error('The user does not exist, please create an account');
+    throw new Error('User not found');
   }
   
   if (user.password !== password) {
     // Wrong password
-    throw new Error('The credentials dont match');
+    throw new Error('Invalid credentials');
   }
 
   // Return user in the same shape as getUserById

@@ -52,7 +52,7 @@ export const createShelf = async (req, res, next) => {
         sendSuccess(res, HTTP_STATUS.OK, shelf);
     } catch (error) {
         if (error.code === 11000) {
-            return sendError(res, HTTP_STATUS.BAD_REQUEST, 'A shelf with this name already exists for this user');
+            return sendError(res, HTTP_STATUS.BAD_REQUEST, 'Shelf name already exists');
         }
         next(error);
     }
@@ -88,7 +88,7 @@ export const updateShelf = async (req, res, next) => {
 
         // Validate at least one field is provided
         if (!name && description === undefined) {
-            return sendError(res, HTTP_STATUS.BAD_REQUEST, 'At least one field (name or description) must be provided');
+            return sendError(res, HTTP_STATUS.BAD_REQUEST, 'At least one field is required for update');
         }
 
         // Validate name is not empty if provided
@@ -109,7 +109,7 @@ export const updateShelf = async (req, res, next) => {
         sendSuccess(res, HTTP_STATUS.OK, shelf);
     } catch (error) {
         if (error.code === 11000) {
-            return sendError(res, HTTP_STATUS.BAD_REQUEST, 'A shelf with this name already exists for this user');
+            return sendError(res, HTTP_STATUS.BAD_REQUEST, 'Shelf name already exists');
         }
         next(error);
     }
