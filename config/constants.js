@@ -7,15 +7,21 @@ export const WORK_TYPES = {
 };
 
 export const RATING_CONSTRAINTS = {
-    MIN: 0.5,
+    MIN: 1,
     MAX: 5,
-    STEP: 0.5
+    STEP: 1  // Only integer ratings allowed
 };
 
 export const USER_CONSTRAINTS = {
     USERNAME_MIN_LENGTH: 3,
     USERNAME_MAX_LENGTH: 20,
     PASSWORD_MIN_LENGTH: 6
+};
+
+export const QUERY_LIMITS = {
+    SIMILAR_WORKS: 10,
+    POPULAR_WORKS: 10,
+    POPULAR_WORKS_FETCH: 50  // Fetch more for sorting
 };
 
 export const HTTP_STATUS = {

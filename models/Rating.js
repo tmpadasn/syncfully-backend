@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { RATING_CONSTRAINTS } from '../config/constants.js';
+import { createToJSONOptions } from '../utils/modelHelpers.js';
 
 const ratingSchema = new mongoose.Schema({
     userId: {
@@ -16,7 +17,11 @@ const ratingSchema = new mongoose.Schema({
         type: Number,
         required: [true, 'Score is required'],
         min: [RATING_CONSTRAINTS.MIN, `Score must be at least ${RATING_CONSTRAINTS.MIN}`],
-        max: [RATING_CONSTRAINTS.MAX, `Score must not exceed ${RATING_CONSTRAINTS.MAX}`]
+        max: [RATING_CONSTRAINTS.MAX, `Score must not exceed ${RATING_CONSTRAINTS.MAX}`],
+        validate: {
+            validator: Number.isInteger,
+            message: 'Score must be an integer (no decimals allowed)'
+        }
     },
     ratedAt: {
         type: Date,
@@ -24,14 +29,7 @@ const ratingSchema = new mongoose.Schema({
     }
 }, {
     timestamps: true,
-    toJSON: {
-        transform: function (doc, ret) {
-            ret.ratingId = ret._id;
-            delete ret._id;
-            delete ret.__v;
-            return ret;
-        }
-    }
+    toJSON: createToJSONOptions('ratingId')
 });
 
 // Compound index to ensure one rating per user per work

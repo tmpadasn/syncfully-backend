@@ -57,8 +57,44 @@ export const validateRatingScore = (score) => {
         errors.push('score is required');
     } else if (typeof score !== 'number') {
         errors.push('score must be a number');
+    } else if (!Number.isInteger(score)) {
+        errors.push('score must be an integer (no decimals)');
     } else if (score < RATING_CONSTRAINTS.MIN || score > RATING_CONSTRAINTS.MAX) {
         errors.push(`score must be between ${RATING_CONSTRAINTS.MIN} and ${RATING_CONSTRAINTS.MAX}`);
+    }
+
+    return { valid: errors.length === 0, errors };
+};
+
+/**
+ * Validate user registration/update data
+ * @param {Object} data - User data to validate
+ * @param {boolean} isUpdate - Whether this is an update (makes fields optional)
+ * @returns {Object} - { valid: boolean, errors: string[] }
+ */
+export const validateUserData = (data, isUpdate = false) => {
+    const { username, email, password } = data;
+    const errors = [];
+
+    // Validate username if provided or required
+    if (username || !isUpdate) {
+        const usernameValidation = validateUsername(username);
+        if (!usernameValidation.valid) {
+            errors.push(...usernameValidation.errors);
+        }
+    }
+
+    // Validate password if provided or required
+    if (password || !isUpdate) {
+        const passwordValidation = validatePassword(password);
+        if (!passwordValidation.valid) {
+            errors.push(...passwordValidation.errors);
+        }
+    }
+
+    // Validate email if provided or required
+    if (!isUpdate && !email) {
+        errors.push('email is required');
     }
 
     return { valid: errors.length === 0, errors };

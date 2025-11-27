@@ -1,3 +1,20 @@
+import { mockRatings } from './mockRatings.js';
+
+// Helper function to build ratedWorks object for a user from mockRatings
+const buildRatedWorksForUser = (userId) => {
+    const userRatings = mockRatings.filter(rating => rating.userId === userId);
+    const ratedWorks = {};
+    
+    userRatings.forEach(rating => {
+        ratedWorks[rating.workId] = {
+            score: rating.score,
+            ratedAt: rating.ratedAt
+        };
+    });
+    
+    return ratedWorks;
+};
+
 export const mockUsers = [
     {
         id: 1,
@@ -5,7 +22,7 @@ export const mockUsers = [
         email: 'alice@example.com',
         password: 'alice',
         profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
-        ratedWorks: {},
+        ratedWorks: buildRatedWorksForUser(1),
         recommendationVersion: Date.now()
     },
     {
@@ -14,7 +31,7 @@ export const mockUsers = [
         email: 'bob@example.com',
         password: 'bob',
         profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
-        ratedWorks: {},
+        ratedWorks: buildRatedWorksForUser(2),
         recommendationVersion: Date.now()
     },
     {
@@ -23,7 +40,7 @@ export const mockUsers = [
         email: 'carol@example.com',
         password: 'carol',
         profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
-        ratedWorks: {},
+        ratedWorks: buildRatedWorksForUser(3),
         recommendationVersion: Date.now()
     },
     {
@@ -32,7 +49,7 @@ export const mockUsers = [
         email: 'david@example.com',
         password: 'david',
         profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
-        ratedWorks: {},
+        ratedWorks: buildRatedWorksForUser(4),
         recommendationVersion: Date.now()
     },
     {
@@ -41,7 +58,7 @@ export const mockUsers = [
         email: 'emma@example.com',
         password: 'emma',
         profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
-        ratedWorks: {},
+        ratedWorks: buildRatedWorksForUser(5),
         recommendationVersion: Date.now()
     },
     {
@@ -50,7 +67,7 @@ export const mockUsers = [
         email: 'frank@example.com',
         password: 'frank',
         profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
-        ratedWorks: {},
+        ratedWorks: buildRatedWorksForUser(6),
         recommendationVersion: Date.now()
     },
     {
@@ -59,7 +76,7 @@ export const mockUsers = [
         email: 'grace@example.com',
         password: 'grace',
         profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
-        ratedWorks: {},
+        ratedWorks: buildRatedWorksForUser(7),
         recommendationVersion: Date.now()
     },
     {
@@ -68,7 +85,7 @@ export const mockUsers = [
         email: 'henry@example.com',
         password: 'henry',
         profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
-        ratedWorks: {},
+        ratedWorks: buildRatedWorksForUser(8),
         recommendationVersion: Date.now()
     },
     {
@@ -77,7 +94,7 @@ export const mockUsers = [
         email: 'iris@example.com',
         password: 'iris',
         profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
-        ratedWorks: {},
+        ratedWorks: buildRatedWorksForUser(9),
         recommendationVersion: Date.now()
     },
     {
@@ -86,7 +103,7 @@ export const mockUsers = [
         email: 'jack@example.com',
         password: 'jack',
         profilePictureUrl: 'http://localhost:3000/uploads/profiles/profile_picture.jpg',
-        ratedWorks: {},
+        ratedWorks: buildRatedWorksForUser(10),
         recommendationVersion: Date.now()
     }
 ];

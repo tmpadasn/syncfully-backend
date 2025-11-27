@@ -1,5 +1,8 @@
 // controllers/searchController.js
 import * as searchService from '../services/searchService.js';
+import { sendSuccess, sendError } from '../utils/responses.js';
+import { HTTP_STATUS } from '../config/constants.js';
+import { parseQueryInt, parseQueryFloat } from '../utils/helpers.js';
 
 /**
  * GET /search
@@ -21,34 +24,31 @@ export const searchItems = async (req, res, next) => {
         const allowedItemTypes = ['user', 'work']; // shelves not supported
 
         if (itemType && !allowedItemTypes.includes(itemType.toLowerCase())) {
-            return res.status(400).json({
-                success: false,
-                message: `Invalid item-type. Allowed values: ${allowedItemTypes.join(', ')}`
-            });
+            return sendError(
+                res,
+                HTTP_STATUS.BAD_REQUEST,
+                `Invalid item-type. Allowed values: ${allowedItemTypes.join(', ')}`
+            );
         }
 
         // rating (min average rating)
-        let minRating;
-        if (req.query.rating !== undefined && req.query.rating !== '') {
-            minRating = parseFloat(req.query.rating);
-            if (Number.isNaN(minRating)) {
-                return res.status(400).json({
-                    success: false,
-                    message: 'Invalid rating parameter. Must be a number.'
-                });
-            }
+        const minRating = parseQueryFloat(req.query.rating);
+        if (req.query.rating && minRating === null) {
+            return sendError(
+                res,
+                HTTP_STATUS.BAD_REQUEST,
+                'Invalid rating parameter. Must be a number.'
+            );
         }
 
         // year
-        let year;
-        if (req.query.year !== undefined && req.query.year !== '') {
-            year = parseInt(req.query.year, 10);
-            if (Number.isNaN(year)) {
-                return res.status(400).json({
-                    success: false,
-                    message: 'Invalid year parameter. Must be an integer.'
-                });
-            }
+        const year = parseQueryInt(req.query.year);
+        if (req.query.year && year === null) {
+            return sendError(
+                res,
+                HTTP_STATUS.BAD_REQUEST,
+                'Invalid year parameter. Must be an integer.'
+            );
         }
 
         const result = await searchService.searchItems({
@@ -60,14 +60,15 @@ export const searchItems = async (req, res, next) => {
             year
         });
 
-        return res.status(200).json({
-            success: true,
-            data: result,
-            meta: {
-                totalWorks: result.works?.length ?? 0,
-                totalUsers: result.users?.length ?? 0
-            }
-        });
+        // Include metadata in the data object for consistency
+        const responseData = {
+            works: result.works || [],
+            users: result.users || [],
+            totalWorks: result.works?.length ?? 0,
+            totalUsers: result.users?.length ?? 0
+        };
+
+        sendSuccess(res, HTTP_STATUS.OK, responseData, 'Search completed successfully');
     } catch (error) {
         next(error);
     }

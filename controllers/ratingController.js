@@ -4,6 +4,28 @@ import { HTTP_STATUS } from '../config/constants.js';
 import { validateRatingScore } from '../utils/validators.js';
 
 /**
+ * Helper to handle common rating service errors
+ */
+const handleRatingError = (error, res, next) => {
+    if (error.message === 'User not found' || error.message === 'Work not found') {
+        return sendError(res, HTTP_STATUS.NOT_FOUND, error.message);
+    }
+    next(error);
+};
+
+/**
+ * Helper to validate score and return error response if invalid
+ */
+const validateScoreOrError = (score, res) => {
+    const validation = validateRatingScore(score);
+    if (!validation.valid) {
+        sendError(res, HTTP_STATUS.BAD_REQUEST, 'Invalid input', validation.errors);
+        return false;
+    }
+    return true;
+};
+
+/**
  * Get rating by ID
  * @route GET /api/ratings/:ratingId
  */
@@ -52,19 +74,13 @@ export const createWorkRating = async (req, res, next) => {
         }
 
         // Validate score
-        const scoreValidation = validateRatingScore(score);
-        if (!scoreValidation.valid) {
-            return sendError(res, HTTP_STATUS.BAD_REQUEST, 'Invalid input', scoreValidation.errors);
-        }
+        if (!validateScoreOrError(score, res)) return;
 
         const rating = await ratingService.createOrUpdateRating(userId, workId, score);
 
         sendSuccess(res, HTTP_STATUS.CREATED, rating, 'Rating submitted successfully');
     } catch (error) {
-        if (error.message === 'User not found' || error.message === 'Work not found') {
-            return sendError(res, HTTP_STATUS.NOT_FOUND, error.message);
-        }
-        next(error);
+        handleRatingError(error, res, next);
     }
 };
 
@@ -78,10 +94,7 @@ export const updateRating = async (req, res, next) => {
         const { score } = req.body;
 
         // Validate score
-        const scoreValidation = validateRatingScore(score);
-        if (!scoreValidation.valid) {
-            return sendError(res, HTTP_STATUS.BAD_REQUEST, 'Invalid input', scoreValidation.errors);
-        }
+        if (!validateScoreOrError(score, res)) return;
 
         const rating = await ratingService.updateRating(ratingId, score);
 
