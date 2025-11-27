@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { createToJSONOptions } from '../utils/modelHelpers.js';
 
 const shelfSchema = new mongoose.Schema({
     userId: {
@@ -26,13 +27,7 @@ const shelfSchema = new mongoose.Schema({
     }
 }, {
     timestamps: true,
-    toJSON: {
-        transform: function (doc, ret) {
-            ret.shelfId = ret._id;
-            delete ret._id;
-            return ret;
-        }
-    }
+    toJSON: createToJSONOptions('shelfId')
 });
 
 // Compound index to ensure unique shelf names per user

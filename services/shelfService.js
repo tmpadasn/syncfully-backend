@@ -1,6 +1,34 @@
 import Shelf from '../models/Shelf.js';
 import { mockShelves, getNextShelfId } from '../data/mockShelves.js';
 import { isMongoConnected } from '../config/database.js';
+import { safeParseInt } from '../utils/helpers.js';
+
+/**
+ * Helper: Find mock shelf by ID
+ * @param {number|string} shelfId - Shelf ID
+ * @returns {Object|null} Shelf object or null
+ */
+const findMockShelfById = (shelfId) => {
+  const parsedId = safeParseInt(shelfId, 'shelfId');
+  return mockShelves.find(s => s.id === parsedId) || null;
+};
+
+/**
+ * Helper: Format shelf data for response
+ * @param {Object} shelf - Shelf object from mock data
+ * @returns {Object} Formatted shelf data
+ */
+const formatShelfData = (shelf) => {
+  return {
+    shelfId: shelf.id,
+    userId: shelf.userId,
+    name: shelf.name,
+    description: shelf.description,
+    works: shelf.works,
+    createdAt: shelf.createdAt,
+    updatedAt: shelf.updatedAt
+  };
+};
 
 /**
  * Get all shelves (across all users)
@@ -13,15 +41,7 @@ export const getAllShelves = async () => {
     }
 
     // Use mock data
-    return mockShelves.map(shelf => ({
-        shelfId: shelf.id,
-        userId: shelf.userId,
-        name: shelf.name,
-        description: shelf.description,
-        works: shelf.works,
-        createdAt: shelf.createdAt,
-        updatedAt: shelf.updatedAt
-    }));
+    return mockShelves.map(formatShelfData);
 };
 
 /**
@@ -36,17 +56,10 @@ export const getUserShelves = async (userId) => {
     }
 
     // Use mock data
+    const parsedId = safeParseInt(userId, 'userId');
     return mockShelves
-        .filter(shelf => shelf.userId === parseInt(userId))
-        .map(shelf => ({
-            shelfId: shelf.id,
-            userId: shelf.userId,
-            name: shelf.name,
-            description: shelf.description,
-            works: shelf.works,
-            createdAt: shelf.createdAt,
-            updatedAt: shelf.updatedAt
-        }));
+        .filter(shelf => shelf.userId === parsedId)
+        .map(formatShelfData);
 };
 
 /**
@@ -62,18 +75,10 @@ export const getShelfById = async (shelfId) => {
     }
 
     // Use mock data
-    const shelf = mockShelves.find(s => s.id === parseInt(shelfId));
+    const shelf = findMockShelfById(shelfId);
     if (!shelf) return null;
 
-    return {
-        shelfId: shelf.id,
-        userId: shelf.userId,
-        name: shelf.name,
-        description: shelf.description,
-        works: shelf.works,
-        createdAt: shelf.createdAt,
-        updatedAt: shelf.updatedAt
-    };
+    return formatShelfData(shelf);
 };
 
 /**
@@ -95,9 +100,10 @@ export const createShelf = async (userId, shelfData) => {
     }
 
     // Use mock data
+    const parsedUserId = safeParseInt(userId, 'userId');
     const newShelf = {
         id: getNextShelfId(),
-        userId: parseInt(userId),
+        userId: parsedUserId,
         name: shelfData.name,
         description: shelfData.description || '',
         works: [],
@@ -107,15 +113,7 @@ export const createShelf = async (userId, shelfData) => {
 
     mockShelves.push(newShelf);
 
-    return {
-        shelfId: newShelf.id,
-        userId: newShelf.userId,
-        name: newShelf.name,
-        description: newShelf.description,
-        works: newShelf.works,
-        createdAt: newShelf.createdAt,
-        updatedAt: newShelf.updatedAt
-    };
+    return formatShelfData(newShelf);
 };
 
 /**
@@ -137,22 +135,14 @@ export const updateShelf = async (shelfId, updateData) => {
     }
 
     // Use mock data
-    const shelf = mockShelves.find(s => s.id === parseInt(shelfId));
+    const shelf = findMockShelfById(shelfId);
     if (!shelf) return null;
 
     if (updateData.name !== undefined) shelf.name = updateData.name;
     if (updateData.description !== undefined) shelf.description = updateData.description;
     shelf.updatedAt = new Date();
 
-    return {
-        shelfId: shelf.id,
-        userId: shelf.userId,
-        name: shelf.name,
-        description: shelf.description,
-        works: shelf.works,
-        createdAt: shelf.createdAt,
-        updatedAt: shelf.updatedAt
-    };
+    return formatShelfData(shelf);
 };
 
 /**
@@ -167,7 +157,8 @@ export const deleteShelf = async (shelfId) => {
     }
 
     // Use mock data
-    const index = mockShelves.findIndex(s => s.id === parseInt(shelfId));
+    const parsedId = safeParseInt(shelfId, 'shelfId');
+    const index = mockShelves.findIndex(s => s.id === parsedId);
     if (index === -1) return false;
 
     mockShelves.splice(index, 1);
@@ -192,7 +183,7 @@ export const getShelfWorks = async (shelfId, filters = {}) => {
     }
 
     // Use mock data - we need to import mockWorks
-    const shelf = mockShelves.find(s => s.id === parseInt(shelfId));
+    const shelf = findMockShelfById(shelfId);
     if (!shelf) return null;
 
     const works = shelf.works; // In mock, works are just IDs
@@ -226,24 +217,16 @@ export const addWorkToShelf = async (shelfId, workId) => {
     }
 
     // Use mock data
-    const shelf = mockShelves.find(s => s.id === parseInt(shelfId));
+    const shelf = findMockShelfById(shelfId);
     if (!shelf) return null;
 
-    const workIdInt = parseInt(workId);
+    const workIdInt = safeParseInt(workId, 'workId');
     if (!shelf.works.includes(workIdInt)) {
         shelf.works.push(workIdInt);
         shelf.updatedAt = new Date();
     }
 
-    return {
-        shelfId: shelf.id,
-        userId: shelf.userId,
-        name: shelf.name,
-        description: shelf.description,
-        works: shelf.works,
-        createdAt: shelf.createdAt,
-        updatedAt: shelf.updatedAt
-    };
+    return formatShelfData(shelf);
 };
 
 /**
@@ -265,25 +248,17 @@ export const removeWorkFromShelf = async (shelfId, workId) => {
     }
 
     // Use mock data
-    const shelf = mockShelves.find(s => s.id === parseInt(shelfId));
+    const shelf = findMockShelfById(shelfId);
     if (!shelf) return null;
 
-    const workIdInt = parseInt(workId);
+    const workIdInt = safeParseInt(workId, 'workId');
     const index = shelf.works.indexOf(workIdInt);
     if (index > -1) {
         shelf.works.splice(index, 1);
         shelf.updatedAt = new Date();
     }
 
-    return {
-        shelfId: shelf.id,
-        userId: shelf.userId,
-        name: shelf.name,
-        description: shelf.description,
-        works: shelf.works,
-        createdAt: shelf.createdAt,
-        updatedAt: shelf.updatedAt
-    };
+    return formatShelfData(shelf);
 };
 
 /**
@@ -301,7 +276,7 @@ function buildMongoQuery(filters) {
     }
 
     if (filters.year) {
-        query.year = { $gte: parseInt(filters.year) }; // Changed to >= for "from year onwards"
+        query.year = { $gte: Number(filters.year) }; // Changed to >= for "from year onwards"
     }
 
     if (filters.rating) {

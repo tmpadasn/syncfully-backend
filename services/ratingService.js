@@ -3,8 +3,25 @@ import { mockRatings, getNextRatingId } from '../data/mockRatings.js';
 import { mockUsers } from '../data/mockUsers.js';
 import { mockWorks } from '../data/mockWorks.js';
 import { isMongoConnected } from '../config/database.js';
-import { calculateAverageRating } from '../utils/helpers.js';
+import { calculateAverageRating, safeParseInt } from '../utils/helpers.js';
 import { updateRecommendationVersion } from './userService.js';
+
+// Helper function to find mock rating by ID
+const findMockRatingById = (ratingId) => {
+    const parsedId = safeParseInt(ratingId, 'ratingId');
+    return mockRatings.find(r => r.id === parsedId) || null;
+};
+
+// Helper function to format rating data
+const formatRatingData = (rating) => {
+    return {
+        ratingId: rating.id,
+        userId: rating.userId,
+        workId: rating.workId,
+        score: rating.score,
+        ratedAt: rating.ratedAt
+    };
+};
 
 /**
  * Get rating by ID
@@ -20,16 +37,10 @@ export const getRatingById = async (ratingId) => {
     }
 
     // Use mock data
-    const rating = mockRatings.find(r => r.id === parseInt(ratingId));
+    const rating = findMockRatingById(ratingId);
     if (!rating) return null;
 
-    return {
-        ratingId: rating.id,
-        userId: rating.userId,
-        workId: rating.workId,
-        score: rating.score,
-        ratedAt: rating.ratedAt
-    };
+    return formatRatingData(rating);
 };
 
 /**
@@ -45,15 +56,10 @@ export const getWorkRatings = async (workId) => {
     }
 
     // Use mock data
-    const ratings = mockRatings.filter(r => r.workId === parseInt(workId));
+    const parsedWorkId = safeParseInt(workId, 'workId');
+    const ratings = mockRatings.filter(r => r.workId === parsedWorkId);
 
-    return ratings.map(r => ({
-        ratingId: r.id,
-        userId: r.userId,
-        workId: r.workId,
-        score: r.score,
-        ratedAt: r.ratedAt
-    }));
+    return ratings.map(formatRatingData);
 };
 
 /**
@@ -89,17 +95,20 @@ export const createOrUpdateRating = async (userId, workId, score) => {
     }
 
     // Use mock data
+    const parsedUserId = safeParseInt(userId, 'userId');
+    const parsedWorkId = safeParseInt(workId, 'workId');
+    
     // Check if user exists
-    const user = mockUsers.find(u => u.id === parseInt(userId));
+    const user = mockUsers.find(u => u.id === parsedUserId);
     if (!user) throw new Error('User not found');
 
     // Check if work exists
-    const work = mockWorks.find(w => w.id === parseInt(workId));
+    const work = mockWorks.find(w => w.id === parsedWorkId);
     if (!work) throw new Error('Work not found');
 
     // Find existing rating
     const existingRatingIndex = mockRatings.findIndex(
-        r => r.userId === parseInt(userId) && r.workId === parseInt(workId)
+        r => r.userId === parsedUserId && r.workId === parsedWorkId
     );
 
     if (existingRatingIndex !== -1) {
@@ -116,20 +125,14 @@ export const createOrUpdateRating = async (userId, workId, score) => {
         // Update recommendation version to trigger new recommendations
         await updateRecommendationVersion(userId);
 
-        return {
-            ratingId: mockRatings[existingRatingIndex].id,
-            userId: parseInt(userId),
-            workId: parseInt(workId),
-            score,
-            ratedAt: mockRatings[existingRatingIndex].ratedAt
-        };
+        return formatRatingData(mockRatings[existingRatingIndex]);
     }
 
     // Create new rating
     const newRating = {
         id: getNextRatingId(),
-        userId: parseInt(userId),
-        workId: parseInt(workId),
+        userId: parsedUserId,
+        workId: parsedWorkId,
         score,
         ratedAt: new Date().toISOString()
     };
@@ -145,13 +148,7 @@ export const createOrUpdateRating = async (userId, workId, score) => {
     // Update recommendation version to trigger new recommendations
     await updateRecommendationVersion(userId);
 
-    return {
-        ratingId: newRating.id,
-        userId: newRating.userId,
-        workId: newRating.workId,
-        score: newRating.score,
-        ratedAt: newRating.ratedAt
-    };
+    return formatRatingData(newRating);
 };
 
 /**
@@ -177,7 +174,8 @@ export const updateRating = async (ratingId, score) => {
     }
 
     // Use mock data
-    const ratingIndex = mockRatings.findIndex(r => r.id === parseInt(ratingId));
+    const parsedRatingId = safeParseInt(ratingId, 'ratingId');
+    const ratingIndex = mockRatings.findIndex(r => r.id === parsedRatingId);
     if (ratingIndex === -1) return null;
 
     mockRatings[ratingIndex].score = score;
@@ -196,13 +194,7 @@ export const updateRating = async (ratingId, score) => {
     // Update recommendation version to trigger new recommendations
     await updateRecommendationVersion(rating.userId);
 
-    return {
-        ratingId: rating.id,
-        userId: rating.userId,
-        workId: rating.workId,
-        score: score,  // Use the new score parameter instead of rating.score
-        ratedAt: rating.ratedAt
-    };
+    return formatRatingData({ ...rating, score });
 };
 
 /**
@@ -217,7 +209,8 @@ export const deleteRating = async (ratingId) => {
     }
 
     // Use mock data
-    const ratingIndex = mockRatings.findIndex(r => r.id === parseInt(ratingId));
+    const parsedRatingId = safeParseInt(ratingId, 'ratingId');
+    const ratingIndex = mockRatings.findIndex(r => r.id === parsedRatingId);
     if (ratingIndex === -1) return false;
 
     // Remove from user's ratedWorks
@@ -257,11 +250,12 @@ export const getAllRatings = async () => {
  * @returns {Promise<Object>}
  */
 export const getWorkAverageRating = async (workId) => {
+    const parsedWorkId = safeParseInt(workId, 'workId');
     const ratings = await getWorkRatings(workId);
 
     if (ratings.length === 0) {
         return {
-            workId: parseInt(workId),
+            workId: parsedWorkId,
             averageRating: 0,
             totalRatings: 0
         };
@@ -270,7 +264,7 @@ export const getWorkAverageRating = async (workId) => {
     const average = calculateAverageRating(ratings);
 
     return {
-        workId: parseInt(workId),
+        workId: parsedWorkId,
         averageRating: average,
         totalRatings: ratings.length
     };

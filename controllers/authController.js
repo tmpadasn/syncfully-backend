@@ -1,7 +1,7 @@
 import { authenticateUser, createUser } from '../services/userService.js';
 import { sendSuccess, sendError } from '../utils/responses.js';
 import { HTTP_STATUS } from '../config/constants.js';
-import { validateUsername, validatePassword } from '../utils/validators.js';
+import { validateUserData } from '../utils/validators.js';
 
 /**
  * Simple LOGIN (no hashing, mock users only)
@@ -16,7 +16,8 @@ export const login = async (req, res, next) => {
       return sendError(
         res,
         HTTP_STATUS.BAD_REQUEST,
-        'identifier and password are required'
+        'Missing required fields',
+        ['identifier and password are required']
       );
     }
 
@@ -42,33 +43,14 @@ export const signup = async (req, res, next) => {
   try {
     const { username, email, password, profilePictureUrl } = req.body;
 
-    // reuse same validation logic as userController
-    const usernameValidation = validateUsername(username);
-    if (!usernameValidation.valid) {
+    // Validate user data
+    const validation = validateUserData({ username, email, password }, false);
+    if (!validation.valid) {
       return sendError(
         res,
         HTTP_STATUS.BAD_REQUEST,
         'Invalid input',
-        usernameValidation.errors
-      );
-    }
-
-    const passwordValidation = validatePassword(password);
-    if (!passwordValidation.valid) {
-      return sendError(
-        res,
-        HTTP_STATUS.BAD_REQUEST,
-        'Invalid input',
-        passwordValidation.errors
-      );
-    }
-
-    if (!email) {
-      return sendError(
-        res,
-        HTTP_STATUS.BAD_REQUEST,
-        'Invalid input',
-        ['email is required']
+        validation.errors
       );
     }
 

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import { createToJSONTransform } from '../utils/modelHelpers.js';
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -27,14 +28,22 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: null
     },
+    recommendationVersion: {
+        type: Number,
+        default: Date.now
+    },
     ratedWorks: {
         type: Map,
         of: {
             score: {
                 type: Number,
                 required: true,
-                min: 0.5,
-                max: 5
+                min: 1,
+                max: 5,
+                validate: {
+                    validator: Number.isInteger,
+                    message: 'Score must be an integer between 1 and 5'
+                }
             },
             ratedAt: {
                 type: Date,
@@ -47,11 +56,9 @@ const userSchema = new mongoose.Schema({
     timestamps: true,
     toJSON: {
         transform: function (doc, ret) {
-            ret.userId = ret._id;
-            delete ret._id;
-            delete ret.__v;
-            delete ret.password;
-
+            // Use standard transform for ID and password
+            createToJSONTransform('userId', ['password'])(doc, ret);
+            
             // Convert ratedWorks Map to object for JSON response
             if (ret.ratedWorks instanceof Map) {
                 ret.ratedWorks = Object.fromEntries(ret.ratedWorks);

@@ -19,7 +19,7 @@ Syncfully helps users discover new works based on their ratings, connect with fr
 
 - **Multi-Media Support** - Works with movies, series, books, music, and graphic novels
 - **Smart Search** - Filter works by type, genre, year, and rating
-- **Rating System** - Rate works on a scale of 0.5 to 5.0
+- **Rating System** - Rate works on a scale of 1 to 5 (integers only, averages display as decimals)
 - **User Profiles** - Create and manage user accounts
 - **Recommendations** - Get personalized recommendations based on ratings
 - **Popular Works** - Discover trending content
@@ -291,9 +291,9 @@ Action, Adventure, Comedy, Drama, Fantasy, Horror, Mystery, Romance, Sci-Fi, Thr
 
 ## 📊 Rating System
 
-- **Range:** 0.5 to 5.0
-- **Step:** 0.5
-- **Examples:** 0.5, 1.0, 1.5, ..., 4.5, 5.0
+- **User Ratings:** Integers only (1, 2, 3, 4, 5)
+- **Average Ratings:** Calculated as decimals (e.g., 3.85, 4.12)
+- **Display:** Average ratings shown with 1-2 decimal places for precision
 
 ## 🔄 Mock Data vs MongoDB
 
