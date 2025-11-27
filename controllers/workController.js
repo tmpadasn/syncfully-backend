@@ -2,6 +2,7 @@ import * as workService from '../services/workService.js';
 import { sendSuccess, sendError } from '../utils/responses.js';
 import { HTTP_STATUS } from '../config/constants.js';
 import { devLog } from '../utils/logger.js';
+import { parseQueryInt } from '../utils/helpers.js';
 
 /**
  * Get work by ID
@@ -36,8 +37,9 @@ export const getAllWorks = async (req, res, next) => {
         }
 
         // Add year filter if provided
-        if (req.query.year) {
-            filters.year = parseInt(req.query.year);
+        const year = parseQueryInt(req.query.year);
+        if (year !== null) {
+            filters.year = year;
         }
 
         // Add genres filter if provided

@@ -3,6 +3,17 @@ import { mockUsers, getNextUserId } from '../data/mockUsers.js';
 import { isMongoConnected } from '../config/database.js';
 import { isValidEmail } from '../utils/validators.js';
 import { buildImageUrl } from '../utils/imageHelpers.js';
+import { safeParseInt } from '../utils/helpers.js';
+
+/**
+ * Helper: Find mock user by ID
+ * @param {number|string} userId - User ID
+ * @returns {Object|null} User object or null
+ */
+const findMockUserById = (userId) => {
+  const parsedId = safeParseInt(userId, 'userId');
+  return mockUsers.find(u => u.id === parsedId) || null;
+};
 
 /**
  * Get all users
@@ -49,7 +60,7 @@ export const getUserById = async (userId) => {
     };
   }
 
-  const user = mockUsers.find(u => u.id === parseInt(userId));
+  const user = findMockUserById(userId);
   if (!user) return null;
 
   return {
@@ -191,13 +202,14 @@ export const updateUser = async (userId, updateData) => {
   }
 
   // Use mock data
-  const userIndex = mockUsers.findIndex(u => u.id === parseInt(userId));
+  const parsedId = safeParseInt(userId, 'userId');
+  const userIndex = mockUsers.findIndex(u => u.id === parsedId);
   if (userIndex === -1) return null;
 
   // Check for duplicate username/email
   if (username || email) {
     const existingUser = mockUsers.find(u =>
-      u.id !== parseInt(userId) &&
+      u.id !== parsedId &&
       (u.username === username || u.email === email)
     );
 
@@ -237,7 +249,8 @@ export const deleteUser = async (userId) => {
   }
 
   // Use mock data
-  const userIndex = mockUsers.findIndex(u => u.id === parseInt(userId));
+  const parsedId = safeParseInt(userId, 'userId');
+  const userIndex = mockUsers.findIndex(u => u.id === parsedId);
   if (userIndex === -1) return false;
 
   mockUsers.splice(userIndex, 1);
@@ -259,7 +272,7 @@ export const getUserRatings = async (userId) => {
   }
 
   // Use mock data
-  const user = mockUsers.find(u => u.id === parseInt(userId));
+  const user = findMockUserById(userId);
   if (!user) return null;
 
   return user.ratedWorks;
@@ -296,7 +309,7 @@ export const addUserRating = async (userId, workId, score) => {
   }
 
   // Use mock data
-  const user = mockUsers.find(u => u.id === parseInt(userId));
+  const user = findMockUserById(userId);
   if (!user) return null;
 
   user.ratedWorks[workId] = {
@@ -364,7 +377,7 @@ export const getRecommendationVersion = async (userId) => {
   }
 
   // Use mock data
-  const user = mockUsers.find(u => u.id === parseInt(userId));
+  const user = findMockUserById(userId);
   if (!user) return Date.now();
   return user.recommendationVersion || Date.now();
 };
@@ -383,7 +396,7 @@ export const updateRecommendationVersion = async (userId) => {
   }
 
   // Use mock data
-  const user = mockUsers.find(u => u.id === parseInt(userId));
+  const user = findMockUserById(userId);
   if (user) {
     user.recommendationVersion = newVersion;
   }

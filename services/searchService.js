@@ -9,8 +9,68 @@ import User from '../models/User.js';
 import { mockWorks } from '../data/mockWorks.js';
 import { mockUsers } from '../data/mockUsers.js';
 import { mockRatings } from '../data/mockRatings.js';
+import { calculateAverageRating, formatWorkData } from '../utils/helpers.js';
 
 const MAX_RESULTS = 50;
+
+// Helper function to calculate rating for a work from mock data
+const calculateWorkRating = (workId) => {
+    const ratingsForWork = mockRatings.filter(
+        (r) => String(r.workId) === String(workId)
+    );
+    return calculateAverageRating(ratingsForWork.map(r => ({ score: r.score })));
+};
+
+// Helper function to format work with rating and count
+const formatWorkWithRating = (work) => {
+    const id = work.workId || work._id || work.id;
+    const ratingsForWork = mockRatings.filter(
+        (r) => String(r.workId) === String(id)
+    );
+    const rating = calculateAverageRating(ratingsForWork.map(r => ({ score: r.score })));
+
+    return {
+        workId: id,
+        title: work.title,
+        description: work.description,
+        type: work.type,
+        year: work.year,
+        genres: work.genres,
+        creator: work.creator,
+        coverUrl: work.coverUrl,
+        foundAt: work.foundAt,
+        rating,
+        ratingCount: ratingsForWork.length,
+        createdAt: work.createdAt,
+        updatedAt: work.updatedAt
+    };
+};
+
+// Helper function to format user data
+const formatUserData = (user) => {
+    const id = user.userId || user._id || user.id;
+    
+    let ratedWorksCount = 0;
+    if (user.ratedWorks && typeof user.ratedWorks === 'object') {
+        ratedWorksCount = Object.keys(user.ratedWorks).length;
+    }
+
+    return {
+        userId: id,
+        username: user.username,
+        email: user.email,
+        profilePictureUrl: user.profilePictureUrl,
+        ratedWorks: user.ratedWorks,
+        ratedWorksCount,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt
+    };
+};
+
+// Helper function to sort works by rating and title
+const sortWorksByRating = (works) => {
+    return works.sort((a, b) => b.rating - a.rating || a.title.localeCompare(b.title));
+};
 
 const isDbConnected = () => mongoose.connection.readyState === 1;
 
@@ -101,7 +161,6 @@ const searchWorksDb = async ({ query, workType, genre, minRating, year }) => {
 
 /* ----------------------- WORKS: mock implementation ---------------------- */
 
-// services/searchService.js (inside searchWorksMock)
 const searchWorksMock = ({ query, workType, genre, minRating, year }) => {
     let works = [...mockWorks];
 
@@ -130,49 +189,19 @@ const searchWorksMock = ({ query, workType, genre, minRating, year }) => {
     }
 
     if (typeof year === 'number') {
-        works = works.filter((w) => w.year >= year); // Changed from exact match to >= (from year onwards)
+        works = works.filter((w) => w.year >= year);
     }
 
-    const withRatings = works.map((w) => {
-        const id = w.workId || w._id || w.id;
+    // Format all works with ratings
+    const withRatings = works.map(formatWorkWithRating);
 
-        const ratingsForWork = mockRatings.filter(
-            (r) => String(r.workId) === String(id)
-        );
-        const ratingCount = ratingsForWork.length;
-        const rating =
-            ratingCount === 0
-                ? 0
-                : ratingsForWork.reduce((sum, r) => sum + (r.score || 0), 0) /
-                  ratingCount;
+    // Filter by minimum rating if specified
+    const filtered = typeof minRating === 'number'
+        ? withRatings.filter((w) => w.rating >= minRating)
+        : withRatings;
 
-        return {
-            workId: id,
-            title: w.title,
-            description: w.description,
-            type: w.type,
-            year: w.year,
-            genres: w.genres,
-            creator: w.creator,
-            coverUrl: w.coverUrl,
-            foundAt: w.foundAt,
-            rating,
-            ratingCount,
-            createdAt: w.createdAt,
-            updatedAt: w.updatedAt
-        };
-    });
-
-    if (typeof minRating === 'number') {
-        return withRatings
-            .filter((w) => w.rating >= minRating)
-            .sort((a, b) => b.rating - a.rating || a.title.localeCompare(b.title))
-            .slice(0, MAX_RESULTS);
-    }
-
-    return withRatings
-        .sort((a, b) => b.rating - a.rating || a.title.localeCompare(b.title))
-        .slice(0, MAX_RESULTS);
+    // Sort and limit results
+    return sortWorksByRating(filtered).slice(0, MAX_RESULTS);
 };
 
 
@@ -214,26 +243,7 @@ const searchUsersMock = ({ query }) => {
     return users
         .sort((a, b) => (a.username || '').localeCompare(b.username || ''))
         .slice(0, MAX_RESULTS)
-        .map((u) => {
-            const id = u.userId || u._id || u.id; // 👈 for your mocks this will be u.id
-
-            // ratedWorks is a plain object in mocks
-            let ratedWorksCount = 0;
-            if (u.ratedWorks && typeof u.ratedWorks === 'object') {
-                ratedWorksCount = Object.keys(u.ratedWorks).length;
-            }
-
-            return {
-                userId: id,                 // 👈 public API field
-                username: u.username,
-                email: u.email,
-                profilePictureUrl: u.profilePictureUrl,
-                ratedWorks: u.ratedWorks,
-                ratedWorksCount,
-                createdAt: u.createdAt,
-                updatedAt: u.updatedAt
-            };
-        });
+        .map(formatUserData);
 };
 
 /* --------------------------- Public functions --------------------------- */

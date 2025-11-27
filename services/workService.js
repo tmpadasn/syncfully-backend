@@ -2,9 +2,21 @@ import Work from '../models/Work.js';
 import { mockWorks, getNextWorkId } from '../data/mockWorks.js';
 import { mockRatings } from '../data/mockRatings.js';
 import { isMongoConnected } from '../config/database.js';
-import { calculateAverageRating } from '../utils/helpers.js';
+import { calculateAverageRating, enrichWorkWithRating, safeParseInt } from '../utils/helpers.js';
 import { buildImageUrl } from '../utils/imageHelpers.js';
 import { devLog } from '../utils/logger.js';
+import { getWorkAverageRating } from './ratingService.js';
+import { QUERY_LIMITS } from '../config/constants.js';
+
+/**
+ * Helper: Find mock work by ID
+ * @param {number|string} workId - Work ID
+ * @returns {Object|null} Work object or null
+ */
+const findMockWorkById = (workId) => {
+  const parsedId = safeParseInt(workId, 'workId');
+  return mockWorks.find(w => w.id === parsedId) || null;
+};
 
 /**
  * Get work by ID
@@ -17,31 +29,21 @@ export const getWorkById = async (workId) => {
         if (!work) return null;
 
         const workData = work.toJSON();
-        workData.rating = 0;
+        const ratingData = await getWorkAverageRating(workId);
+        workData.rating = ratingData.averageRating;
         workData.coverUrl = buildImageUrl(workData.coverUrl, workData.type);
 
         return workData;
     }
 
     // Use mock data
-    const work = mockWorks.find(w => w.id === parseInt(workId));
+    const work = findMockWorkById(workId);
     if (!work) return null;
 
-    const workRatings = mockRatings.filter(r => r.workId === parseInt(workId));
-    const rating = calculateAverageRating(workRatings);
+    const enrichedWork = enrichWorkWithRating(work, mockRatings);
+    enrichedWork.coverUrl = buildImageUrl(work.coverUrl, work.type);
 
-    return {
-        workId: work.id,
-        title: work.title,
-        description: work.description,
-        type: work.type,
-        year: work.year,
-        genres: work.genres,
-        creator: work.creator,
-        rating,
-        coverUrl: buildImageUrl(work.coverUrl, work.type), // Use helper
-        foundAt: work.foundAt
-    };
+    return enrichedWork;
 };
 
 /**
@@ -58,7 +60,7 @@ export const getAllWorks = async (filters = {}) => {
         }
 
         if (filters.year) {
-            query.year = { $gte: parseInt(filters.year) }; // Changed to >= for "from year onwards"
+            query.year = { $gte: Number(filters.year) }; // Changed to >= for "from year onwards"
         }
 
         if (filters.genres && filters.genres.length > 0) {
@@ -67,11 +69,17 @@ export const getAllWorks = async (filters = {}) => {
 
         const works = await Work.find(query);
 
-        return works.map(work => {
-            const workData = work.toJSON();
-            workData.rating = 0; // TODO: Calculate from ratings
-            return workData;
-        });
+        // Enrich with ratings using the rating service
+        const enrichedWorks = await Promise.all(
+            works.map(async (work) => {
+                const workData = work.toJSON();
+                const ratingData = await getWorkAverageRating(work._id);
+                workData.rating = ratingData.averageRating;
+                return workData;
+            })
+        );
+
+        return enrichedWorks;
     }
 
     // Use mock data
@@ -89,7 +97,8 @@ export const getAllWorks = async (filters = {}) => {
     // Apply year filter
     if (filters.year) {
         devLog('Filtering by year:', filters.year);
-        works = works.filter(w => w.year >= parseInt(filters.year)); // Changed to >= for "from year onwards"
+        const yearInt = Number(filters.year);
+        works = works.filter(w => w.year >= yearInt); // Changed to >= for "from year onwards"
         devLog('Works after year filter:', works.length);
     }
 
@@ -102,23 +111,7 @@ export const getAllWorks = async (filters = {}) => {
         devLog('Works after genres filter:', works.length);
     }
 
-    return works.map(work => {
-        const workRatings = mockRatings.filter(r => r.workId === work.id);
-        const rating = calculateAverageRating(workRatings);
-
-        return {
-            workId: work.id,
-            title: work.title,
-            description: work.description,
-            type: work.type,
-            year: work.year,
-            genres: work.genres,
-            creator: work.creator,
-            rating,
-            coverUrl: work.coverUrl,
-            foundAt: work.foundAt
-        };
-    });
+    return works.map(work => enrichWorkWithRating(work, mockRatings));
 };
 
 /**
@@ -138,40 +131,31 @@ export const getSimilarWorks = async (workId) => {
                 { type: work.type },
                 { genres: { $in: work.genres } }
             ]
-        }).limit(10);
+        }).limit(QUERY_LIMITS.SIMILAR_WORKS);
 
-        return similar.map(w => {
-            const workData = w.toJSON();
-            workData.rating = 0; // TODO: Calculate from ratings
-            return workData;
-        });
+        // Enrich with ratings
+        const enrichedSimilar = await Promise.all(
+            similar.map(async (w) => {
+                const workData = w.toJSON();
+                const ratingData = await getWorkAverageRating(w._id);
+                workData.rating = ratingData.averageRating;
+                return workData;
+            })
+        );
+
+        return enrichedSimilar;
     }
 
     // Use mock data - find works with same type or genres
+    const parsedId = safeParseInt(workId, 'workId');
     const similar = mockWorks
         .filter(w =>
-            w.id !== parseInt(workId) &&
+            w.id !== parsedId &&
             (w.type === work.type || (w.genres && w.genres.some(g => work.genres && work.genres.includes(g))))
         )
-        .slice(0, 10);
+        .slice(0, QUERY_LIMITS.SIMILAR_WORKS);
 
-    return similar.map(w => {
-        const workRatings = mockRatings.filter(r => r.workId === w.id);
-        const rating = calculateAverageRating(workRatings);
-
-        return {
-            workId: w.id,
-            title: w.title,
-            description: w.description,
-            type: w.type,
-            year: w.year,
-            genres: w.genres,
-            creator: w.creator,
-            rating,
-            coverUrl: w.coverUrl,
-            foundAt: w.foundAt
-        };
-    });
+    return similar.map(w => enrichWorkWithRating(w, mockRatings));
 };
 
 /**
@@ -180,34 +164,35 @@ export const getSimilarWorks = async (workId) => {
  */
 export const getPopularWorks = async () => {
     if (isMongoConnected()) {
-        // TODO: Implement based on recent ratings count/average
-        const works = await Work.find().limit(10);
+        // Get works and enrich with rating data, then sort by popularity
+        const works = await Work.find().limit(QUERY_LIMITS.POPULAR_WORKS_FETCH);
 
-        return works.map(w => {
-            const workData = w.toJSON();
-            workData.rating = 0;
-            return workData;
-        });
+        const worksWithRatings = await Promise.all(
+            works.map(async (w) => {
+                const workData = w.toJSON();
+                const ratingData = await getWorkAverageRating(w._id);
+                workData.rating = ratingData.averageRating;
+                workData.ratingsCount = ratingData.totalRatings;
+                return workData;
+            })
+        );
+
+        // Sort by rating and number of ratings
+        return worksWithRatings
+            .sort((a, b) => {
+                if (b.rating !== a.rating) return b.rating - a.rating;
+                return b.ratingsCount - a.ratingsCount;
+            })
+            .slice(0, QUERY_LIMITS.POPULAR_WORKS);
     }
 
     // Use mock data - sort by rating
     const worksWithRatings = mockWorks.map(work => {
         const workRatings = mockRatings.filter(r => r.workId === work.id);
         const rating = calculateAverageRating(workRatings);
-
-        return {
-            workId: work.id,
-            title: work.title,
-            description: work.description,
-            type: work.type,
-            year: work.year,
-            genres: work.genres,
-            creator: work.creator,
-            rating,
-            coverUrl: work.coverUrl,
-            foundAt: work.foundAt,
-            ratingsCount: workRatings.length
-        };
+        const enrichedWork = enrichWorkWithRating(work, mockRatings);
+        enrichedWork.ratingsCount = workRatings.length;
+        return enrichedWork;
     });
 
     // Sort by rating and number of ratings
@@ -216,7 +201,7 @@ export const getPopularWorks = async () => {
             if (b.rating !== a.rating) return b.rating - a.rating;
             return b.ratingsCount - a.ratingsCount;
         })
-        .slice(0, 10);
+        .slice(0, QUERY_LIMITS.POPULAR_WORKS);
 };
 
 /**
@@ -230,7 +215,8 @@ export const createWork = async (workData) => {
         await work.save();
 
         const result = work.toJSON();
-        result.rating = 0;
+        const ratingData = await getWorkAverageRating(work._id);
+        result.rating = ratingData.averageRating;
         return result;
     }
 
@@ -266,24 +252,19 @@ export const updateWork = async (workId, updateData) => {
         if (!work) return null;
 
         const result = work.toJSON();
-        result.rating = 0;
+        const ratingData = await getWorkAverageRating(workId);
+        result.rating = ratingData.averageRating;
         return result;
     }
 
     // Use mock data
-    const workIndex = mockWorks.findIndex(w => w.id === parseInt(workId));
+    const parsedId = safeParseInt(workId, 'workId');
+    const workIndex = mockWorks.findIndex(w => w.id === parsedId);
     if (workIndex === -1) return null;
 
     mockWorks[workIndex] = { ...mockWorks[workIndex], ...updateData };
 
-    const workRatings = mockRatings.filter(r => r.workId === parseInt(workId));
-    const rating = calculateAverageRating(workRatings);
-
-    return {
-        workId: mockWorks[workIndex].id,
-        ...mockWorks[workIndex],
-        rating
-    };
+    return enrichWorkWithRating(mockWorks[workIndex], mockRatings);
 };
 
 /**
@@ -298,7 +279,8 @@ export const deleteWork = async (workId) => {
     }
 
     // Use mock data
-    const workIndex = mockWorks.findIndex(w => w.id === parseInt(workId));
+    const parsedId = safeParseInt(workId, 'workId');
+    const workIndex = mockWorks.findIndex(w => w.id === parsedId);
     if (workIndex === -1) return false;
 
     mockWorks.splice(workIndex, 1);

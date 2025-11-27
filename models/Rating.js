@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { RATING_CONSTRAINTS } from '../config/constants.js';
+import { createToJSONOptions } from '../utils/modelHelpers.js';
 
 const ratingSchema = new mongoose.Schema({
     userId: {
@@ -28,14 +29,7 @@ const ratingSchema = new mongoose.Schema({
     }
 }, {
     timestamps: true,
-    toJSON: {
-        transform: function (doc, ret) {
-            ret.ratingId = ret._id;
-            delete ret._id;
-            delete ret.__v;
-            return ret;
-        }
-    }
+    toJSON: createToJSONOptions('ratingId')
 });
 
 // Compound index to ensure one rating per user per work

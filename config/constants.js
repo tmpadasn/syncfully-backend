@@ -18,6 +18,12 @@ export const USER_CONSTRAINTS = {
     PASSWORD_MIN_LENGTH: 6
 };
 
+export const QUERY_LIMITS = {
+    SIMILAR_WORKS: 10,
+    POPULAR_WORKS: 10,
+    POPULAR_WORKS_FETCH: 50  // Fetch more for sorting
+};
+
 export const HTTP_STATUS = {
     OK: 200,
     CREATED: 201,

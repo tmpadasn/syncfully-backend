@@ -2,7 +2,7 @@ import * as userService from '../services/userService.js';
 import * as workService from '../services/workService.js';
 import { sendSuccess, sendError } from '../utils/responses.js';
 import { HTTP_STATUS } from '../config/constants.js';
-import { validateUsername, validatePassword, validateRatingScore } from '../utils/validators.js';
+import { validateUserData, validateRatingScore } from '../utils/validators.js';
 
 /**
  * Get all users
@@ -44,21 +44,10 @@ export const createUser = async (req, res, next) => {
   try {
     const { username, email, password, profilePictureUrl } = req.body;
     
-    // Validate username
-    const usernameValidation = validateUsername(username);
-    if (!usernameValidation.valid) {
-      return sendError(res, HTTP_STATUS.BAD_REQUEST, 'Invalid input', usernameValidation.errors);
-    }
-    
-    // Validate password
-    const passwordValidation = validatePassword(password);
-    if (!passwordValidation.valid) {
-      return sendError(res, HTTP_STATUS.BAD_REQUEST, 'Invalid input', passwordValidation.errors);
-    }
-    
-    // Validate email
-    if (!email) {
-      return sendError(res, HTTP_STATUS.BAD_REQUEST, 'Invalid input', ['email is required']);
+    // Validate user data
+    const validation = validateUserData({ username, email, password }, false);
+    if (!validation.valid) {
+      return sendError(res, HTTP_STATUS.BAD_REQUEST, 'Invalid input', validation.errors);
     }
     
     const user = await userService.createUser({
@@ -86,20 +75,10 @@ export const updateUser = async (req, res, next) => {
     const { userId } = req.params;
     const { username, email, password, profilePictureUrl } = req.body;
     
-    // Validate username if provided
-    if (username) {
-      const usernameValidation = validateUsername(username);
-      if (!usernameValidation.valid) {
-        return sendError(res, HTTP_STATUS.BAD_REQUEST, 'Invalid input', usernameValidation.errors);
-      }
-    }
-    
-    // Validate password if provided
-    if (password) {
-      const passwordValidation = validatePassword(password);
-      if (!passwordValidation.valid) {
-        return sendError(res, HTTP_STATUS.BAD_REQUEST, 'Invalid input', passwordValidation.errors);
-      }
+    // Validate user data (isUpdate = true makes fields optional)
+    const validation = validateUserData({ username, email, password }, true);
+    if (!validation.valid) {
+      return sendError(res, HTTP_STATUS.BAD_REQUEST, 'Invalid input', validation.errors);
     }
     
     const user = await userService.updateUser(userId, {

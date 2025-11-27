@@ -1,6 +1,7 @@
 import * as shelfService from '../services/shelfService.js';
 import { sendSuccess, sendError } from '../utils/responses.js';
 import { HTTP_STATUS } from '../config/constants.js';
+import { parseQueryInt, parseQueryFloat } from '../utils/helpers.js';
 
 /**
  * Get all shelves (across all users)
@@ -154,13 +155,15 @@ export const getShelfWorks = async (req, res, next) => {
         }
 
         // Add rating filter if provided
-        if (req.query.rating) {
-            filters.rating = parseFloat(req.query.rating);
+        const rating = parseQueryFloat(req.query.rating);
+        if (rating !== null) {
+            filters.rating = rating;
         }
 
         // Add year filter if provided
-        if (req.query.year) {
-            filters.year = parseInt(req.query.year);
+        const year = parseQueryInt(req.query.year);
+        if (year !== null) {
+            filters.year = year;
         }
 
         const shelf = await shelfService.getShelfWorks(shelfId, filters);

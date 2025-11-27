@@ -2,6 +2,7 @@
 import * as searchService from '../services/searchService.js';
 import { sendSuccess, sendError } from '../utils/responses.js';
 import { HTTP_STATUS } from '../config/constants.js';
+import { parseQueryInt, parseQueryFloat } from '../utils/helpers.js';
 
 /**
  * GET /search
@@ -31,29 +32,23 @@ export const searchItems = async (req, res, next) => {
         }
 
         // rating (min average rating)
-        let minRating;
-        if (req.query.rating !== undefined && req.query.rating !== '') {
-            minRating = parseFloat(req.query.rating);
-            if (Number.isNaN(minRating)) {
-                return sendError(
-                    res,
-                    HTTP_STATUS.BAD_REQUEST,
-                    'Invalid rating parameter. Must be a number.'
-                );
-            }
+        const minRating = parseQueryFloat(req.query.rating);
+        if (req.query.rating && minRating === null) {
+            return sendError(
+                res,
+                HTTP_STATUS.BAD_REQUEST,
+                'Invalid rating parameter. Must be a number.'
+            );
         }
 
         // year
-        let year;
-        if (req.query.year !== undefined && req.query.year !== '') {
-            year = parseInt(req.query.year, 10);
-            if (Number.isNaN(year)) {
-                return sendError(
-                    res,
-                    HTTP_STATUS.BAD_REQUEST,
-                    'Invalid year parameter. Must be an integer.'
-                );
-            }
+        const year = parseQueryInt(req.query.year);
+        if (req.query.year && year === null) {
+            return sendError(
+                res,
+                HTTP_STATUS.BAD_REQUEST,
+                'Invalid year parameter. Must be an integer.'
+            );
         }
 
         const result = await searchService.searchItems({

@@ -65,3 +65,37 @@ export const validateRatingScore = (score) => {
 
     return { valid: errors.length === 0, errors };
 };
+
+/**
+ * Validate user registration/update data
+ * @param {Object} data - User data to validate
+ * @param {boolean} isUpdate - Whether this is an update (makes fields optional)
+ * @returns {Object} - { valid: boolean, errors: string[] }
+ */
+export const validateUserData = (data, isUpdate = false) => {
+    const { username, email, password } = data;
+    const errors = [];
+
+    // Validate username if provided or required
+    if (username || !isUpdate) {
+        const usernameValidation = validateUsername(username);
+        if (!usernameValidation.valid) {
+            errors.push(...usernameValidation.errors);
+        }
+    }
+
+    // Validate password if provided or required
+    if (password || !isUpdate) {
+        const passwordValidation = validatePassword(password);
+        if (!passwordValidation.valid) {
+            errors.push(...passwordValidation.errors);
+        }
+    }
+
+    // Validate email if provided or required
+    if (!isUpdate && !email) {
+        errors.push('email is required');
+    }
+
+    return { valid: errors.length === 0, errors };
+};
