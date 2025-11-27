@@ -113,4 +113,32 @@ router.post(
     shelfController.createShelf
 );
 
+/**
+ * @route   GET /api/users/:userId/following
+ * @desc    Get user's following
+ * @access  Public
+ */
+router.get('/:userId/following', userController.getUserFollowing);
+
+/**
+ * @route   GET /api/users/:userId/followers
+ * @desc    Get user's followers
+ * @access  Public
+ */
+router.get('/:userId/followers', userController.getUserFollowers);
+
+/**
+ * @route   POST /api/users/:userId/following/:targetUserId
+ * @desc    Follow a user
+ * @access  Public
+ */
+router.post('/:userId/following/:targetUserId', userController.followUser);
+
+/**
+ * @route   DELETE /api/users/:userId/following/:targetUserId
+ * @desc    Unfollow a user
+ * @access  Public
+ */
+router.delete('/:userId/following/:targetUserId', userController.unfollowUser);
+
 export default router;
