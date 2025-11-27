@@ -1,6 +1,7 @@
 import * as workService from '../services/workService.js';
 import { sendSuccess, sendError } from '../utils/responses.js';
 import { HTTP_STATUS } from '../config/constants.js';
+import { devLog } from '../utils/logger.js';
 
 /**
  * Get work by ID
@@ -47,7 +48,7 @@ export const getAllWorks = async (req, res, next) => {
                 : req.query.genres.split(',').map(g => g.trim());
         }
 
-        console.log('Filters applied:', filters); // Debug log
+        devLog('Filters applied:', filters);
 
         const works = await workService.getAllWorks(filters);
         sendSuccess(res, HTTP_STATUS.OK, { works });

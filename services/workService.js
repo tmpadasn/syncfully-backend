@@ -4,6 +4,7 @@ import { mockRatings } from '../data/mockRatings.js';
 import { isMongoConnected } from '../config/database.js';
 import { calculateAverageRating } from '../utils/helpers.js';
 import { buildImageUrl } from '../utils/imageHelpers.js';
+import { devLog } from '../utils/logger.js';
 
 /**
  * Get work by ID
@@ -76,29 +77,29 @@ export const getAllWorks = async (filters = {}) => {
     // Use mock data
     let works = [...mockWorks];
 
-    console.log('Total works before filtering:', works.length); // Debug
+    devLog('Total works before filtering:', works.length);
 
     // Apply type filter
     if (filters.type) {
-        console.log('Filtering by type:', filters.type); // Debug
+        devLog('Filtering by type:', filters.type);
         works = works.filter(w => w.type === filters.type);
-        console.log('Works after type filter:', works.length); // Debug
+        devLog('Works after type filter:', works.length);
     }
 
     // Apply year filter
     if (filters.year) {
-        console.log('Filtering by year:', filters.year); // Debug
+        devLog('Filtering by year:', filters.year);
         works = works.filter(w => w.year >= parseInt(filters.year)); // Changed to >= for "from year onwards"
-        console.log('Works after year filter:', works.length); // Debug
+        devLog('Works after year filter:', works.length);
     }
 
     // Apply genres filter
     if (filters.genres && filters.genres.length > 0) {
-        console.log('Filtering by genres:', filters.genres); // Debug
+        devLog('Filtering by genres:', filters.genres);
         works = works.filter(w =>
             w.genres && w.genres.some(g => filters.genres.includes(g))
         );
-        console.log('Works after genres filter:', works.length); // Debug
+        devLog('Works after genres filter:', works.length);
     }
 
     return works.map(work => {

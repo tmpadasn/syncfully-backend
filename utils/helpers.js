@@ -24,6 +24,27 @@ export const calculateAverageRating = (ratings) => {
 };
 
 /**
+ * Safely parse an ID to integer with validation
+ * @param {string|number} id - ID to parse
+ * @param {string} fieldName - Name of the field (for error messages)
+ * @returns {number} Parsed integer ID
+ * @throws {Error} If ID is invalid or not a positive integer
+ */
+export const safeParseInt = (id, fieldName = 'ID') => {
+    const parsed = parseInt(id, 10);
+    
+    if (isNaN(parsed)) {
+        throw new Error(`Invalid ${fieldName}: must be a number`);
+    }
+    
+    if (parsed <= 0) {
+        throw new Error(`Invalid ${fieldName}: must be a positive integer`);
+    }
+    
+    return parsed;
+};
+
+/**
  * Filter items by search query
  * @param {Array} items - Items to filter
  * @param {string} query - Search query

@@ -1,5 +1,6 @@
 import { HTTP_STATUS } from '../config/constants.js';
 import { sendError } from '../utils/responses.js';
+import { prodError } from '../utils/logger.js';
 
 /**
  * Global error handling middleware
@@ -9,7 +10,7 @@ import { sendError } from '../utils/responses.js';
  * @param {Function} next - Express next middleware function
  */
 export const errorHandler = (err, req, res, next) => {
-    console.error('Error:', err);
+    prodError('Error:', err);
 
     // Mongoose validation error
     if (err.name === 'ValidationError') {

@@ -50,10 +50,6 @@ const userSchema = new mongoose.Schema({
             }
         },
         default: new Map()
-    },
-    recommendationVersion: {
-        type: Number,
-        default: Date.now
     }
 }, {
     timestamps: true,

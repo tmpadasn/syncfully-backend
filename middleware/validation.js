@@ -25,19 +25,21 @@ export const validateRequiredFields = (requiredFields) => {
 };
 
 /**
- * Validate ID parameter is a valid integer
+ * Validate ID parameter is a valid integer (read-only, doesn't mutate)
  * @param {string} paramName - Name of the parameter
  * @returns {Function} Express middleware function
  */
 export const validateIdParam = (paramName) => {
     return (req, res, next) => {
-        const id = parseInt(req.params[paramName]);
+        const id = req.params[paramName];
+        const parsedId = parseInt(id, 10);
 
-        if (isNaN(id) || id <= 0) {
+        if (isNaN(parsedId) || parsedId <= 0) {
             return sendError(res, HTTP_STATUS.BAD_REQUEST, `Invalid ${paramName}: must be a positive integer`);
         }
 
-        req.params[paramName] = id;
+        // Don't mutate params - let services handle parsing
+        // This keeps validation pure and avoids type inconsistencies
         next();
     };
 };
