@@ -122,7 +122,8 @@ export const createUser = async (userData) => {
     email,
     password, // In production, this would be hashed
     profilePictureUrl: profilePictureUrl || "http://localhost:3000/uploads/profiles/profile_picture.jpg",
-    ratedWorks: {}
+    ratedWorks: {},
+    recommendationVersion: Date.now()
   };
 
   mockUsers.push(newUser);

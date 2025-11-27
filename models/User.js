@@ -27,14 +27,22 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: null
     },
+    recommendationVersion: {
+        type: Number,
+        default: Date.now
+    },
     ratedWorks: {
         type: Map,
         of: {
             score: {
                 type: Number,
                 required: true,
-                min: 0.5,
-                max: 5
+                min: 1,
+                max: 5,
+                validate: {
+                    validator: Number.isInteger,
+                    message: 'Score must be an integer between 1 and 5'
+                }
             },
             ratedAt: {
                 type: Date,
@@ -42,6 +50,10 @@ const userSchema = new mongoose.Schema({
             }
         },
         default: new Map()
+    },
+    recommendationVersion: {
+        type: Number,
+        default: Date.now
     }
 }, {
     timestamps: true,
