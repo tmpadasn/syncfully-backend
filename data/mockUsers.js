@@ -25,7 +25,7 @@ export const mockUsers = [
         ratedWorks: buildRatedWorksForUser(1),
         recommendationVersion: Date.now(),
         followers: [2, 3, 4],
-        following: [5, 6, 7]
+        following: [2, 3, 5, 6, 7]
     },
     {
         id: 2,
@@ -35,7 +35,7 @@ export const mockUsers = [
         profilePictureUrl: 'http://localhost:3000/uploads/profiles/avatar_2_bob.jpg',
         ratedWorks: buildRatedWorksForUser(2),
         recommendationVersion: Date.now(),
-        followers: [1],
+        followers: [1, 3],
         following: [1, 3]
     },
     {
@@ -47,7 +47,7 @@ export const mockUsers = [
         ratedWorks: buildRatedWorksForUser(3),
         recommendationVersion: Date.now(),
         followers: [1, 2],
-        following: [1]
+        following: [1, 2]
     },
     {
         id: 4,
@@ -58,7 +58,7 @@ export const mockUsers = [
         ratedWorks: buildRatedWorksForUser(4),
         recommendationVersion: Date.now(),
         followers: [],
-        following: []
+        following: [1]
     },
     {
         id: 5,
@@ -68,7 +68,7 @@ export const mockUsers = [
         profilePictureUrl: 'http://localhost:3000/uploads/profiles/avatar_5_emma.jpg',
         ratedWorks: buildRatedWorksForUser(5),
         recommendationVersion: Date.now(),
-        followers: [],
+        followers: [1],
         following: []
     },
     {
@@ -79,7 +79,7 @@ export const mockUsers = [
         profilePictureUrl: 'http://localhost:3000/uploads/profiles/avatar_6_frank.jpg',
         ratedWorks: buildRatedWorksForUser(6),
         recommendationVersion: Date.now(),
-        followers: [],
+        followers: [1],
         following: []
     },
     {
@@ -90,7 +90,7 @@ export const mockUsers = [
         profilePictureUrl: 'http://localhost:3000/uploads/profiles/avatar_7_grace.jpg',
         ratedWorks: buildRatedWorksForUser(7),
         recommendationVersion: Date.now(),
-        followers: [],
+        followers: [1],
         following: []
     },
     {
