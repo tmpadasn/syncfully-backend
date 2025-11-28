@@ -3,6 +3,17 @@ import { mockUsers, getNextUserId } from '../data/mockUsers.js';
 import { isMongoConnected } from '../config/database.js';
 import { isValidEmail } from '../utils/validators.js';
 import { buildImageUrl } from '../utils/imageHelpers.js';
+import { safeParseInt } from '../utils/helpers.js';
+
+/**
+ * Helper: Find mock user by ID
+ * @param {number|string} userId - User ID
+ * @returns {Object|null} User object or null
+ */
+const findMockUserById = (userId) => {
+  const parsedId = safeParseInt(userId, 'userId');
+  return mockUsers.find(u => u.id === parsedId) || null;
+};
 
 /**
  * Get all users
@@ -49,7 +60,7 @@ export const getUserById = async (userId) => {
     };
   }
 
-  const user = mockUsers.find(u => u.id === parseInt(userId));
+  const user = findMockUserById(userId);
   if (!user) return null;
 
   return {
@@ -90,7 +101,7 @@ export const createUser = async (userData) => {
       username,
       email,
       password,
-      profilePictureUrl: profilePictureUrl || null
+      profilePictureUrl: "http://localhost:3000/uploads/profiles/profile_picture.jpg",
     });
 
     await user.save();
@@ -121,8 +132,9 @@ export const createUser = async (userData) => {
     username,
     email,
     password, // In production, this would be hashed
-    profilePictureUrl: profilePictureUrl || null,
-    ratedWorks: {}
+    profilePictureUrl: profilePictureUrl || "http://localhost:3000/uploads/profiles/profile_picture.jpg",
+    ratedWorks: {},
+    recommendationVersion: Date.now()
   };
 
   mockUsers.push(newUser);
@@ -190,13 +202,14 @@ export const updateUser = async (userId, updateData) => {
   }
 
   // Use mock data
-  const userIndex = mockUsers.findIndex(u => u.id === parseInt(userId));
+  const parsedId = safeParseInt(userId, 'userId');
+  const userIndex = mockUsers.findIndex(u => u.id === parsedId);
   if (userIndex === -1) return null;
 
   // Check for duplicate username/email
   if (username || email) {
     const existingUser = mockUsers.find(u =>
-      u.id !== parseInt(userId) &&
+      u.id !== parsedId &&
       (u.username === username || u.email === email)
     );
 
@@ -236,7 +249,8 @@ export const deleteUser = async (userId) => {
   }
 
   // Use mock data
-  const userIndex = mockUsers.findIndex(u => u.id === parseInt(userId));
+  const parsedId = safeParseInt(userId, 'userId');
+  const userIndex = mockUsers.findIndex(u => u.id === parsedId);
   if (userIndex === -1) return false;
 
   mockUsers.splice(userIndex, 1);
@@ -258,7 +272,7 @@ export const getUserRatings = async (userId) => {
   }
 
   // Use mock data
-  const user = mockUsers.find(u => u.id === parseInt(userId));
+  const user = findMockUserById(userId);
   if (!user) return null;
 
   return user.ratedWorks;
@@ -283,6 +297,9 @@ export const addUserRating = async (userId, workId, score) => {
 
     await user.save();
 
+    // Update recommendation version to trigger new recommendations
+    await updateRecommendationVersion(userId);
+
     return {
       userId: user._id,
       workId,
@@ -292,7 +309,7 @@ export const addUserRating = async (userId, workId, score) => {
   }
 
   // Use mock data
-  const user = mockUsers.find(u => u.id === parseInt(userId));
+  const user = findMockUserById(userId);
   if (!user) return null;
 
   user.ratedWorks[workId] = {
@@ -300,10 +317,324 @@ export const addUserRating = async (userId, workId, score) => {
     ratedAt: new Date().toISOString()
   };
 
+  // Update recommendation version to trigger new recommendations
+  await updateRecommendationVersion(userId);
+
   return {
     userId: user.id,
     workId,
     score,
     ratedAt: new Date().toISOString()
+  };
+};
+
+/**
+ * Authenticate user using mock data (email or username + plain password)
+ * @param {string} identifier - email OR username
+ * @param {string} password - plain text password
+ * @returns {Promise<Object>}
+ */
+export const authenticateUser = async (identifier, password) => {
+  // We ignore Mongo here and always use mockUsers, as requested
+  const ident = (identifier || '').toLowerCase();
+
+  const user = mockUsers.find(
+    (u) =>
+      u.email.toLowerCase() === ident ||
+      u.username.toLowerCase() === ident
+  );
+
+  if (!user) {
+    // User not found
+    throw new Error('User not found');
+  }
+
+  if (user.password !== password) {
+    // Wrong password
+    throw new Error('Invalid credentials');
+  }
+
+  // Return user in the same shape as getUserById
+  return {
+    userId: user.id,
+    username: user.username,
+    email: user.email,
+    profilePictureUrl: buildImageUrl(user.profilePictureUrl, 'profile'),
+    ratedWorks: Object.keys(user.ratedWorks).length
+  };
+};
+
+/**
+ * Get recommendation version for a user
+ * @param {number|string} userId - User ID
+ * @returns {Promise<number>}
+ */
+export const getRecommendationVersion = async (userId) => {
+  if (isMongoConnected()) {
+    const user = await User.findById(userId);
+    if (!user) return Date.now();
+    return user.recommendationVersion || Date.now();
+  }
+
+  // Use mock data
+  const user = findMockUserById(userId);
+  if (!user) return Date.now();
+  return user.recommendationVersion || Date.now();
+};
+
+/**
+ * Update recommendation version for a user (triggers new recommendations)
+ * @param {number|string} userId - User ID
+ * @returns {Promise<number>}
+ */
+export const updateRecommendationVersion = async (userId) => {
+  const newVersion = Date.now();
+
+  if (isMongoConnected()) {
+    await User.findByIdAndUpdate(userId, { recommendationVersion: newVersion });
+    return newVersion;
+  }
+
+  // Use mock data
+  const user = findMockUserById(userId);
+  if (user) {
+    user.recommendationVersion = newVersion;
+  }
+  return newVersion;
+};
+
+/**
+ * Get users that a user is following
+ */
+/**
+ * Get users that a user is following
+ * @route GET /api/users/:userId/following
+ */
+/**
+ * Get users that a user is following
+ * @param {number|string} userId - User ID
+ * @returns {Promise<Array>}
+ * @throws {Error} if user not found
+ */
+export const getUserFollowing = async (userId) => {
+  if (isMongoConnected()) {
+    const user = await User.findById(userId).populate('following', 'userId username email profilePictureUrl createdAt');
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    return user.following.map(followedUser => ({
+      userId: followedUser._id,
+      username: followedUser.username,
+      email: followedUser.email,
+      profilePictureUrl: followedUser.profilePictureUrl,
+      createdAt: followedUser.createdAt
+    }));
+  }
+
+  // Use mock data
+  const user = mockUsers.find(u => u.id === parseInt(userId));
+  if (!user) {
+    throw new Error('User not found');
+  }
+
+  if (!user.following || user.following.length === 0) {
+    return [];
+  }
+
+  return user.following.map(followedUserId => {
+    const followedUser = mockUsers.find(u => u.id === followedUserId);
+    if (followedUser) {
+      return {
+        userId: followedUser.id,
+        username: followedUser.username,
+        email: followedUser.email,
+        profilePictureUrl: followedUser.profilePictureUrl,
+        createdAt: followedUser.createdAt || new Date().toISOString()
+      };
+    }
+  }).filter(Boolean);
+};
+
+/**
+ * Get users that follow a user
+ * @param {number|string} userId - User ID
+ * @returns {Promise<Array>}
+ * @throws {Error} if user not found
+ */
+export const getUserFollowers = async (userId) => {
+  if (isMongoConnected()) {
+    const user = await User.findById(userId).populate('followers', 'userId username email profilePictureUrl createdAt');
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    return user.followers.map(followerUser => ({
+      userId: followerUser._id,
+      username: followerUser.username,
+      email: followerUser.email,
+      profilePictureUrl: followerUser.profilePictureUrl,
+      createdAt: followerUser.createdAt
+    }));
+  }
+
+  // Use mock data
+  const user = mockUsers.find(u => u.id === parseInt(userId));
+  if (!user) {
+    throw new Error('User not found');
+  }
+
+  if (!user.followers || user.followers.length === 0) {
+    return [];
+  }
+
+  return user.followers.map(followerUserId => {
+    const followerUser = mockUsers.find(u => u.id === followerUserId);
+    if (followerUser) {
+      return {
+        userId: followerUser.id,
+        username: followerUser.username,
+        email: followerUser.email,
+        profilePictureUrl: followerUser.profilePictureUrl,
+        createdAt: followerUser.createdAt || new Date().toISOString()
+      };
+    }
+  }).filter(Boolean);
+};
+
+/**
+ * Follow a user
+ * @param {number|string} userId - User ID of the follower
+ * @param {number|string} targetUserId - User ID to follow
+ * @returns {Promise<Object>}
+ * @throws {Error} if user not found, target not found, already following, or trying to follow self
+ */
+export const followUser = async (userId, targetUserId) => {
+  if (userId === targetUserId || userId == targetUserId) {
+    throw new Error('Cannot follow yourself');
+  }
+
+  if (isMongoConnected()) {
+    const user = await User.findById(userId);
+    const targetUser = await User.findById(targetUserId);
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+    if (!targetUser) {
+      throw new Error('Target user not found');
+    }
+
+    if (user.following.includes(targetUserId)) {
+      throw new Error('Already following this user');
+    }
+
+    user.following.push(targetUserId);
+    targetUser.followers.push(userId);
+
+    await user.save();
+    await targetUser.save();
+
+    return {
+      userId: user._id,
+      username: user.username,
+      email: user.email,
+      createdAt: user.createdAt
+    };
+  }
+
+  // Use mock data
+  const userIndex = mockUsers.findIndex(u => u.id === parseInt(userId));
+  const targetUserIndex = mockUsers.findIndex(u => u.id === parseInt(targetUserId));
+
+  if (userIndex === -1) {
+    throw new Error('User not found');
+  }
+  if (targetUserIndex === -1) {
+    throw new Error('Target user not found');
+  }
+
+  if (!mockUsers[userIndex].following) {
+    mockUsers[userIndex].following = [];
+  }
+  if (!mockUsers[targetUserIndex].followers) {
+    mockUsers[targetUserIndex].followers = [];
+  }
+
+  if (mockUsers[userIndex].following.includes(parseInt(targetUserId))) {
+    throw new Error('Already following this user');
+  }
+
+  mockUsers[userIndex].following.push(parseInt(targetUserId));
+  mockUsers[targetUserIndex].followers.push(parseInt(userId));
+
+  return {
+    userId: mockUsers[userIndex].id,
+    username: mockUsers[userIndex].username,
+    email: mockUsers[userIndex].email,
+    createdAt: mockUsers[userIndex].createdAt || new Date().toISOString()
+  };
+};
+
+/**
+ * Unfollow a user
+ * @param {number|string} userId - User ID of the follower
+ * @param {number|string} targetUserId - User ID to unfollow
+ * @returns {Promise<Object>}
+ * @throws {Error} if user not found, target not found, or not following
+ */
+export const unfollowUser = async (userId, targetUserId) => {
+  if (isMongoConnected()) {
+    const user = await User.findById(userId);
+    const targetUser = await User.findById(targetUserId);
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+    if (!targetUser) {
+      throw new Error('Target user not found');
+    }
+
+    if (!user.following.includes(targetUserId)) {
+      throw new Error('Not following this user');
+    }
+
+    user.following = user.following.filter(id => !id.equals(targetUserId));
+    targetUser.followers = targetUser.followers.filter(id => !id.equals(userId));
+
+    await user.save();
+    await targetUser.save();
+
+    return {
+      userId: user._id,
+      username: user.username,
+      email: user.email,
+      createdAt: user.createdAt
+    };
+  }
+
+  // Use mock data
+  const userIndex = mockUsers.findIndex(u => u.id === parseInt(userId));
+  const targetUserIndex = mockUsers.findIndex(u => u.id === parseInt(targetUserId));
+
+  if (userIndex === -1) {
+    throw new Error('User not found');
+  }
+  if (targetUserIndex === -1) {
+    throw new Error('Target user not found');
+  }
+
+  if (!mockUsers[userIndex].following || !mockUsers[userIndex].following.includes(parseInt(targetUserId))) {
+    throw new Error('Not following this user');
+  }
+
+  mockUsers[userIndex].following = mockUsers[userIndex].following.filter(id => id !== parseInt(targetUserId));
+  mockUsers[targetUserIndex].followers = mockUsers[targetUserIndex].followers.filter(id => id !== parseInt(userId));
+
+  return {
+    userId: mockUsers[userIndex].id,
+    username: mockUsers[userIndex].username,
+    email: mockUsers[userIndex].email,
+    createdAt: mockUsers[userIndex].createdAt || new Date().toISOString()
   };
 };

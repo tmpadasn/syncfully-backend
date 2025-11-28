@@ -1,6 +1,8 @@
 import * as workService from '../services/workService.js';
 import { sendSuccess, sendError } from '../utils/responses.js';
 import { HTTP_STATUS } from '../config/constants.js';
+import { devLog } from '../utils/logger.js';
+import { parseQueryInt } from '../utils/helpers.js';
 
 /**
  * Get work by ID
@@ -15,7 +17,7 @@ export const getWorkById = async (req, res, next) => {
             return sendError(res, HTTP_STATUS.NOT_FOUND, 'Work not found');
         }
 
-        sendSuccess(res, HTTP_STATUS.OK, { works: [work] });
+        sendSuccess(res, HTTP_STATUS.OK, work);
     } catch (error) {
         next(error);
     }
@@ -35,8 +37,9 @@ export const getAllWorks = async (req, res, next) => {
         }
 
         // Add year filter if provided
-        if (req.query.year) {
-            filters.year = parseInt(req.query.year);
+        const year = parseQueryInt(req.query.year);
+        if (year !== null) {
+            filters.year = year;
         }
 
         // Add genres filter if provided
@@ -47,7 +50,7 @@ export const getAllWorks = async (req, res, next) => {
                 : req.query.genres.split(',').map(g => g.trim());
         }
 
-        console.log('Filters applied:', filters); // Debug log
+        devLog('Filters applied:', filters);
 
         const works = await workService.getAllWorks(filters);
         sendSuccess(res, HTTP_STATUS.OK, { works });

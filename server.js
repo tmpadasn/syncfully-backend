@@ -1,9 +1,10 @@
 import dotenv from 'dotenv';
+
+dotenv.config();
+
 import app from './app.js';
 import connectDB from './config/database.js';
-
-// Load environment variables
-dotenv.config();
+import { prodLog, prodError } from './utils/logger.js';
 
 const PORT = process.env.PORT || 3000;
 
@@ -17,11 +18,11 @@ const startServer = async () => {
 
     // Start Express server
     app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`);
-      console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
+      prodLog(`🚀 Server running on port ${PORT}`);
+      prodLog(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
     });
   } catch (error) {
-    console.error('Failed to start server:', error);
+    prodError('Failed to start server:', error);
     process.exit(1);
   }
 };

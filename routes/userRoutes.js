@@ -1,5 +1,6 @@
 import express from 'express';
 import * as userController from '../controllers/userController.js';
+import * as shelfController from '../controllers/shelfController.js';
 import { validateRequiredFields, validateIdParam } from '../middleware/validation.js';
 
 const router = express.Router();
@@ -88,5 +89,56 @@ router.get(
     validateIdParam('userId'),
     userController.getUserRecommendations
 );
+
+/**
+ * @route   GET /api/users/:userId/shelves
+ * @desc    Get all shelves for a user
+ * @access  Public
+ */
+router.get(
+    '/:userId/shelves',
+    validateIdParam('userId'),
+    shelfController.getUserShelves
+);
+
+/**
+ * @route   POST /api/users/:userId/shelves
+ * @desc    Create a new shelf for a user
+ * @access  Public
+ */
+router.post(
+    '/:userId/shelves',
+    validateIdParam('userId'),
+    validateRequiredFields(['name']),
+    shelfController.createShelf
+);
+
+/**
+ * @route   GET /api/users/:userId/following
+ * @desc    Get user's following
+ * @access  Public
+ */
+router.get('/:userId/following', userController.getUserFollowing);
+
+/**
+ * @route   GET /api/users/:userId/followers
+ * @desc    Get user's followers
+ * @access  Public
+ */
+router.get('/:userId/followers', userController.getUserFollowers);
+
+/**
+ * @route   POST /api/users/:userId/following/:targetUserId
+ * @desc    Follow a user
+ * @access  Public
+ */
+router.post('/:userId/following/:targetUserId', userController.followUser);
+
+/**
+ * @route   DELETE /api/users/:userId/following/:targetUserId
+ * @desc    Unfollow a user
+ * @access  Public
+ */
+router.delete('/:userId/following/:targetUserId', userController.unfollowUser);
 
 export default router;

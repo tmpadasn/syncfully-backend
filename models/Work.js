@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { WORK_TYPES, GENRES } from '../config/constants.js';
+import { createToJSONOptions } from '../utils/modelHelpers.js';
 
 const workSchema = new mongoose.Schema({
     title: {
@@ -44,15 +45,7 @@ const workSchema = new mongoose.Schema({
     }
 }, {
     timestamps: true,
-    toJSON: {
-        virtuals: true,
-        transform: function (doc, ret) {
-            ret.workId = ret._id;
-            delete ret._id;
-            delete ret.__v;
-            return ret;
-        }
-    }
+    toJSON: createToJSONOptions('workId', [], true) // Include virtuals for rating
 });
 
 /**

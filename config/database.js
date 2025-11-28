@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { prodLog, prodError } from '../utils/logger.js';
 
 /**
  * Connect to MongoDB database
@@ -9,15 +10,15 @@ const connectDB = async () => {
         const mongoUri = process.env.MONGODB_URI;
 
         if (!mongoUri) {
-            console.log('⚠️  No MongoDB URI provided. Running with mock data only.');
+            prodLog('⚠️  No MongoDB URI provided. Running with mock data only.');
             return;
         }
 
         await mongoose.connect(mongoUri);
-        console.log('✅ MongoDB connected successfully');
+        prodLog('✅ MongoDB connected successfully');
     } catch (error) {
-        console.error('❌ MongoDB connection error:', error.message);
-        console.log('⚠️  Falling back to mock data mode');
+        prodError('❌ MongoDB connection error:', error.message);
+        prodLog('⚠️  Falling back to mock data mode');
     }
 };
 

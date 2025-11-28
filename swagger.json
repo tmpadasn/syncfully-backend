@@ -1,0 +1,1925 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "SyncFully API",
+    "version": "1.0.0",
+    "description": "SyncFully API allows users to register, manage their accounts, rate works, create shelves, and get personalized recommendations across different entertainment types (movies, series, books, music, and graphic novels)."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api",
+      "description": "Local development server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "auth",
+      "description": "Authentication operations - login and signup"
+    },
+    {
+      "name": "users",
+      "description": "User account creation, retrieval, update, deletion, and social features"
+    },
+    {
+      "name": "works",
+      "description": "Manage works (books, movies, series, music albums, graphic novels)"
+    },
+    {
+      "name": "ratings",
+      "description": "Rating operations for works"
+    },
+    {
+      "name": "shelves",
+      "description": "User shelves for organizing works"
+    },
+    {
+      "name": "search",
+      "description": "Search across users and works with filters"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health check endpoint",
+        "description": "Check if the server is running",
+        "responses": {
+          "200": {
+            "description": "Server is running",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Server is running"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "User login",
+        "description": "Authenticate a user with identifier (username or email) and password",
+        "tags": ["auth"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["identifier", "password"],
+                "properties": {
+                  "identifier": {
+                    "type": "string",
+                    "description": "Username or email",
+                    "example": "spiros"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "password123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing required fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/signup": {
+      "post": {
+        "summary": "User signup",
+        "description": "Create a new user account",
+        "tags": ["auth"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input or user already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "summary": "Get all users",
+        "description": "Retrieve a list of all registered users",
+        "tags": ["users"],
+        "responses": {
+          "200": {
+            "description": "List of users retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new user",
+        "description": "Register a new user with username, email, and password",
+        "tags": ["users"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input or user already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/UserId"
+        }
+      ],
+      "get": {
+        "summary": "Get user by ID",
+        "description": "Retrieve details of a specific user",
+        "tags": ["users"],
+        "responses": {
+          "200": {
+            "description": "User found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update user",
+        "description": "Update user information",
+        "tags": ["users"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdateInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete user",
+        "description": "Permanently delete a user account",
+        "tags": ["users"],
+        "responses": {
+          "204": {
+            "description": "User deleted successfully"
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/ratings": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/UserId"
+        }
+      ],
+      "get": {
+        "summary": "Get user's ratings",
+        "description": "Retrieve all ratings submitted by a specific user",
+        "tags": ["users"],
+        "responses": {
+          "200": {
+            "description": "User ratings retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add user rating",
+        "description": "Submit a rating for a work as a user",
+        "tags": ["users"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["workId", "score"],
+                "properties": {
+                  "workId": {
+                    "type": "string",
+                    "description": "ID of the work to rate"
+                  },
+                  "score": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5,
+                    "description": "Rating score (1-5)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Rating added successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User or work not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/recommendations": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/UserId"
+        }
+      ],
+      "get": {
+        "summary": "Get user recommendations",
+        "description": "Get personalized work recommendations for a user based on their ratings and preferences",
+        "tags": ["users"],
+        "responses": {
+          "200": {
+            "description": "Recommendations retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/shelves": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/UserId"
+        }
+      ],
+      "get": {
+        "summary": "Get user's shelves",
+        "description": "Retrieve all shelves created by a specific user",
+        "tags": ["shelves"],
+        "responses": {
+          "200": {
+            "description": "Shelves retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a shelf",
+        "description": "Create a new shelf for organizing works",
+        "tags": ["shelves"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 50,
+                    "description": "Shelf name"
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 500,
+                    "description": "Shelf description"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Shelf created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input or shelf name already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/following": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/UserId"
+        }
+      ],
+      "get": {
+        "summary": "Get user's following list",
+        "description": "Retrieve list of users that this user is following",
+        "tags": ["users"],
+        "responses": {
+          "200": {
+            "description": "Following list retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/followers": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/UserId"
+        }
+      ],
+      "get": {
+        "summary": "Get user's followers",
+        "description": "Retrieve list of users following this user",
+        "tags": ["users"],
+        "responses": {
+          "200": {
+            "description": "Followers retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/following/{targetUserId}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/UserId"
+        },
+        {
+          "name": "targetUserId",
+          "in": "path",
+          "required": true,
+          "description": "ID of the user to follow/unfollow",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "summary": "Follow a user",
+        "description": "Follow another user",
+        "tags": ["users"],
+        "responses": {
+          "200": {
+            "description": "User followed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Cannot follow yourself or already following",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Unfollow a user",
+        "description": "Stop following a user",
+        "tags": ["users"],
+        "responses": {
+          "200": {
+            "description": "User unfollowed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/works": {
+      "get": {
+        "summary": "Get all works",
+        "description": "Retrieve all works with optional filters",
+        "tags": ["works"],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["movie", "series", "music", "book", "graphic-novel"]
+            },
+            "description": "Filter by work type"
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Filter by release year"
+          },
+          {
+            "name": "genres",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by genres (comma-separated)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Works retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new work",
+        "description": "Add a new work to the database",
+        "tags": ["works"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Work created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/works/popular": {
+      "get": {
+        "summary": "Get popular works",
+        "description": "Retrieve this week's most popular works based on ratings",
+        "tags": ["works"],
+        "responses": {
+          "200": {
+            "description": "Popular works retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/works/{workId}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/WorkId"
+        }
+      ],
+      "get": {
+        "summary": "Get work by ID",
+        "description": "Retrieve details of a specific work",
+        "tags": ["works"],
+        "responses": {
+          "200": {
+            "description": "Work found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Work not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update work",
+        "description": "Update work information",
+        "tags": ["works"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkUpdateInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Work updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Work not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete work",
+        "description": "Permanently delete a work",
+        "tags": ["works"],
+        "responses": {
+          "204": {
+            "description": "Work deleted successfully"
+          },
+          "404": {
+            "description": "Work not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/works/{workId}/similar": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/WorkId"
+        }
+      ],
+      "get": {
+        "summary": "Get similar works",
+        "description": "Find works similar to a specific work based on type and genres",
+        "tags": ["works"],
+        "responses": {
+          "200": {
+            "description": "Similar works retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Work not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/works/{workId}/ratings": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/WorkId"
+        }
+      ],
+      "get": {
+        "summary": "Get work ratings",
+        "description": "Retrieve all ratings for a specific work",
+        "tags": ["ratings"],
+        "responses": {
+          "200": {
+            "description": "Ratings retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Submit work rating",
+        "description": "Submit or update a rating for a work",
+        "tags": ["ratings"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["userId", "score"],
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "description": "ID of the user submitting the rating"
+                  },
+                  "score": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5,
+                    "description": "Rating score (1-5)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Rating submitted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User or work not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/works/{workId}/ratings/average": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/WorkId"
+        }
+      ],
+      "get": {
+        "summary": "Get average rating",
+        "description": "Calculate and retrieve the average rating for a work",
+        "tags": ["ratings"],
+        "responses": {
+          "200": {
+            "description": "Average rating retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ratings": {
+      "get": {
+        "summary": "Get all ratings",
+        "description": "Retrieve all ratings in the system (admin)",
+        "tags": ["ratings"],
+        "responses": {
+          "200": {
+            "description": "Ratings retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ratings/{ratingId}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/RatingId"
+        }
+      ],
+      "get": {
+        "summary": "Get rating by ID",
+        "description": "Retrieve a specific rating",
+        "tags": ["ratings"],
+        "responses": {
+          "200": {
+            "description": "Rating retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Rating not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update rating",
+        "description": "Update the score of a rating",
+        "tags": ["ratings"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["score"],
+                "properties": {
+                  "score": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5,
+                    "description": "Updated rating score (1-5)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Rating updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Rating not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete rating",
+        "description": "Remove a rating",
+        "tags": ["ratings"],
+        "responses": {
+          "204": {
+            "description": "Rating deleted successfully"
+          },
+          "404": {
+            "description": "Rating not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shelves": {
+      "get": {
+        "summary": "Get all shelves",
+        "description": "Retrieve all shelves across all users",
+        "tags": ["shelves"],
+        "responses": {
+          "200": {
+            "description": "Shelves retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shelves/{shelfId}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/ShelfId"
+        }
+      ],
+      "get": {
+        "summary": "Get shelf by ID",
+        "description": "Retrieve details of a specific shelf",
+        "tags": ["shelves"],
+        "responses": {
+          "200": {
+            "description": "Shelf found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Shelf not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update shelf",
+        "description": "Update shelf name or description",
+        "tags": ["shelves"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 50
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 500
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Shelf updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Shelf not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete shelf",
+        "description": "Permanently delete a shelf",
+        "tags": ["shelves"],
+        "responses": {
+          "204": {
+            "description": "Shelf deleted successfully"
+          },
+          "404": {
+            "description": "Shelf not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shelves/{shelfId}/works": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/ShelfId"
+        }
+      ],
+      "get": {
+        "summary": "Get shelf works",
+        "description": "Retrieve all works in a shelf with optional filters",
+        "tags": ["shelves"],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["movie", "series", "music", "book", "graphic-novel"]
+            },
+            "description": "Filter by work type"
+          },
+          {
+            "name": "genre",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by genre"
+          },
+          {
+            "name": "minRating",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "description": "Minimum average rating"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Shelf works retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Shelf not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shelves/{shelfId}/works/{workId}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/ShelfId"
+        },
+        {
+          "$ref": "#/components/parameters/WorkId"
+        }
+      ],
+      "post": {
+        "summary": "Add work to shelf",
+        "description": "Add a work to a shelf",
+        "tags": ["shelves"],
+        "responses": {
+          "200": {
+            "description": "Work added to shelf successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Work already in shelf",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Shelf or work not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remove work from shelf",
+        "description": "Remove a work from a shelf",
+        "tags": ["shelves"],
+        "responses": {
+          "200": {
+            "description": "Work removed from shelf successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Shelf or work not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search": {
+      "get": {
+        "summary": "Search items",
+        "description": "Search for users and works with various filters",
+        "tags": ["search"],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search term for matching titles or usernames"
+          },
+          {
+            "name": "item-type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["user", "work"]
+            },
+            "description": "Filter by item type"
+          },
+          {
+            "name": "work-type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": ["movie", "series", "music", "book", "graphic-novel"]
+            },
+            "description": "Filter by work type (only for works)"
+          },
+          {
+            "name": "genre",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by genre (only for works)"
+          },
+          {
+            "name": "rating",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "description": "Minimum average rating (only for works)"
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Filter by release year (only for works)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search results retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid search parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "UserId": {
+        "name": "userId",
+        "in": "path",
+        "required": true,
+        "description": "Unique identifier of the user",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "WorkId": {
+        "name": "workId",
+        "in": "path",
+        "required": true,
+        "description": "Unique identifier of the work",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "RatingId": {
+        "name": "ratingId",
+        "in": "path",
+        "required": true,
+        "description": "Unique identifier of the rating",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "ShelfId": {
+        "name": "shelfId",
+        "in": "path",
+        "required": true,
+        "description": "Unique identifier of the shelf",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "schemas": {
+      "SuccessResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "example": "Operation successful"
+          },
+          "data": {
+            "type": "object",
+            "description": "Response data (varies by endpoint)"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "message": {
+            "type": "string",
+            "example": "Error message"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of validation errors (optional)"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "required": ["userId", "username", "email"],
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "Unique identifier",
+            "example": "507f1f77bcf86cd799439011"
+          },
+          "username": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 20,
+            "example": "spiros"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "spiros@example.com"
+          },
+          "profilePictureUrl": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true,
+            "example": "https://example.com/uploads/profiles/123.jpg"
+          },
+          "recommendationVersion": {
+            "type": "number",
+            "description": "Timestamp for recommendation versioning"
+          },
+          "ratedWorks": {
+            "type": "object",
+            "description": "Map of work IDs to rating details",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "score": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 5
+                },
+                "ratedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          },
+          "ratedWorksCount": {
+            "type": "integer",
+            "description": "Total number of rated works"
+          },
+          "followers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Array of user IDs following this user"
+          },
+          "following": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Array of user IDs this user is following"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "UserInput": {
+        "type": "object",
+        "required": ["username", "email", "password"],
+        "properties": {
+          "username": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 20,
+            "example": "spiros"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "spiros@example.com"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "minLength": 6,
+            "example": "password123"
+          },
+          "profilePictureUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://example.com/uploads/profiles/123.jpg"
+          }
+        }
+      },
+      "UserUpdateInput": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 20
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "minLength": 6
+          },
+          "profilePictureUrl": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "Work": {
+        "type": "object",
+        "required": ["workId", "title", "type"],
+        "properties": {
+          "workId": {
+            "type": "string",
+            "description": "Unique identifier",
+            "example": "507f1f77bcf86cd799439011"
+          },
+          "title": {
+            "type": "string",
+            "example": "The Lord of the Rings"
+          },
+          "description": {
+            "type": "string",
+            "example": "An epic fantasy novel about a quest to destroy a powerful ring"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["movie", "series", "music", "book", "graphic-novel"],
+            "example": "book"
+          },
+          "year": {
+            "type": "integer",
+            "minimum": 1900,
+            "example": 1954
+          },
+          "genres": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Action",
+                "Adventure",
+                "Comedy",
+                "Drama",
+                "Fantasy",
+                "Horror",
+                "Mystery",
+                "Romance",
+                "Sci-Fi",
+                "Thriller",
+                "Documentary",
+                "Animation",
+                "Crime",
+                "Historical",
+                "Biography",
+                "Western",
+                "Musical",
+                "War",
+                "Family",
+                "Sport"
+              ]
+            },
+            "example": ["Fantasy", "Adventure"]
+          },
+          "creator": {
+            "type": "string",
+            "example": "J.R.R. Tolkien"
+          },
+          "coverUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://example.com/uploads/covers/lotr.jpg"
+          },
+          "foundAt": {
+            "type": "string",
+            "example": "https://amazon.com/lord-of-the-rings"
+          },
+          "rating": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 5,
+            "description": "Average rating (calculated from user ratings)"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "WorkInput": {
+        "type": "object",
+        "required": ["title", "type"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "The Lord of the Rings"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["movie", "series", "music", "book", "graphic-novel"]
+          },
+          "year": {
+            "type": "integer",
+            "minimum": 1900
+          },
+          "genres": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "creator": {
+            "type": "string"
+          },
+          "coverUrl": {
+            "type": "string",
+            "format": "uri"
+          },
+          "foundAt": {
+            "type": "string"
+          }
+        }
+      },
+      "WorkUpdateInput": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["movie", "series", "music", "book", "graphic-novel"]
+          },
+          "year": {
+            "type": "integer",
+            "minimum": 1900
+          },
+          "genres": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "creator": {
+            "type": "string"
+          },
+          "coverUrl": {
+            "type": "string",
+            "format": "uri"
+          },
+          "foundAt": {
+            "type": "string"
+          }
+        }
+      },
+      "Rating": {
+        "type": "object",
+        "required": ["ratingId", "userId", "workId", "score"],
+        "properties": {
+          "ratingId": {
+            "type": "string",
+            "description": "Unique identifier",
+            "example": "507f1f77bcf86cd799439011"
+          },
+          "userId": {
+            "type": "string",
+            "description": "ID of the user who submitted the rating",
+            "example": "507f1f77bcf86cd799439011"
+          },
+          "workId": {
+            "type": "string",
+            "description": "ID of the rated work",
+            "example": "507f1f77bcf86cd799439011"
+          },
+          "score": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "Rating score (integer from 1 to 5)",
+            "example": 4
+          },
+          "ratedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the rating was created"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Shelf": {
+        "type": "object",
+        "required": ["shelfId", "userId", "name"],
+        "properties": {
+          "shelfId": {
+            "type": "string",
+            "description": "Unique identifier",
+            "example": "507f1f77bcf86cd799439011"
+          },
+          "userId": {
+            "type": "string",
+            "description": "ID of the user who owns this shelf",
+            "example": "507f1f77bcf86cd799439011"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "example": "Want to Read"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 500,
+            "example": "Books I plan to read soon"
+          },
+          "works": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Array of work IDs in this shelf"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}
