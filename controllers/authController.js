@@ -1,7 +1,7 @@
 import { authenticateUser, createUser } from '../services/userService.js';
 import { sendSuccess, sendError } from '../utils/responses.js';
 import { HTTP_STATUS } from '../config/constants.js';
-import { validateUserData } from '../utils/validators.js';
+import { validateUserData, validatePassword } from '../utils/validators.js';
 
 /**
  * Simple LOGIN (no hashing, mock users only)
