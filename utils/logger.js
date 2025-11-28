@@ -3,14 +3,14 @@
  * Only logs in development mode (NODE_ENV !== 'production')
  */
 
-const isDevelopment = process.env.NODE_ENV !== 'production';
+const isDevelopment = () => (process.env.NODE_ENV || 'development') !== 'production';
 
 /**
  * Log message in development mode only
  * @param {...any} args - Arguments to log
  */
 export const devLog = (...args) => {
-    if (isDevelopment) {
+    if (isDevelopment()) {
         console.log(...args);
     }
 };
@@ -20,7 +20,7 @@ export const devLog = (...args) => {
  * @param {...any} args - Arguments to log
  */
 export const devError = (...args) => {
-    if (isDevelopment) {
+    if (isDevelopment()) {
         console.error(...args);
     }
 };
@@ -30,7 +30,7 @@ export const devError = (...args) => {
  * @param {...any} args - Arguments to log
  */
 export const devWarn = (...args) => {
-    if (isDevelopment) {
+    if (isDevelopment()) {
         console.warn(...args);
     }
 };
@@ -40,7 +40,7 @@ export const devWarn = (...args) => {
  * @param {...any} args - Arguments to log
  */
 export const devInfo = (...args) => {
-    if (isDevelopment) {
+    if (isDevelopment()) {
         console.info(...args);
     }
 };
