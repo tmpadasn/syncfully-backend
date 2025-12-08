@@ -49,8 +49,8 @@ export const signup = async (req, res, next) => {
       return sendError(
         res,
         HTTP_STATUS.BAD_REQUEST,
-        'Invalid username',
-        usernameValidation.errors
+        'Invalid input',
+        validation.errors
       );
     }
 
