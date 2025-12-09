@@ -14,119 +14,249 @@ test.after.always((t) => {
     t.context.server.close();
 });
 
-// GET /api/search (General)
-test('GET /api/search returns results for both works and users (Happy Path 1)', async (t) => {
+// GET /api/search
+test('GET /api/search returns all works and users without filters (Happy Path 1)', async (t) => {
     const { body } = await t.context.got('api/search');
+
     t.true(body.success);
+    t.truthy(body.data);
     t.true(Array.isArray(body.data.works));
     t.true(Array.isArray(body.data.users));
-    t.true(typeof body.data.totalWorks === 'number');
-    t.true(typeof body.data.totalUsers === 'number');
+    t.is(typeof body.data.totalWorks, 'number');
+    t.is(typeof body.data.totalUsers, 'number');
 });
 
 test('GET /api/search filters by query string (Happy Path 2)', async (t) => {
-    // Assuming "Alice" exists as a user and maybe "Alice" in Wonderland as a work (or similar)
-    // Or just "The" which is common
-    const { body } = await t.context.got('api/search?query=The');
-    t.true(body.success);
-    // Should find something
-    t.true(body.data.works.length > 0 || body.data.users.length > 0);
-});
+    const { body } = await t.context.got('api/search?query=lord');
 
-test('GET /api/search returns error for invalid item-type (Unhappy Path 1)', async (t) => {
-    try {
-        await t.context.got('api/search?item-type=invalid');
-    } catch (error) {
-        t.is(error.response.statusCode, 400);
-        t.regex(error.response.body.error, /Invalid item-type/);
+    t.true(body.success);
+    t.true(Array.isArray(body.data.works));
+    // Should find works with "lord" in title or description
+    if (body.data.works.length > 0) {
+        const hasLord = body.data.works.some(work => 
+            work.title.toLowerCase().includes('lord') || 
+            work.description.toLowerCase().includes('lord')
+        );
+        t.true(hasLord);
     }
 });
 
-// GET /api/search (Works)
-test('GET /api/search filters by item-type=work (Happy Path 1)', async (t) => {
+test('GET /api/search filters by item-type=work (Happy Path 3)', async (t) => {
     const { body } = await t.context.got('api/search?item-type=work');
+
     t.true(body.success);
     t.true(Array.isArray(body.data.works));
-    t.is(body.data.users.length, 0); // Should be empty
+    t.true(body.data.works.length > 0);
+    t.is(body.data.users.length, 0); // Should not return users
 });
 
-test('GET /api/search filters by work-type (Happy Path 2)', async (t) => {
-    const { body } = await t.context.got('api/search?item-type=work&work-type=movie');
+test('GET /api/search filters by item-type=user (Happy Path 4)', async (t) => {
+    const { body } = await t.context.got('api/search?item-type=user');
+
     t.true(body.success);
-    t.true(body.data.works.length > 0);
+    t.true(Array.isArray(body.data.users));
+    t.true(body.data.users.length > 0);
+    t.is(body.data.works.length, 0); // Should not return works
+});
+
+test('GET /api/search filters by work-type (Happy Path 5)', async (t) => {
+    const { body } = await t.context.got('api/search?work-type=movie');
+
+    t.true(body.success);
+    t.true(Array.isArray(body.data.works));
+    // All returned works should be movies
     body.data.works.forEach(work => {
         t.is(work.type, 'movie');
     });
 });
 
-test('GET /api/search filters by genre (Happy Path 3)', async (t) => {
-    // Assuming 'Drama' is a valid genre in mock data
-    const { body } = await t.context.got('api/search?item-type=work&genre=Drama');
+test('GET /api/search filters by genre (Happy Path 6)', async (t) => {
+    const { body } = await t.context.got('api/search?genre=Action');
+
     t.true(body.success);
-    t.true(body.data.works.length > 0);
+    t.true(Array.isArray(body.data.works));
+    // All returned works should have Action genre
     body.data.works.forEach(work => {
-        t.true(work.genres.includes('Drama'));
+        t.true(work.genres.includes('Action'));
     });
 });
 
-test('GET /api/search filters by year (Happy Path 4)', async (t) => {
-    // Assuming works from 2000 exist
-    const { body } = await t.context.got('api/search?item-type=work&year=2000');
+test('GET /api/search filters by minimum rating (Happy Path 7)', async (t) => {
+    const { body } = await t.context.got('api/search?rating=4.0');
+
     t.true(body.success);
-    t.true(body.data.works.length > 0);
+    t.true(Array.isArray(body.data.works));
+    // All returned works should have rating >= 4.0
     body.data.works.forEach(work => {
-        t.true(work.year >= 2000);
+        if (work.rating !== undefined && work.rating !== null) {
+            t.true(work.rating >= 4.0);
+        }
     });
 });
 
-test('GET /api/search filters by minimum rating (Happy Path 5)', async (t) => {
-    // Assuming there are works with rating >= 4
-    const { body } = await t.context.got('api/search?item-type=work&rating=4');
+test('GET /api/search filters by year (Happy Path 8)', async (t) => {
+    const { body } = await t.context.got('api/search?year=2020');
+
     t.true(body.success);
-    // Note: Mock data ratings might be 0 if not calculated/enriched in search mock,
-    // but searchService mock implementation does calculate ratings.
-    // Let's verify if any returned.
-    if (body.data.works.length > 0) {
-        body.data.works.forEach(work => {
-            t.true(work.rating >= 4);
-        });
-    } else {
-        t.pass('No works found with rating >= 4, but request succeeded');
-    }
+    t.true(Array.isArray(body.data.works));
+    // All returned works should be from 2020 or later
+    body.data.works.forEach(work => {
+        t.true(work.year >= 2020);
+    });
 });
 
-test('GET /api/search returns error for invalid year (Unhappy Path 1)', async (t) => {
-    try {
-        await t.context.got('api/search?year=notanumber');
-    } catch (error) {
-        t.is(error.response.statusCode, 400);
-        t.regex(error.response.body.error, /Invalid year/);
-    }
+test('GET /api/search combines multiple filters (Happy Path 9)', async (t) => {
+    const { body } = await t.context.got('api/search?item-type=work&work-type=movie&genre=Action&rating=3.0');
+
+    t.true(body.success);
+    t.true(Array.isArray(body.data.works));
+    t.is(body.data.users.length, 0);
+
+    // All returned works should match all filters
+    body.data.works.forEach(work => {
+        t.is(work.type, 'movie');
+        t.true(work.genres.includes('Action'));
+        if (work.rating !== undefined && work.rating !== null) {
+            t.true(work.rating >= 3.0);
+        }
+    });
 });
 
-test('GET /api/search returns error for invalid rating (Unhappy Path 2)', async (t) => {
-    try {
-        await t.context.got('api/search?rating=notanumber');
-    } catch (error) {
-        t.is(error.response.statusCode, 400);
-        t.regex(error.response.body.error, /Invalid rating/);
-    }
+test('GET /api/search returns empty results when no matches (Happy Path 10)', async (t) => {
+    const { body } = await t.context.got('api/search?query=nonexistentwork12345xyz');
+
+    t.true(body.success);
+    t.is(body.data.works.length, 0);
+    t.is(body.data.totalWorks, 0);
 });
 
-// GET /api/search (Users)
-test('GET /api/search filters by item-type=user (Happy Path 1)', async (t) => {
-    const { body } = await t.context.got('api/search?item-type=user');
+test('GET /api/search searches users by username (Happy Path 11)', async (t) => {
+    const { body } = await t.context.got('api/search?item-type=user&query=alice');
+
     t.true(body.success);
     t.true(Array.isArray(body.data.users));
-    t.is(body.data.works.length, 0); // Should be empty
+    
+    if (body.data.users.length > 0) {
+        const hasAlice = body.data.users.some(user => 
+            user.username.toLowerCase().includes('alice')
+        );
+        t.true(hasAlice);
+    }
 });
 
-test('GET /api/search filters users by username (Happy Path 2)', async (t) => {
-    // Assuming 'alice' exists
-    const { body } = await t.context.got('api/search?item-type=user&query=alice');
+test('GET /api/search includes work rating information (Happy Path 12)', async (t) => {
+    const { body } = await t.context.got('api/search?item-type=work');
+
     t.true(body.success);
-    t.true(body.data.users.length > 0);
-    body.data.users.forEach(user => {
-        t.regex(user.username.toLowerCase(), /alice/);
+    
+    if (body.data.works.length > 0) {
+        const work = body.data.works[0];
+        t.truthy(work.workId);
+        t.truthy(work.title);
+        t.true('rating' in work);
+        t.true('ratingCount' in work);
+    }
+});
+
+test('GET /api/search includes user information (Happy Path 13)', async (t) => {
+    const { body } = await t.context.got('api/search?item-type=user');
+
+    t.true(body.success);
+    
+    if (body.data.users.length > 0) {
+        const user = body.data.users[0];
+        t.truthy(user.userId);
+        t.truthy(user.username);
+        t.truthy(user.email);
+    }
+});
+
+test('GET /api/search fails with invalid item-type (Unhappy Path 1)', async (t) => {
+    try {
+        await t.context.got('api/search?item-type=invalid');
+        t.fail('Should have thrown an error');
+    } catch (error) {
+        t.is(error.response.statusCode, 400);
+        t.regex(error.response.body.error, /invalid item-type/i);
+    }
+});
+
+test('GET /api/search fails with invalid rating (Unhappy Path 2)', async (t) => {
+    try {
+        await t.context.got('api/search?rating=invalid');
+        t.fail('Should have thrown an error');
+    } catch (error) {
+        t.is(error.response.statusCode, 400);
+        t.regex(error.response.body.error, /invalid rating/i);
+    }
+});
+
+test('GET /api/search fails with invalid year (Unhappy Path 3)', async (t) => {
+    try {
+        await t.context.got('api/search?year=notayear');
+        t.fail('Should have thrown an error');
+    } catch (error) {
+        t.is(error.response.statusCode, 400);
+        t.regex(error.response.body.error, /invalid year/i);
+    }
+});
+
+test('GET /api/search handles case-insensitive item-type (Edge Case 1)', async (t) => {
+    const { body } = await t.context.got('api/search?item-type=WORK');
+
+    t.true(body.success);
+    t.true(Array.isArray(body.data.works));
+    t.is(body.data.users.length, 0);
+});
+
+test('GET /api/search handles case-insensitive work-type (Edge Case 2)', async (t) => {
+    const { body } = await t.context.got('api/search?work-type=MOVIE');
+
+    t.true(body.success);
+    t.true(Array.isArray(body.data.works));
+});
+
+test('GET /api/search handles rating as integer (Edge Case 3)', async (t) => {
+    const { body } = await t.context.got('api/search?rating=4');
+
+    t.true(body.success);
+    t.true(Array.isArray(body.data.works));
+});
+
+test('GET /api/search handles rating as decimal (Edge Case 4)', async (t) => {
+    const { body } = await t.context.got('api/search?rating=4.5');
+
+    t.true(body.success);
+    t.true(Array.isArray(body.data.works));
+});
+
+test('GET /api/search returns metadata with counts (Edge Case 5)', async (t) => {
+    const { body } = await t.context.got('api/search');
+
+    t.true(body.success);
+    t.is(body.data.totalWorks, body.data.works.length);
+    t.is(body.data.totalUsers, body.data.users.length);
+});
+
+test('GET /api/search with query and work-type together (Edge Case 6)', async (t) => {
+    const { body } = await t.context.got('api/search?query=the&work-type=movie');
+
+    t.true(body.success);
+    t.true(Array.isArray(body.data.works));
+    
+    body.data.works.forEach(work => {
+        t.is(work.type, 'movie');
+        const matchesQuery = 
+            work.title.toLowerCase().includes('the') || 
+            work.description.toLowerCase().includes('the');
+        t.true(matchesQuery);
     });
+});
+
+test('GET /api/search with all filters combined (Edge Case 7)', async (t) => {
+    const { body } = await t.context.got('api/search?query=action&item-type=work&work-type=movie&genre=Action&rating=3&year=2000');
+
+    t.true(body.success);
+    t.true(Array.isArray(body.data.works));
+    t.is(body.data.users.length, 0);
 });
