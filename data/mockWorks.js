@@ -1,3 +1,5 @@
+import { IMAGE_BASE_URL } from '../config/constants.js';
+
 export const mockWorks = [
     {
         id: 1,
@@ -7,7 +9,7 @@ export const mockWorks = [
         year: 2003,
         genres: ['Adventure', 'Drama', 'Fantasy'],
         creator: 'Peter Jackson',
-        coverUrl: 'http://localhost:3000/uploads/covers/lord_of_the_rings.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/lord_of_the_rings.jpg',
         foundAt: 'https://www.imdb.com/title/tt0167260/'
     },
     {
@@ -18,7 +20,7 @@ export const mockWorks = [
         year: 1980,
         genres: ['Comedy'],
         creator: 'Jim Abrahams, David Zucker, Jerry Zucker',
-        coverUrl: 'http://localhost:3000/uploads/covers/airplane.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/airplane.jpg',
         foundAt: 'https://www.imdb.com/title/tt0080339/'
     },
     {
@@ -29,7 +31,7 @@ export const mockWorks = [
         year: 2024,
         genres: ['Drama', 'Romance', 'Comedy'],
         creator: 'Sean Baker',
-        coverUrl: 'http://localhost:3000/uploads/covers/anora.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/anora.jpg',
         foundAt: 'https://www.imdb.com/title/tt28607951/'
     },
     {
@@ -40,7 +42,7 @@ export const mockWorks = [
         year: 1973,
         genres: ['Progressive Rock', 'Psychedelic Rock'],
         creator: 'Pink Floyd',
-        coverUrl: 'http://localhost:3000/uploads/covers/pink_floyd_1.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/pink_floyd_1.jpg',
         foundAt: 'https://open.spotify.com/album/4LH4d3cOWNNsVw41Gqt2kv'
     },
     {
@@ -51,7 +53,7 @@ export const mockWorks = [
         year: 1971,
         genres: ['Progressive Rock', 'Psychedelic Rock', 'Art Rock'],
         creator: 'Pink Floyd',
-        coverUrl: 'http://localhost:3000/uploads/covers/pink_floyd_2.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/pink_floyd_2.jpg',
         foundAt: 'https://open.spotify.com/album/468ZwCchVtzEbt9BHUTcPm'
     },
     {
@@ -62,7 +64,7 @@ export const mockWorks = [
         year: 1866,
         genres: ['Psychological Fiction', 'Crime', 'Philosophical Fiction'],
         creator: 'Fyodor Dostoevsky',
-        coverUrl: 'http://localhost:3000/uploads/covers/crime_and_punishment.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/crime_and_punishment.jpg',
         foundAt: 'https://www.goodreads.com/book/show/7144.Crime_and_Punishment'
     },
     {
@@ -73,7 +75,7 @@ export const mockWorks = [
         year: 1998,
         genres: ['Trip Hop', 'Electronic', 'Downtempo'],
         creator: 'Massive Attack',
-        coverUrl: 'http://localhost:3000/uploads/covers/mezzanine.png',
+        coverUrl: IMAGE_BASE_URL + '/covers/mezzanine.png',
         foundAt: 'https://open.spotify.com/album/5jzvI8CbCeUJkD2nGLBUVX'
     },
     {
@@ -84,7 +86,7 @@ export const mockWorks = [
         year: 1994,
         genres: ['Crime', 'Drama', 'Thriller'],
         creator: 'Quentin Tarantino',
-        coverUrl: 'http://localhost:3000/uploads/covers/pulp_fiction.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/pulp_fiction.jpg',
         foundAt: 'https://www.imdb.com/title/tt0110912/'
     },
     {
@@ -95,7 +97,7 @@ export const mockWorks = [
         year: 1869,
         genres: ['Historical Fiction', 'War', 'Romance', 'Philosophy'],
         creator: 'Leo Tolstoy',
-        coverUrl: 'http://localhost:3000/uploads/covers/war_and_peace.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/war_and_peace.jpg',
         foundAt: 'https://www.goodreads.com/book/show/656.War_and_Peace'
     },
     {
@@ -106,7 +108,7 @@ export const mockWorks = [
         year: 2011,
         genres: ['Adventure', 'Fantasy', 'Mystery'],
         creator: 'David Yates',
-        coverUrl: 'http://localhost:3000/uploads/covers/harry_potter_2.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/harry_potter_2.jpg',
         foundAt: 'https://www.imdb.com/title/tt1201607/'
     },
     // MOVIES (11-35)
@@ -118,7 +120,7 @@ export const mockWorks = [
         year: 1994,
         genres: ['Drama'],
         creator: 'Frank Darabont',
-        coverUrl: 'http://localhost:3000/uploads/covers/shawshank_redemption.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/shawshank_redemption.jpg',
         foundAt: 'https://www.imdb.com/title/tt0111161/'
     },
     {
@@ -129,7 +131,7 @@ export const mockWorks = [
         year: 1972,
         genres: ['Crime', 'Drama'],
         creator: 'Francis Ford Coppola',
-        coverUrl: 'http://localhost:3000/uploads/covers/godfather.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/godfather.jpg',
         foundAt: 'https://www.imdb.com/title/tt0068646/'
     },
     {
@@ -140,7 +142,7 @@ export const mockWorks = [
         year: 2010,
         genres: ['Action', 'Sci-Fi', 'Thriller'],
         creator: 'Christopher Nolan',
-        coverUrl: 'http://localhost:3000/uploads/covers/inception.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/inception.jpg',
         foundAt: 'https://www.imdb.com/title/tt1375666/'
     },
     {
@@ -151,7 +153,7 @@ export const mockWorks = [
         year: 2019,
         genres: ['Drama', 'Thriller'],
         creator: 'Bong Joon Ho',
-        coverUrl: 'http://localhost:3000/uploads/covers/parasite.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/parasite.jpg',
         foundAt: 'https://www.imdb.com/title/tt6751668/'
     },
     {
@@ -162,7 +164,7 @@ export const mockWorks = [
         year: 2001,
         genres: ['Animation', 'Adventure', 'Fantasy'],
         creator: 'Hayao Miyazaki',
-        coverUrl: 'http://localhost:3000/uploads/covers/spirited_away.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/spirited_away.jpg',
         foundAt: 'https://www.imdb.com/title/tt0245429/'
     },
     {
@@ -173,7 +175,7 @@ export const mockWorks = [
         year: 2008,
         genres: ['Action', 'Crime', 'Drama'],
         creator: 'Christopher Nolan',
-        coverUrl: 'http://localhost:3000/uploads/covers/dark_knight.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/dark_knight.jpg',
         foundAt: 'https://www.imdb.com/title/tt0468569/'
     },
     {
@@ -184,7 +186,7 @@ export const mockWorks = [
         year: 1994,
         genres: ['Drama', 'Romance'],
         creator: 'Robert Zemeckis',
-        coverUrl: 'http://localhost:3000/uploads/covers/forrest_gump.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/forrest_gump.jpg',
         foundAt: 'https://www.imdb.com/title/tt0109830/'
     },
     {
@@ -195,7 +197,7 @@ export const mockWorks = [
         year: 2014,
         genres: ['Adventure', 'Drama', 'Sci-Fi'],
         creator: 'Christopher Nolan',
-        coverUrl: 'http://localhost:3000/uploads/covers/interstellar.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/interstellar.jpg',
         foundAt: 'https://www.imdb.com/title/tt0816692/'
     },
     {
@@ -206,7 +208,7 @@ export const mockWorks = [
         year: 1990,
         genres: ['Crime', 'Drama', 'Biography'],
         creator: 'Martin Scorsese',
-        coverUrl: 'http://localhost:3000/uploads/covers/goodfellas.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/goodfellas.jpg',
         foundAt: 'https://www.imdb.com/title/tt0099685/'
     },
     {
@@ -217,7 +219,7 @@ export const mockWorks = [
         year: 1999,
         genres: ['Action', 'Sci-Fi'],
         creator: 'Lana Wachowski, Lilly Wachowski',
-        coverUrl: 'http://localhost:3000/uploads/covers/matrix.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/matrix.jpg',
         foundAt: 'https://www.imdb.com/title/tt0133093/'
     },
     {
@@ -228,7 +230,7 @@ export const mockWorks = [
         year: 1993,
         genres: ['Biography', 'Drama', 'History'],
         creator: 'Steven Spielberg',
-        coverUrl: 'http://localhost:3000/uploads/covers/schindlers_list.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/schindlers_list.jpg',
         foundAt: 'https://www.imdb.com/title/tt0108052/'
     },
     {
@@ -239,7 +241,7 @@ export const mockWorks = [
         year: 1999,
         genres: ['Drama'],
         creator: 'David Fincher',
-        coverUrl: 'http://localhost:3000/uploads/covers/fight_club.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/fight_club.jpg',
         foundAt: 'https://www.imdb.com/title/tt0137523/'
     },
     {
@@ -250,7 +252,7 @@ export const mockWorks = [
         year: 1991,
         genres: ['Crime', 'Drama', 'Thriller'],
         creator: 'Jonathan Demme',
-        coverUrl: 'http://localhost:3000/uploads/covers/silence_of_the_lambs.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/silence_of_the_lambs.jpg',
         foundAt: 'https://www.imdb.com/title/tt0102926/'
     },
     {
@@ -261,7 +263,7 @@ export const mockWorks = [
         year: 2014,
         genres: ['Drama'],
         creator: 'Damien Chazelle',
-        coverUrl: 'http://localhost:3000/uploads/covers/whiplash.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/whiplash.jpg',
         foundAt: 'https://www.imdb.com/title/tt2582802/'
     },
     {
@@ -272,7 +274,7 @@ export const mockWorks = [
         year: 2014,
         genres: ['Adventure', 'Comedy', 'Crime'],
         creator: 'Wes Anderson',
-        coverUrl: 'http://localhost:3000/uploads/covers/grand_budapest_hotel.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/grand_budapest_hotel.jpg',
         foundAt: 'https://www.imdb.com/title/tt2278388/'
     },
     {
@@ -283,7 +285,7 @@ export const mockWorks = [
         year: 2022,
         genres: ['Action', 'Adventure', 'Comedy', 'Sci-Fi'],
         creator: 'Daniel Kwan, Daniel Scheinert',
-        coverUrl: 'http://localhost:3000/uploads/covers/everything_everywhere.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/everything_everywhere.jpg',
         foundAt: 'https://www.imdb.com/title/tt6710474/'
     },
     {
@@ -294,7 +296,7 @@ export const mockWorks = [
         year: 2017,
         genres: ['Action', 'Drama', 'Sci-Fi'],
         creator: 'Denis Villeneuve',
-        coverUrl: 'http://localhost:3000/uploads/covers/blade_runner_2049.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/blade_runner_2049.jpg',
         foundAt: 'https://www.imdb.com/title/tt1856101/'
     },
     {
@@ -305,7 +307,7 @@ export const mockWorks = [
         year: 2016,
         genres: ['Comedy', 'Drama', 'Romance'],
         creator: 'Damien Chazelle',
-        coverUrl: 'http://localhost:3000/uploads/covers/la_la_land.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/la_la_land.jpg',
         foundAt: 'https://www.imdb.com/title/tt3783958/'
     },
     {
@@ -316,7 +318,7 @@ export const mockWorks = [
         year: 2017,
         genres: ['Horror', 'Mystery', 'Thriller'],
         creator: 'Jordan Peele',
-        coverUrl: 'http://localhost:3000/uploads/covers/get_out.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/get_out.jpg',
         foundAt: 'https://www.imdb.com/title/tt5052448/'
     },
     {
@@ -327,7 +329,7 @@ export const mockWorks = [
         year: 1998,
         genres: ['Comedy', 'Drama', 'Sci-Fi'],
         creator: 'Peter Weir',
-        coverUrl: 'http://localhost:3000/uploads/covers/truman_show.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/truman_show.jpg',
         foundAt: 'https://www.imdb.com/title/tt0120382/'
     },
     {
@@ -349,7 +351,7 @@ export const mockWorks = [
         year: 2010,
         genres: ['Biography', 'Drama'],
         creator: 'David Fincher',
-        coverUrl: 'http://localhost:3000/uploads/covers/social_network.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/social_network.jpg',
         foundAt: 'https://www.imdb.com/title/tt1285016/'
     },
     {
@@ -360,7 +362,7 @@ export const mockWorks = [
         year: 2021,
         genres: ['Action', 'Adventure', 'Drama', 'Sci-Fi'],
         creator: 'Denis Villeneuve',
-        coverUrl: 'http://localhost:3000/uploads/covers/dune.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/dune.jpg',
         foundAt: 'https://www.imdb.com/title/tt1160419/'
     },
     {
@@ -371,7 +373,7 @@ export const mockWorks = [
         year: 2023,
         genres: ['Biography', 'Drama', 'History'],
         creator: 'Christopher Nolan',
-        coverUrl: 'http://localhost:3000/uploads/covers/oppenheimer.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/oppenheimer.jpg',
         foundAt: 'https://www.imdb.com/title/tt15398776/'
     },
     {
@@ -382,7 +384,7 @@ export const mockWorks = [
         year: 2016,
         genres: ['Drama'],
         creator: 'Barry Jenkins',
-        coverUrl: 'http://localhost:3000/uploads/covers/moonlight.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/moonlight.jpg',
         foundAt: 'https://www.imdb.com/title/tt4975722/'
     },
     // SERIES (36-50)
@@ -394,7 +396,7 @@ export const mockWorks = [
         year: 2008,
         genres: ['Crime', 'Drama', 'Thriller'],
         creator: 'Vince Gilligan',
-        coverUrl: 'http://localhost:3000/uploads/covers/breaking_bad.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/breaking_bad.jpg',
         foundAt: 'https://www.imdb.com/title/tt0903747/'
     },
     {
@@ -405,7 +407,7 @@ export const mockWorks = [
         year: 2011,
         genres: ['Action', 'Adventure', 'Drama', 'Fantasy'],
         creator: 'David Benioff, D.B. Weiss',
-        coverUrl: 'http://localhost:3000/uploads/covers/game_of_thrones.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/game_of_thrones.jpg',
         foundAt: 'https://www.imdb.com/title/tt0944947/'
     },
     {
@@ -416,7 +418,7 @@ export const mockWorks = [
         year: 2002,
         genres: ['Crime', 'Drama', 'Thriller'],
         creator: 'David Simon',
-        coverUrl: 'http://localhost:3000/uploads/covers/the_wire.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/the_wire.jpg',
         foundAt: 'https://www.imdb.com/title/tt0306414/'
     },
     {
@@ -427,7 +429,7 @@ export const mockWorks = [
         year: 1999,
         genres: ['Crime', 'Drama'],
         creator: 'David Chase',
-        coverUrl: 'http://localhost:3000/uploads/covers/sopranos.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/sopranos.jpg',
         foundAt: 'https://www.imdb.com/title/tt0141842/'
     },
     {
@@ -438,7 +440,7 @@ export const mockWorks = [
         year: 2016,
         genres: ['Drama', 'Fantasy', 'Horror', 'Mystery'],
         creator: 'The Duffer Brothers',
-        coverUrl: 'http://localhost:3000/uploads/covers/stranger_things.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/stranger_things.jpg',
         foundAt: 'https://www.imdb.com/title/tt4574334/'
     },
     {
@@ -449,7 +451,7 @@ export const mockWorks = [
         year: 2016,
         genres: ['Biography', 'Drama', 'History'],
         creator: 'Peter Morgan',
-        coverUrl: 'http://localhost:3000/uploads/covers/the_crown.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/the_crown.jpg',
         foundAt: 'https://www.imdb.com/title/tt4786824/'
     },
     {
@@ -460,7 +462,7 @@ export const mockWorks = [
         year: 2023,
         genres: ['Action', 'Adventure', 'Drama', 'Sci-Fi'],
         creator: 'Craig Mazin, Neil Druckmann',
-        coverUrl: 'http://localhost:3000/uploads/covers/last_of_us.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/last_of_us.jpg',
         foundAt: 'https://www.imdb.com/title/tt3581920/'
     },
     {
@@ -471,7 +473,7 @@ export const mockWorks = [
         year: 2013,
         genres: ['Animation', 'Action', 'Adventure', 'Drama', 'Fantasy'],
         creator: 'Hajime Isayama',
-        coverUrl: 'http://localhost:3000/uploads/covers/attack_on_titan.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/attack_on_titan.jpg',
         foundAt: 'https://www.imdb.com/title/tt2560140/'
     },
     {
@@ -482,7 +484,7 @@ export const mockWorks = [
         year: 2014,
         genres: ['Crime', 'Drama', 'Mystery', 'Thriller'],
         creator: 'Nic Pizzolatto',
-        coverUrl: 'http://localhost:3000/uploads/covers/true_detective.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/true_detective.jpg',
         foundAt: 'https://www.imdb.com/title/tt2356777/'
     },
     {
@@ -493,7 +495,7 @@ export const mockWorks = [
         year: 2018,
         genres: ['Drama'],
         creator: 'Jesse Armstrong',
-        coverUrl: 'http://localhost:3000/uploads/covers/succession.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/succession.jpg',
         foundAt: 'https://www.imdb.com/title/tt7660850/'
     },
     {
@@ -504,7 +506,7 @@ export const mockWorks = [
         year: 2019,
         genres: ['Drama', 'History', 'Thriller'],
         creator: 'Craig Mazin',
-        coverUrl: 'http://localhost:3000/uploads/covers/chernobyl.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/chernobyl.jpg',
         foundAt: 'https://www.imdb.com/title/tt7366338/'
     },
     {
@@ -515,7 +517,7 @@ export const mockWorks = [
         year: 2005,
         genres: ['Comedy'],
         creator: 'Greg Daniels',
-        coverUrl: 'http://localhost:3000/uploads/covers/the_office.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/the_office.jpg',
         foundAt: 'https://www.imdb.com/title/tt0386676/'
     },
     {
@@ -526,7 +528,7 @@ export const mockWorks = [
         year: 2010,
         genres: ['Crime', 'Drama', 'Mystery'],
         creator: 'Mark Gatiss, Steven Moffat',
-        coverUrl: 'http://localhost:3000/uploads/covers/sherlock.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/sherlock.jpg',
         foundAt: 'https://www.imdb.com/title/tt1475582/'
     },
     {
@@ -537,7 +539,7 @@ export const mockWorks = [
         year: 2016,
         genres: ['Comedy', 'Drama'],
         creator: 'Phoebe Waller-Bridge',
-        coverUrl: 'http://localhost:3000/uploads/covers/fleabag.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/fleabag.jpg',
         foundAt: 'https://www.imdb.com/title/tt5687612/'
     },
     {
@@ -548,7 +550,7 @@ export const mockWorks = [
         year: 2022,
         genres: ['Comedy', 'Drama'],
         creator: 'Christopher Storer',
-        coverUrl: 'http://localhost:3000/uploads/covers/the_bear.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/the_bear.jpg',
         foundAt: 'https://www.imdb.com/title/tt14452776/'
     },
     // BOOKS (51-70)
@@ -560,7 +562,7 @@ export const mockWorks = [
         year: 1949,
         genres: ['Sci-Fi', 'Drama'],
         creator: 'George Orwell',
-        coverUrl: 'http://localhost:3000/uploads/covers/1984.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/1984.jpg',
         foundAt: 'https://www.goodreads.com/book/show/40961427-1984'
     },
     {
@@ -571,7 +573,7 @@ export const mockWorks = [
         year: 1960,
         genres: ['Drama', 'History'],
         creator: 'Harper Lee',
-        coverUrl: 'http://localhost:3000/uploads/covers/to_kill_a_mockingbird.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/to_kill_a_mockingbird.jpg',
         foundAt: 'https://www.goodreads.com/book/show/2657.To_Kill_a_Mockingbird'
     },
     {
@@ -582,7 +584,7 @@ export const mockWorks = [
         year: 1925,
         genres: ['Drama', 'Romance'],
         creator: 'F. Scott Fitzgerald',
-        coverUrl: 'http://localhost:3000/uploads/covers/great_gatsby.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/great_gatsby.jpg',
         foundAt: 'https://www.goodreads.com/book/show/4671.The_Great_Gatsby'
     },
     {
@@ -593,7 +595,7 @@ export const mockWorks = [
         year: 1813,
         genres: ['Romance', 'Comedy'],
         creator: 'Jane Austen',
-        coverUrl: 'http://localhost:3000/uploads/covers/pride_and_prejudice.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/pride_and_prejudice.jpg',
         foundAt: 'https://www.goodreads.com/book/show/1885.Pride_and_Prejudice'
     },
     {
@@ -604,7 +606,7 @@ export const mockWorks = [
         year: 1951,
         genres: ['Drama'],
         creator: 'J.D. Salinger',
-        coverUrl: 'http://localhost:3000/uploads/covers/catcher_in_the_rye.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/catcher_in_the_rye.jpg',
         foundAt: 'https://www.goodreads.com/book/show/5107.The_Catcher_in_the_Rye'
     },
     {
@@ -615,7 +617,7 @@ export const mockWorks = [
         year: 1967,
         genres: ['Fantasy', 'Drama'],
         creator: 'Gabriel García Márquez',
-        coverUrl: 'http://localhost:3000/uploads/covers/hundred_years_solitude.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/hundred_years_solitude.jpg',
         foundAt: 'https://www.goodreads.com/book/show/320.One_Hundred_Years_of_Solitude'
     },
     {
@@ -626,7 +628,7 @@ export const mockWorks = [
         year: 1954,
         genres: ['Fantasy', 'Adventure'],
         creator: 'J.R.R. Tolkien',
-        coverUrl: 'http://localhost:3000/uploads/covers/lotr_book.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/lotr_book.jpg',
         foundAt: 'https://www.goodreads.com/book/show/33.The_Lord_of_the_Rings'
     },
     {
@@ -637,7 +639,7 @@ export const mockWorks = [
         year: 1880,
         genres: ['Drama'],
         creator: 'Fyodor Dostoevsky',
-        coverUrl: 'http://localhost:3000/uploads/covers/brothers_karamazov.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/brothers_karamazov.jpg',
         foundAt: 'https://www.goodreads.com/book/show/4934.The_Brothers_Karamazov'
     },
     {
@@ -648,7 +650,7 @@ export const mockWorks = [
         year: 1932,
         genres: ['Sci-Fi', 'Drama'],
         creator: 'Aldous Huxley',
-        coverUrl: 'http://localhost:3000/uploads/covers/brave_new_world.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/brave_new_world.jpg',
         foundAt: 'https://www.goodreads.com/book/show/5129.Brave_New_World'
     },
     {
@@ -659,7 +661,7 @@ export const mockWorks = [
         year: 1937,
         genres: ['Fantasy', 'Adventure'],
         creator: 'J.R.R. Tolkien',
-        coverUrl: 'http://localhost:3000/uploads/covers/hobbit.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/hobbit.jpg',
         foundAt: 'https://www.goodreads.com/book/show/5907.The_Hobbit'
     },
     {
@@ -670,7 +672,7 @@ export const mockWorks = [
         year: 1997,
         genres: ['Fantasy', 'Adventure'],
         creator: 'J.K. Rowling',
-        coverUrl: 'http://localhost:3000/uploads/covers/harry_potter_book.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/harry_potter_book.jpg',
         foundAt: 'https://www.goodreads.com/book/show/3.Harry_Potter_and_the_Sorcerer_s_Stone'
     },
     {
@@ -681,7 +683,7 @@ export const mockWorks = [
         year: 1985,
         genres: ['Sci-Fi', 'Drama'],
         creator: 'Margaret Atwood',
-        coverUrl: 'http://localhost:3000/uploads/covers/handmaids_tale.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/handmaids_tale.jpg',
         foundAt: 'https://www.goodreads.com/book/show/38447.The_Handmaid_s_Tale'
     },
     {
@@ -692,7 +694,7 @@ export const mockWorks = [
         year: 1965,
         genres: ['Sci-Fi', 'Adventure'],
         creator: 'Frank Herbert',
-        coverUrl: 'http://localhost:3000/uploads/covers/dune_book.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/dune_book.jpg',
         foundAt: 'https://www.goodreads.com/book/show/44767458-dune'
     },
     {
@@ -703,7 +705,7 @@ export const mockWorks = [
         year: 1988,
         genres: ['Adventure', 'Fantasy'],
         creator: 'Paulo Coelho',
-        coverUrl: 'http://localhost:3000/uploads/covers/alchemist.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/alchemist.jpg',
         foundAt: 'https://www.goodreads.com/book/show/18144590-the-alchemist'
     },
     {
@@ -714,7 +716,7 @@ export const mockWorks = [
         year: 1987,
         genres: ['Drama', 'History'],
         creator: 'Toni Morrison',
-        coverUrl: 'http://localhost:3000/uploads/covers/beloved.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/beloved.jpg',
         foundAt: 'https://www.goodreads.com/book/show/6149.Beloved'
     },
     {
@@ -725,7 +727,7 @@ export const mockWorks = [
         year: 1890,
         genres: ['Drama', 'Fantasy', 'Horror'],
         creator: 'Oscar Wilde',
-        coverUrl: 'http://localhost:3000/uploads/covers/dorian_gray.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/dorian_gray.jpg',
         foundAt: 'https://www.goodreads.com/book/show/5297.The_Picture_of_Dorian_Gray'
     },
     {
@@ -736,7 +738,7 @@ export const mockWorks = [
         year: 1953,
         genres: ['Sci-Fi', 'Drama'],
         creator: 'Ray Bradbury',
-        coverUrl: 'http://localhost:3000/uploads/covers/fahrenheit_451.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/fahrenheit_451.jpg',
         foundAt: 'https://www.goodreads.com/book/show/13079982-fahrenheit-451'
     },
     {
@@ -747,7 +749,7 @@ export const mockWorks = [
         year: 2003,
         genres: ['Drama', 'History'],
         creator: 'Khaled Hosseini',
-        coverUrl: 'http://localhost:3000/uploads/covers/kite_runner.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/kite_runner.jpg',
         foundAt: 'https://www.goodreads.com/book/show/77203.The_Kite_Runner'
     },
     {
@@ -758,7 +760,7 @@ export const mockWorks = [
         year: 2006,
         genres: ['Drama', 'Sci-Fi'],
         creator: 'Cormac McCarthy',
-        coverUrl: 'http://localhost:3000/uploads/covers/the_road.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/the_road.jpg',
         foundAt: 'https://www.goodreads.com/book/show/6288.The_Road'
     },
     {
@@ -769,7 +771,7 @@ export const mockWorks = [
         year: 2001,
         genres: ['Adventure', 'Fantasy'],
         creator: 'Yann Martel',
-        coverUrl: 'http://localhost:3000/uploads/covers/life_of_pi.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/life_of_pi.jpg',
         foundAt: 'https://www.goodreads.com/book/show/4214.Life_of_Pi'
     },
     // MUSIC (71-85)
@@ -781,7 +783,7 @@ export const mockWorks = [
         year: 1969,
         genres: ['Rock'],
         creator: 'The Beatles',
-        coverUrl: 'http://localhost:3000/uploads/covers/abbey_road.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/abbey_road.jpg',
         foundAt: 'https://open.spotify.com/album/0ETFjACtuP2ADo6LFhL6HN'
     },
     {
@@ -792,7 +794,7 @@ export const mockWorks = [
         year: 1982,
         genres: ['Pop'],
         creator: 'Michael Jackson',
-        coverUrl: 'http://localhost:3000/uploads/covers/thriller.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/thriller.jpg',
         foundAt: 'https://open.spotify.com/album/2ANVost0y2y52ema1E9xAZ'
     },
     {
@@ -803,7 +805,7 @@ export const mockWorks = [
         year: 1997,
         genres: ['Alternative Rock'],
         creator: 'Radiohead',
-        coverUrl: 'http://localhost:3000/uploads/covers/ok_computer.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/ok_computer.jpg',
         foundAt: 'https://open.spotify.com/album/6dVIqQ8qmQ5GBnJ9shOYGE'
     },
     {
@@ -814,7 +816,7 @@ export const mockWorks = [
         year: 1959,
         genres: ['Jazz'],
         creator: 'Miles Davis',
-        coverUrl: 'http://localhost:3000/uploads/covers/kind_of_blue.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/kind_of_blue.jpg',
         foundAt: 'https://open.spotify.com/album/1weenld61qoidwYuZ1GESA'
     },
     {
@@ -825,7 +827,7 @@ export const mockWorks = [
         year: 1977,
         genres: ['Rock'],
         creator: 'Fleetwood Mac',
-        coverUrl: 'http://localhost:3000/uploads/covers/rumours.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/rumours.jpg',
         foundAt: 'https://open.spotify.com/album/0BwWUstDMUbgq2NYONRqlu'
     },
     {
@@ -836,7 +838,7 @@ export const mockWorks = [
         year: 1991,
         genres: ['Grunge', 'Alternative Rock'],
         creator: 'Nirvana',
-        coverUrl: 'http://localhost:3000/uploads/covers/nevermind.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/nevermind.jpg',
         foundAt: 'https://open.spotify.com/album/2guirTSEqLizK7j9i1MTTZ'
     },
     {
@@ -847,7 +849,7 @@ export const mockWorks = [
         year: 1967,
         genres: ['Art Rock'],
         creator: 'The Velvet Underground',
-        coverUrl: 'http://localhost:3000/uploads/covers/velvet_underground.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/velvet_underground.jpg',
         foundAt: 'https://open.spotify.com/album/4xwx0x7k6c5VuThz5qVqmV'
     },
     {
@@ -858,7 +860,7 @@ export const mockWorks = [
         year: 2015,
         genres: ['Hip Hop'],
         creator: 'Kendrick Lamar',
-        coverUrl: 'http://localhost:3000/uploads/covers/to_pimp_a_butterfly.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/to_pimp_a_butterfly.jpg',
         foundAt: 'https://open.spotify.com/album/7ycBtnsMtyVbbwTfJwRjSP'
     },
     {
@@ -869,7 +871,7 @@ export const mockWorks = [
         year: 1980,
         genres: ['Hard Rock'],
         creator: 'AC/DC',
-        coverUrl: 'http://localhost:3000/uploads/covers/back_in_black.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/back_in_black.jpg',
         foundAt: 'https://open.spotify.com/album/6mUdeDZCsExyJLMdAfDuwh'
     },
     {
@@ -880,7 +882,7 @@ export const mockWorks = [
         year: 1984,
         genres: ['Pop', 'Rock', 'R&B'],
         creator: 'Prince',
-        coverUrl: 'http://localhost:3000/uploads/covers/purple_rain.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/purple_rain.jpg',
         foundAt: 'https://open.spotify.com/album/7nXJ5k4XgRj5OLg9m8V3zc'
     },
     {
@@ -891,7 +893,7 @@ export const mockWorks = [
         year: 1971,
         genres: ['Soul', 'R&B'],
         creator: 'Marvin Gaye',
-        coverUrl: 'http://localhost:3000/uploads/covers/whats_going_on.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/whats_going_on.jpg',
         foundAt: 'https://open.spotify.com/album/2v6ANhRTJIeNCNkTyq6wpE'
     },
     {
@@ -902,7 +904,7 @@ export const mockWorks = [
         year: 1998,
         genres: ['R&B', 'Hip Hop', 'Soul'],
         creator: 'Lauryn Hill',
-        coverUrl: 'http://localhost:3000/uploads/covers/miseducation_lauryn_hill.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/miseducation_lauryn_hill.jpg',
         foundAt: 'https://open.spotify.com/album/1BZoqf8Zje5nGdwZhOjAtD'
     },
     {
@@ -913,7 +915,7 @@ export const mockWorks = [
         year: 2013,
         genres: ['Electronic', 'Disco', 'Funk'],
         creator: 'Daft Punk',
-        coverUrl: 'http://localhost:3000/uploads/covers/random_access_memories.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/random_access_memories.jpg',
         foundAt: 'https://open.spotify.com/album/4m2880jivSbbyEGAKfITCa'
     },
     {
@@ -924,7 +926,7 @@ export const mockWorks = [
         year: 1972,
         genres: ['Glam Rock'],
         creator: 'David Bowie',
-        coverUrl: 'http://localhost:3000/uploads/covers/ziggy_stardust.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/ziggy_stardust.jpg',
         foundAt: 'https://open.spotify.com/album/48D1hRORqJjjshGaLiDFqq'
     },
     {
@@ -935,7 +937,7 @@ export const mockWorks = [
         year: 2012,
         genres: ['Hip Hop'],
         creator: 'Kendrick Lamar',
-        coverUrl: 'http://localhost:3000/uploads/covers/good_kid_maad_city.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/good_kid_maad_city.jpg',
         foundAt: 'https://open.spotify.com/album/3DGQ1iZ9XKUQxAUWjfC34w'
     },
     // GRAPHIC NOVELS (86-100)
@@ -947,7 +949,7 @@ export const mockWorks = [
         year: 1986,
         genres: ['Sci-Fi', 'Mystery', 'Thriller'],
         creator: 'Alan Moore, Dave Gibbons',
-        coverUrl: 'http://localhost:3000/uploads/covers/watchmen.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/watchmen.jpg',
         foundAt: 'https://www.goodreads.com/book/show/472331.Watchmen'
     },
     {
@@ -958,7 +960,7 @@ export const mockWorks = [
         year: 1991,
         genres: ['Biography', 'History'],
         creator: 'Art Spiegelman',
-        coverUrl: 'http://localhost:3000/uploads/covers/maus.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/maus.jpg',
         foundAt: 'https://www.goodreads.com/book/show/15195.The_Complete_Maus'
     },
     {
@@ -969,7 +971,7 @@ export const mockWorks = [
         year: 1989,
         genres: ['Fantasy', 'Horror'],
         creator: 'Neil Gaiman',
-        coverUrl: 'http://localhost:3000/uploads/covers/sandman.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/sandman.jpg',
         foundAt: 'https://www.goodreads.com/book/show/23754.The_Sandman_Vol_1'
     },
     {
@@ -980,7 +982,7 @@ export const mockWorks = [
         year: 1986,
         genres: ['Action', 'Crime', 'Thriller'],
         creator: 'Frank Miller',
-        coverUrl: 'http://localhost:3000/uploads/covers/dark_knight_returns.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/dark_knight_returns.jpg',
         foundAt: 'https://www.goodreads.com/book/show/59960.Batman'
     },
     {
@@ -991,7 +993,7 @@ export const mockWorks = [
         year: 1988,
         genres: ['Sci-Fi', 'Thriller'],
         creator: 'Alan Moore, David Lloyd',
-        coverUrl: 'http://localhost:3000/uploads/covers/v_for_vendetta.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/v_for_vendetta.jpg',
         foundAt: 'https://www.goodreads.com/book/show/5805.V_for_Vendetta'
     },
     {
@@ -1002,7 +1004,7 @@ export const mockWorks = [
         year: 2012,
         genres: ['Sci-Fi', 'Fantasy', 'Romance'],
         creator: 'Brian K. Vaughan, Fiona Staples',
-        coverUrl: 'http://localhost:3000/uploads/covers/saga.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/saga.jpg',
         foundAt: 'https://www.goodreads.com/book/show/15704307-saga-vol-1'
     },
     {
@@ -1013,7 +1015,7 @@ export const mockWorks = [
         year: 2000,
         genres: ['Biography', 'History'],
         creator: 'Marjane Satrapi',
-        coverUrl: 'http://localhost:3000/uploads/covers/persepolis.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/persepolis.jpg',
         foundAt: 'https://www.goodreads.com/book/show/9516.Persepolis'
     },
     {
@@ -1024,7 +1026,7 @@ export const mockWorks = [
         year: 1991,
         genres: ['Fantasy', 'Adventure', 'Comedy'],
         creator: 'Jeff Smith',
-        coverUrl: 'http://localhost:3000/uploads/covers/bone.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/bone.jpg',
         foundAt: 'https://www.goodreads.com/book/show/92143.Bone'
     },
     {
@@ -1035,7 +1037,7 @@ export const mockWorks = [
         year: 2002,
         genres: ['Sci-Fi', 'Adventure'],
         creator: 'Brian K. Vaughan, Pia Guerra',
-        coverUrl: 'http://localhost:3000/uploads/covers/y_the_last_man.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/y_the_last_man.jpg',
         foundAt: 'https://www.goodreads.com/book/show/156534.Y'
     },
     {
@@ -1046,7 +1048,7 @@ export const mockWorks = [
         year: 2003,
         genres: ['Horror', 'Drama'],
         creator: 'Robert Kirkman, Tony Moore',
-        coverUrl: 'http://localhost:3000/uploads/covers/walking_dead.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/walking_dead.jpg',
         foundAt: 'https://www.goodreads.com/book/show/13024.The_Walking_Dead_Vol_1'
     },
     {
@@ -1057,7 +1059,7 @@ export const mockWorks = [
         year: 2004,
         genres: ['Comedy', 'Romance', 'Action'],
         creator: 'Bryan Lee O\'Malley',
-        coverUrl: 'http://localhost:3000/uploads/covers/scott_pilgrim.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/scott_pilgrim.jpg',
         foundAt: 'https://www.goodreads.com/book/show/29207.Scott_Pilgrim_s_Precious_Little_Life'
     },
     {
@@ -1068,7 +1070,7 @@ export const mockWorks = [
         year: 2003,
         genres: ['Romance', 'Drama'],
         creator: 'Craig Thompson',
-        coverUrl: 'http://localhost:3000/uploads/covers/blankets.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/blankets.jpg',
         foundAt: 'https://www.goodreads.com/book/show/25179.Blankets'
     },
     {
@@ -1079,7 +1081,7 @@ export const mockWorks = [
         year: 1982,
         genres: ['Sci-Fi', 'Action'],
         creator: 'Katsuhiro Otomo',
-        coverUrl: 'http://localhost:3000/uploads/covers/akira.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/akira.jpg',
         foundAt: 'https://www.goodreads.com/book/show/93371.Akira_Vol_1'
     },
     {
@@ -1090,7 +1092,7 @@ export const mockWorks = [
         year: 2002,
         genres: ['Fantasy', 'Mystery'],
         creator: 'Bill Willingham',
-        coverUrl: 'http://localhost:3000/uploads/covers/fables.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/fables.jpg',
         foundAt: 'https://www.goodreads.com/book/show/21326.Fables_Vol_1'
     },
     {
@@ -1101,7 +1103,7 @@ export const mockWorks = [
         year: 2006,
         genres: ['Biography', 'Drama'],
         creator: 'Alison Bechdel',
-        coverUrl: 'http://localhost:3000/uploads/covers/fun_home.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/fun_home.jpg',
         foundAt: 'https://www.goodreads.com/book/show/26135825-fun-home'
     }
 ];
