@@ -6,6 +6,9 @@ export const WORK_TYPES = {
     GRAPHIC_NOVEL: 'graphic-novel'
 };
 
+// Image Base URL from environment or default
+export const IMAGE_BASE_URL = process.env.IMAGE_BASE_URL || 'http://localhost:3000/uploads';
+
 export const RATING_CONSTRAINTS = {
     MIN: 1,
     MAX: 5,
