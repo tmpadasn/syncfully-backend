@@ -340,7 +340,7 @@ export const mockWorks = [
         year: 2001,
         genres: ['Comedy', 'Romance'],
         creator: 'Jean-Pierre Jeunet',
-        coverUrl: 'http://localhost:3000/uploads/covers/amelie.jpg',
+        coverUrl: IMAGE_BASE_URL + '/covers/amelie.jpg',
         foundAt: 'https://www.imdb.com/title/tt0211915/'
     },
     {

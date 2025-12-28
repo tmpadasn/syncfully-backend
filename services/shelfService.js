@@ -1,6 +1,4 @@
-import Shelf from '../models/Shelf.js';
 import { mockShelves, getNextShelfId } from '../data/mockShelves.js';
-import { isMongoConnected } from '../config/database.js';
 import { safeParseInt } from '../utils/helpers.js';
 
 /**
@@ -35,12 +33,6 @@ const formatShelfData = (shelf) => {
  * @returns {Promise<Array>}
  */
 export const getAllShelves = async () => {
-    if (isMongoConnected()) {
-        const shelves = await Shelf.find().populate('works');
-        return shelves.map(shelf => shelf.toJSON());
-    }
-
-    // Use mock data
     return mockShelves.map(formatShelfData);
 };
 
@@ -50,12 +42,6 @@ export const getAllShelves = async () => {
  * @returns {Promise<Array>}
  */
 export const getUserShelves = async (userId) => {
-    if (isMongoConnected()) {
-        const shelves = await Shelf.find({ userId }).populate('works');
-        return shelves.map(shelf => shelf.toJSON());
-    }
-
-    // Use mock data
     const parsedId = safeParseInt(userId, 'userId');
     return mockShelves
         .filter(shelf => shelf.userId === parsedId)
@@ -68,16 +54,8 @@ export const getUserShelves = async (userId) => {
  * @returns {Promise<Object|null>}
  */
 export const getShelfById = async (shelfId) => {
-    if (isMongoConnected()) {
-        const shelf = await Shelf.findById(shelfId).populate('works');
-        if (!shelf) return null;
-        return shelf.toJSON();
-    }
-
-    // Use mock data
     const shelf = findMockShelfById(shelfId);
     if (!shelf) return null;
-
     return formatShelfData(shelf);
 };
 
@@ -88,18 +66,6 @@ export const getShelfById = async (shelfId) => {
  * @returns {Promise<Object>}
  */
 export const createShelf = async (userId, shelfData) => {
-    if (isMongoConnected()) {
-        const shelf = new Shelf({
-            userId,
-            name: shelfData.name,
-            description: shelfData.description || ''
-        });
-
-        await shelf.save();
-        return shelf.toJSON();
-    }
-
-    // Use mock data
     const parsedUserId = safeParseInt(userId, 'userId');
     const newShelf = {
         id: getNextShelfId(),
@@ -112,7 +78,6 @@ export const createShelf = async (userId, shelfData) => {
     };
 
     mockShelves.push(newShelf);
-
     return formatShelfData(newShelf);
 };
 
@@ -123,18 +88,6 @@ export const createShelf = async (userId, shelfData) => {
  * @returns {Promise<Object|null>}
  */
 export const updateShelf = async (shelfId, updateData) => {
-    if (isMongoConnected()) {
-        const shelf = await Shelf.findByIdAndUpdate(
-            shelfId,
-            { $set: updateData },
-            { new: true, runValidators: true }
-        ).populate('works');
-
-        if (!shelf) return null;
-        return shelf.toJSON();
-    }
-
-    // Use mock data
     const shelf = findMockShelfById(shelfId);
     if (!shelf) return null;
 
@@ -151,12 +104,6 @@ export const updateShelf = async (shelfId, updateData) => {
  * @returns {Promise<boolean>}
  */
 export const deleteShelf = async (shelfId) => {
-    if (isMongoConnected()) {
-        const result = await Shelf.findByIdAndDelete(shelfId);
-        return result !== null;
-    }
-
-    // Use mock data
     const parsedId = safeParseInt(shelfId, 'shelfId');
     const index = mockShelves.findIndex(s => s.id === parsedId);
     if (index === -1) return false;
@@ -166,33 +113,21 @@ export const deleteShelf = async (shelfId) => {
 };
 
 /**
- * Get all works in a shelf with optional filtering
+ * Get all works in a shelf
  * @param {string} shelfId - Shelf ID
  * @param {Object} filters - Filter options (workType, genre, rating, year)
  * @returns {Promise<Object|null>}
  */
 export const getShelfWorks = async (shelfId, filters = {}) => {
-    if (isMongoConnected()) {
-        const shelf = await Shelf.findById(shelfId).populate({
-            path: 'works',
-            match: buildMongoQuery(filters)
-        });
-
-        if (!shelf) return null;
-        return shelf.toJSON();
-    }
-
-    // Use mock data - we need to import mockWorks
     const shelf = findMockShelfById(shelfId);
     if (!shelf) return null;
 
-    const works = shelf.works; // In mock, works are just IDs
     return {
         shelfId: shelf.id,
         userId: shelf.userId,
         name: shelf.name,
         description: shelf.description,
-        works: works,
+        works: shelf.works,
         createdAt: shelf.createdAt,
         updatedAt: shelf.updatedAt
     };
@@ -205,18 +140,6 @@ export const getShelfWorks = async (shelfId, filters = {}) => {
  * @returns {Promise<Object|null>}
  */
 export const addWorkToShelf = async (shelfId, workId) => {
-    if (isMongoConnected()) {
-        const shelf = await Shelf.findByIdAndUpdate(
-            shelfId,
-            { $addToSet: { works: workId } },
-            { new: true }
-        ).populate('works');
-
-        if (!shelf) return null;
-        return shelf.toJSON();
-    }
-
-    // Use mock data
     const shelf = findMockShelfById(shelfId);
     if (!shelf) return null;
 
@@ -236,18 +159,6 @@ export const addWorkToShelf = async (shelfId, workId) => {
  * @returns {Promise<Object|null>}
  */
 export const removeWorkFromShelf = async (shelfId, workId) => {
-    if (isMongoConnected()) {
-        const shelf = await Shelf.findByIdAndUpdate(
-            shelfId,
-            { $pull: { works: workId } },
-            { new: true }
-        ).populate('works');
-
-        if (!shelf) return null;
-        return shelf.toJSON();
-    }
-
-    // Use mock data
     const shelf = findMockShelfById(shelfId);
     if (!shelf) return null;
 
@@ -260,29 +171,3 @@ export const removeWorkFromShelf = async (shelfId, workId) => {
 
     return formatShelfData(shelf);
 };
-
-/**
- * Helper function to build MongoDB query from filters
- */
-function buildMongoQuery(filters) {
-    const query = {};
-
-    if (filters['work-type']) {
-        query.type = filters['work-type'];
-    }
-
-    if (filters.genre) {
-        query.genres = filters.genre;
-    }
-
-    if (filters.year) {
-        query.year = { $gte: Number(filters.year) }; // Changed to >= for "from year onwards"
-    }
-
-    if (filters.rating) {
-        // This would need to be implemented with aggregation in a real scenario
-        // For now, we'll handle it at the application level
-    }
-
-    return query;
-}
