@@ -9,7 +9,7 @@ import { prodError } from '../utils/logger.js';
  * @param {Object} res - Express response object
  * @param {Function} next - Express next middleware function
  */
-export const errorHandler = (err, req, res, next) => {
+export const errorHandler = (err, _req, res, next) => {
     prodError('Error:', err);
 
     // Mongoose validation error

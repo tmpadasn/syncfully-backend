@@ -5,17 +5,7 @@ import { calculateAverageRating } from '../utils/helpers.js';
 
 const MAX_RESULTS = 50;
 
-/**
- * Helper: Calculate rating for a work from mock data
- * @param {number|string} workId - Work ID
- * @returns {number} Average rating
- */
-const calculateWorkRating = (workId) => {
-    const ratingsForWork = mockRatings.filter(
-        (r) => String(r.workId) === String(workId)
-    );
-    return calculateAverageRating(ratingsForWork.map(r => ({ score: r.score })));
-};
+
 
 /**
  * Helper: Format work with rating and count

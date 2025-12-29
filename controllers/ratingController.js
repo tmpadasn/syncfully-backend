@@ -131,7 +131,7 @@ export const deleteRating = async (req, res, next) => {
  * Get all ratings (admin)
  * @route GET /api/ratings
  */
-export const getAllRatings = async (req, res, next) => {
+export const getAllRatings = async (_req, res, next) => {
     try {
         const ratings = await ratingService.getAllRatings();
         sendSuccess(res, HTTP_STATUS.OK, { ratings });

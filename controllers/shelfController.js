@@ -7,7 +7,7 @@ import { parseQueryInt, parseQueryFloat } from '../utils/helpers.js';
  * Get all shelves (across all users)
  * @route GET /api/shelves
  */
-export const getAllShelves = async (req, res, next) => {
+export const getAllShelves = async (_req, res, next) => {
     try {
         const shelves = await shelfService.getAllShelves();
         sendSuccess(res, HTTP_STATUS.OK, { shelves });

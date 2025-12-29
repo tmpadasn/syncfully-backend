@@ -61,7 +61,7 @@ app.use(logger);
  * @route GET /health
  * @returns {Object} 200 - Server status
  */
-app.get('/health', (req, res) => {
+app.get('/health', (_req, res) => {
     res.json({
         success: true,
         message: 'Server is running',

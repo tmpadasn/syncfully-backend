@@ -8,7 +8,7 @@ import { validateUserData, validateRatingScore, validateUsername, validatePasswo
  * Get all users
  * @route GET /api/users
  */
-export const getAllUsers = async (req, res, next) => {
+export const getAllUsers = async (_req, res, next) => {
   try {
     const users = await userService.getAllUsers();
     sendSuccess(res, HTTP_STATUS.OK, users);

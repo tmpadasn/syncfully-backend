@@ -82,7 +82,7 @@ export const getSimilarWorks = async (req, res, next) => {
  * Get popular works
  * @route GET /api/works/popular
  */
-export const getPopularWorks = async (req, res, next) => {
+export const getPopularWorks = async (_req, res, next) => {
     try {
         const works = await workService.getPopularWorks();
         sendSuccess(res, HTTP_STATUS.OK, { works });
