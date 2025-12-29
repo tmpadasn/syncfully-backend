@@ -131,6 +131,7 @@ export const deleteRating = async (req, res, next) => {
  * Get all ratings (admin)
  * @route GET /api/ratings
  */
+// eslint-disable-next-line no-unused-vars
 export const getAllRatings = async (_req, res, next) => {
     try {
         const ratings = await ratingService.getAllRatings();

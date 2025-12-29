@@ -184,7 +184,7 @@ export const enrichWorkWithRating = (work, mockRatings) => {
  * parseQueryInt('', 'year') // Returns null
  * parseQueryInt('abc', 'year') // Returns null (doesn't throw)
  */
-export const parseQueryInt = (value, _fieldName = 'value') => {
+export const parseQueryInt = (value) => {
     if (value === undefined || value === '') return null;
     const parsed = parseInt(value, 10);
     // Return null instead of NaN to indicate "no filter"
@@ -206,7 +206,7 @@ export const parseQueryInt = (value, _fieldName = 'value') => {
  * parseQueryFloat('', 'rating') // Returns null
  * parseQueryFloat('abc', 'rating') // Returns null
  */
-export const parseQueryFloat = (value, _fieldName = 'value') => {
+export const parseQueryFloat = (value) => {
     if (value === undefined || value === '') return null;
     const parsed = parseFloat(value);
     return Number.isNaN(parsed) ? null : parsed;

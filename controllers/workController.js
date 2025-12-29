@@ -82,6 +82,7 @@ export const getSimilarWorks = async (req, res, next) => {
  * Get popular works
  * @route GET /api/works/popular
  */
+// eslint-disable-next-line no-unused-vars
 export const getPopularWorks = async (_req, res, next) => {
     try {
         const works = await workService.getPopularWorks();

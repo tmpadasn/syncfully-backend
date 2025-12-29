@@ -9,6 +9,7 @@ import { prodError } from '../utils/logger.js';
  * @param {Object} res - Express response object
  * @param {Function} next - Express next middleware function
  */
+// eslint-disable-next-line no-unused-vars
 export const errorHandler = (err, _req, res, next) => {
     prodError('Error:', err);
 

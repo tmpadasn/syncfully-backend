@@ -6,6 +6,7 @@
  * @returns {Function} Transform function for toJSON
  */
 export const createToJSONTransform = (idField, fieldsToDelete = []) => {
+    // eslint-disable-next-line no-unused-vars
     return function (_doc, ret) {
         // Rename _id to custom field
         ret[idField] = ret._id;

@@ -61,6 +61,7 @@ app.use(logger);
  * @route GET /health
  * @returns {Object} 200 - Server status
  */
+// eslint-disable-next-line no-unused-vars
 app.get('/health', (_req, res) => {
     res.json({
         success: true,

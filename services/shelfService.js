@@ -118,7 +118,7 @@ export const deleteShelf = async (shelfId) => {
  * @param {Object} filters - Filter options (workType, genre, rating, year)
  * @returns {Promise<Object|null>}
  */
-export const getShelfWorks = async (shelfId, _filters = {}) => {
+export const getShelfWorks = async (shelfId) => {
     const shelf = findMockShelfById(shelfId);
     if (!shelf) return null;
 

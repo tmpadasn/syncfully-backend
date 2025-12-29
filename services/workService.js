@@ -95,7 +95,7 @@ export const getSimilarWorks = async (workId) => {
 export const getPopularWorks = async () => {
     const worksWithRatings = mockWorks.map(work => {
         const workRatings = mockRatings.filter(r => r.workId === work.id);
-        const rating = calculateAverageRating(workRatings);
+
         const enrichedWork = enrichWorkWithRating(work, mockRatings);
         enrichedWork.ratingsCount = workRatings.length;
         return enrichedWork;
