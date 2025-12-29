@@ -1,0 +1,462 @@
+
+> syncfully-backend@1.0.0 test
+> c8 ava
+
+
+  - [skip] auth_signup_validation › Signup validation - missing username
+  - [skip] auth_signup_validation › Signup validation - missing email
+  - [skip] auth_signup_validation › Signup validation - missing password
+  - [skip] auth_signup_validation › Signup validation - short password
+  - [skip] auth_signup_validation › Signup validation - empty username
+GET /api/ratings 200 - 12ms
+  ✔ ratings_admin › GET /api/ratings - returns all ratings
+POST /api/auth/signup 400 - 3ms
+GET /api/ratings 200 - 6ms
+  ✔ auth_signup_validation › Signup validation - invalid email format
+GET /api/ratings/999999 404 - 1ms
+  ✔ ratings_admin › GET /api/ratings/:ratingId - 404 for non-existent rating
+GET /api/ratings/1 200 - 2ms
+GET /api/ratings 200 - 3ms
+  ✔ ratings_admin › GET /api/ratings/:ratingId - returns rating by ID
+POST /api/auth/signup 201 - 3ms
+DELETE /api/ratings/999999 404 - 4ms
+  ✔ auth_signup_success › Signup - create new user successfully
+POST /api/auth/signup 201 - 0ms
+  ✔ auth_signup_success › Signup - create user with profile picture
+POST /api/auth/signup 400 - 0ms
+POST /api/auth/signup 400 - 0ms
+  ✔ auth_signup_success › Signup duplicate - username already exists
+  ✔ auth_signup_success › Signup duplicate - email already exists
+  ✔ ratings_admin › DELETE /api/ratings/:ratingId - 404 for non-existent rating (124ms)
+  - [skip] user_following › POST follow - 404 for non-existent target
+PUT /api/ratings/1 200 - 1ms
+PUT /api/ratings/999999 404 - 0ms
+  ✔ ratings_admin › PUT /api/ratings/:ratingId - updates rating (129ms)
+  ✔ ratings_admin › PUT /api/ratings/:ratingId - 404 for non-existent rating (129ms)
+POST /api/works/1/ratings 201 - 5ms
+DELETE /api/ratings/143 204 - 3ms
+  ✔ ratings_admin › DELETE /api/ratings/:ratingId - deletes rating (145ms)
+GET /api/ratings/143 404 - 1ms
+GET /api/users/1/following 200 - 11ms
+  ✔ user_following › GET /api/users/:userId/following - returns following list
+GET /api/users/8/following 200 - 1ms
+  ✔ user_following › GET /api/users/:userId/following - empty for user with no following
+GET /api/users/999999/following 404 - 3ms
+  ✔ user_following › GET /api/users/:userId/following - 404 for non-existent user
+POST /api/users/8/following/10 200 - 3ms
+  ✔ user_following › POST follow - successfully follows a user
+POST /api/users/10/following/8 200 - 1ms
+  ✔ user_following › POST follow - mutual follow works
+POST /api/auth/login 200 - 3ms
+POST /api/users/8/following/8 400 - 0ms
+POST /api/users/8/following/10 400 - 1ms
+  ✔ user_following › POST follow - 400 when following self
+POST /api/auth/login 401 - 1ms
+  ✔ auth_login_success › Login with username - success
+POST /api/users/999999/following/1 404 - 1ms
+  ✔ user_following › POST follow - 400 when already following
+  ✔ user_following › POST follow - 404 for non-existent user
+POST /api/auth/login 401 - 0ms
+  ✔ auth_login_success › Login with username - wrong password
+  ✔ auth_login_success › Login with username - non-existent user
+POST /api/auth/login 400 - 8ms
+POST /api/auth/login 200 - 0ms
+  ✔ auth_login_success › Login with email - success
+  ✔ auth_login_validation › Login validation - missing identifier
+POST /api/auth/login 400 - 1ms
+  ✔ auth_login_validation › Login validation - missing password
+POST /api/auth/login 400 - 0ms
+  ✔ auth_login_validation › Login validation - empty identifier
+POST /api/auth/login 400 - 0ms
+  ✔ auth_login_validation › Login validation - empty password
+GET /api/works/1/ratings 200 - 7ms
+  ✔ ratings_work_list › GET /api/works/:workId/ratings - returns ratings
+GET /api/works/invalid/ratings 400 - 1ms
+  ✔ ratings_work_list › GET /api/works/:workId/ratings - 400 for invalid ID
+POST /api/works 201 - 1ms
+GET /api/works/101/ratings 200 - 1ms
+  ✔ ratings_work_list › GET /api/works/:workId/ratings - empty for work with no ratings
+GET /api/works/1/ratings/average 200 - 4ms
+  ✔ ratings_work_average › GET /api/works/:workId/ratings/average - returns average
+GET /api/works/invalid/ratings/average 400 - 1ms
+  ✔ ratings_work_average › GET /api/works/:workId/ratings/average - 400 for invalid ID
+POST /api/works 201 - 0ms
+GET /api/works/101/ratings/average 200 - 1ms
+  ✔ ratings_work_average › GET /api/works/:workId/ratings/average - 0 for no ratings
+POST /api/works/1/ratings 201 - 21ms
+  ✔ ratings_work_submit › POST /api/works/:workId/ratings - submits rating
+POST /api/works/1/ratings 201 - 1ms
+POST /api/works/1/ratings 400 - 1ms
+  ✔ ratings_work_submit › POST /api/works/:workId/ratings - 400 for invalid score
+  ✔ ratings_work_submit › POST /api/works/:workId/ratings - updates existing rating
+GET /api/works/1/ratings 200 - 1ms
+POST /api/works/999999/ratings 404 - 2ms
+  ✔ ratings_work_submit › POST /api/works/:workId/ratings - 404 for non-existent work
+GET /api/search 200 - 29ms
+  ✔ search_basic › GET /api/search - returns all without filters
+GET /api/search?query=lord 200 - 1ms
+  ✔ search_basic › GET /api/search - filters by query
+GET /api/search?query=nonexistentwork12345xyz 200 - 1ms
+  ✔ search_basic › GET /api/search - empty when no matches
+GET /api/search?item-type=work 200 - 10ms
+  ✔ search_basic › GET /api/search - item-type=work (110ms)
+GET /api/search?item-type=user 200 - 2ms
+GET /api/search?item-type=invalid 400 - 1ms
+  ✔ search_basic › GET /api/search - item-type=user (116ms)
+  ✔ search_basic › GET /api/search - 400 for invalid item-type (124ms)
+GET /api/search?item-type=WORK 200 - 14ms
+  ✔ search_basic › GET /api/search - case-insensitive item-type (140ms)
+GET /api/search?item-type=work&work-type=movie&genre=Action&rating=3.0 200 - 10ms
+  ✔ search_combined › GET /api/search - multiple filters
+GET /api/search?query=the&work-type=movie 200 - 4ms
+  ✔ search_combined › GET /api/search - query and work-type
+GET /api/search?query=action&item-type=work&work-type=movie&genre=Action&rating=3&year=2000 200 - 1ms
+  ✔ search_combined › GET /api/search - all filters combined
+GET /api/search?item-type=user&query=alice 200 - 3ms
+  ✔ search_combined › GET /api/search - user by username
+GET /api/search?item-type=work 200 - 7ms
+  ✔ search_combined › GET /api/search - work includes rating info (105ms)
+GET /api/search?item-type=user 200 - 2ms
+  ✔ search_combined › GET /api/search - user includes properties (110ms)
+GET /api/search 200 - 10ms
+  ✔ search_combined › GET /api/search - metadata counts match (126ms)
+GET /api/search?work-type=movie 200 - 7ms
+  ✔ search_filters › GET /api/search - work-type=movie
+GET /api/search?work-type=MOVIE 200 - 1ms
+  ✔ search_filters › GET /api/search - case-insensitive work-type
+GET /api/search?genre=Action 200 - 1ms
+  ✔ search_filters › GET /api/search - genre=Action
+GET /api/search?rating=4.0 200 - 5ms
+  ✔ search_filters › GET /api/search - rating=4.0
+GET /api/search?rating=4 200 - 5ms
+  ✔ search_filters › GET /api/search - rating as integer
+GET /api/search?rating=4.5 200 - 5ms
+  ✔ search_filters › GET /api/search - rating as decimal
+  ✔ search_filters › GET /api/search - 400 for invalid rating
+GET /api/search?rating=invalid 400 - 1ms
+GET /api/search?year=2020 200 - 1ms
+  ✔ search_filters › GET /api/search - year=2020
+GET /api/search?year=notayear 400 - 1ms
+  ✔ search_filters › GET /api/search - 400 for invalid year
+GET /api/shelves 200 - 4ms
+  ✔ shelf_list › GET /api/shelves - returns all shelves
+GET /api/shelves 200 - 1ms
+  ✔ shelf_list › GET /api/shelves - includes shelf properties
+GET /api/shelves/1 200 - 1ms
+  ✔ shelf_list › GET /api/shelves/:shelfId - returns shelf by ID
+GET /api/shelves/3 200 - 1ms
+  ✔ shelf_list › GET /api/shelves/:shelfId - returns another shelf by ID
+GET /api/shelves/999999 404 - 0ms
+  ✔ shelf_list › GET /api/shelves/:shelfId - 404 for non-existent shelf
+GET /api/shelves/invalid 400 - 1ms
+  ✔ shelf_list › GET /api/shelves/:shelfId - 400 for invalid ID format
+DELETE /api/shelves/999999 404 - 4ms
+  ✔ shelf_modify › DELETE /api/shelves/:shelfId - 404 for non-existent shelf
+PUT /api/shelves/1 200 - 1ms
+  ✔ shelf_modify › PUT /api/shelves/:shelfId - updates name
+PUT /api/shelves/1 200 - 0ms
+  ✔ shelf_modify › PUT /api/shelves/:shelfId - updates description
+PUT /api/shelves/2 200 - 1ms
+  ✔ shelf_modify › PUT /api/shelves/:shelfId - updates name and description
+PUT /api/shelves/1 400 - 0ms
+  ✔ shelf_modify › PUT /api/shelves/:shelfId - 400 for empty name
+PUT /api/shelves/1 400 - 1ms
+  ✔ shelf_modify › PUT /api/shelves/:shelfId - 400 for no fields
+PUT /api/shelves/999999 404 - 1ms
+  ✔ shelf_modify › PUT /api/shelves/:shelfId - 404 for non-existent shelf
+POST /api/users/1/shelves 200 - 2ms
+DELETE /api/shelves/21 204 - 1ms
+GET /api/shelves/21 404 - 0ms
+  ✔ shelf_modify › DELETE /api/shelves/:shelfId - deletes shelf
+GET /api/users/1/shelves 200 - 4ms
+  ✔ shelf_user › GET /api/users/:userId/shelves - returns user shelves
+GET /api/users/999999/shelves 200 - 1ms
+  ✔ shelf_user › GET /api/users/:userId/shelves - empty for non-existent user (mock mode)
+POST /api/users 201 - 1ms
+POST /api/users/1/shelves 200 - 1ms
+  ✔ shelf_user › POST /api/users/:userId/shelves - creates new shelf
+  ✔ shelf_user › GET /api/users/:userId/shelves - empty for user with no shelves
+GET /api/users/11/shelves 200 - 1ms
+POST /api/users/2/shelves 200 - 0ms
+  ✔ shelf_user › POST /api/users/:userId/shelves - creates shelf without description
+POST /api/users/3/shelves 200 - 1ms
+  ✔ shelf_user › POST /api/users/:userId/shelves - trims whitespace
+POST /api/users/1/shelves 400 - 1ms
+  ✔ shelf_user › POST /api/users/:userId/shelves - 400 for missing name
+POST /api/users/1/shelves 400 - 0ms
+  ✔ shelf_user › POST /api/users/:userId/shelves - 400 for empty name
+POST /api/shelves/1/works/1 200 - 5ms
+  ✔ shelf_works_add › POST add work - prevents duplicate works
+POST /api/shelves/999999/works/1 404 - 1ms
+POST /api/shelves/1/works/999999 200 - 3ms
+  ✔ shelf_works_add › POST add work - 404 for non-existent shelf
+  ✔ shelf_works_add › POST add work - accepts invalid work ID in mock mode
+POST /api/users/1/shelves 200 - 1ms
+POST /api/users/1/shelves 200 - 4ms
+POST /api/shelves/21/works/5 200 - 1ms
+  ✔ shelf_works_add › POST add work - adds work to shelf
+POST /api/shelves/22/works/10 200 - 1ms
+POST /api/shelves/22/works/15 200 - 0ms
+  ✔ shelf_works_add › POST add work - adds multiple works
+GET /api/shelves/1/works 200 - 4ms
+  ✔ shelf_works_list › GET /api/shelves/:shelfId/works - returns works in shelf
+GET /api/shelves/999999/works 404 - 0ms
+  ✔ shelf_works_list › GET /api/shelves/:shelfId/works - 404 for non-existent shelf
+GET /api/shelves/1/works?work-type=movie 200 - 1ms
+  ✔ shelf_works_list › GET /api/shelves/:shelfId/works - filter by work-type
+GET /api/shelves/3/works?genre=Action 200 - 0ms
+  ✔ shelf_works_list › GET /api/shelves/:shelfId/works - filter by genre
+GET /api/shelves/1/works?rating=4.0 200 - 1ms
+  ✔ shelf_works_list › GET /api/shelves/:shelfId/works - filter by rating
+  ✔ shelf_works_list › GET /api/shelves/:shelfId/works - filter by year
+GET /api/shelves/1/works?year=2020 200 - 0ms
+GET /api/shelves/3/works?work-type=movie&genre=Action&rating=4.0 200 - 1ms
+  ✔ shelf_works_list › GET /api/shelves/:shelfId/works - multiple filters combined
+GET /api/shelves/1/works?work-type=invalid&rating=invalid 200 - 1ms
+  ✔ shelf_works_list › GET /api/shelves/:shelfId/works - invalid filters return all works
+DELETE /api/shelves/1/works/999 200 - 4ms
+POST /api/users/1/shelves 200 - 2ms
+GET /api/shelves/21/works 200 - 1ms
+  ✔ shelf_works_list › GET /api/shelves/:shelfId/works - empty for shelf with no works
+  ✔ shelf_works_remove › DELETE remove work - no error if work not in shelf
+DELETE /api/shelves/999999/works/1 404 - 2ms
+  ✔ shelf_works_remove › DELETE remove work - 404 for non-existent shelf
+POST /api/users/1/shelves 200 - 2ms
+POST /api/users/1/shelves 200 - 3ms
+POST /api/shelves/21/works/20 200 - 0ms
+POST /api/users 201 - 3ms
+POST /api/shelves/22/works/25 200 - 1ms
+DELETE /api/shelves/21/works/20 200 - 0ms
+POST /api/users/11/shelves 200 - 0ms
+  ✔ shelf_works_remove › DELETE remove work - removes work from shelf
+POST /api/shelves/22/works/30 200 - 1ms
+POST /api/shelves/23/works/1 200 - 0ms
+POST /api/shelves/22/works/35 200 - 0ms
+POST /api/shelves/23/works/2 200 - 1ms
+DELETE /api/shelves/22/works/30 200 - 1ms
+  ✔ shelf_works_remove › DELETE remove work - removes only specified work
+POST /api/shelves/23/works/3 200 - 1ms
+GET /api/shelves/23/works 200 - 1ms
+PUT /api/shelves/23 200 - 1ms
+DELETE /api/shelves/23/works/2 200 - 0ms
+GET /api/shelves/23/works 200 - 0ms
+GET /api/users/11/shelves 200 - 0ms
+  ✔ shelf_works_remove › Integration - complex shelf operations work together (112ms)
+DELETE /api/users/999999 404 - 3ms
+  ✔ user_delete › DELETE /api/users/:userId - 404 for non-existent user
+POST /api/users 201 - 1ms
+DELETE /api/users/11 204 - 0ms
+GET /api/users/11 404 - 1ms
+  ✔ user_delete › DELETE /api/users/:userId - deletes user
+GET /api/users/1/followers 200 - 5ms
+  ✔ user_followers_list › GET /api/users/:userId/followers - returns followers list
+GET /api/users/8/followers 200 - 1ms
+  ✔ user_followers_list › GET /api/users/:userId/followers - empty for user with no followers
+GET /api/users/999999/followers 404 - 1ms
+POST /api/users 201 - 12ms
+  ✔ user_followers_list › GET /api/users/:userId/followers - 404 for non-existent user
+  ✔ user_create › POST /api/users - creates new user
+POST /api/users 201 - 4ms
+  ✔ user_create › POST /api/users - creates user with profile picture
+POST /api/users 400 - 1ms
+  ✔ user_create › POST /api/users - 400 for missing username
+POST /api/users 400 - 1ms
+  ✔ user_create › POST /api/users - 400 for missing email
+POST /api/users 400 - 1ms
+  ✔ user_create › POST /api/users - 400 for missing password
+POST /api/users 400 - 0ms
+  ✔ user_create › POST /api/users - 400 for duplicate username
+POST /api/users 400 - 1ms
+  ✔ user_create › POST /api/users - 400 for duplicate email
+GET /api/users 200 - 4ms
+  ✔ user_list › GET /api/users - returns all users
+GET /api/users 200 - 0ms
+  ✔ user_list › GET /api/users - includes user properties
+GET /api/users/1 200 - 1ms
+  ✔ user_list › GET /api/users/:userId - returns user by ID
+GET /api/users/2 200 - 1ms
+  ✔ user_list › GET /api/users/:userId - returns another user by ID
+GET /api/users/999999 404 - 0ms
+  ✔ user_list › GET /api/users/:userId - 404 for non-existent user
+GET /api/users/invalid 400 - 1ms
+  ✔ user_list › GET /api/users/:userId - 400 for invalid ID format
+POST /api/users 201 - 3ms
+POST /api/users 201 - 1ms
+POST /api/users/11/ratings 200 - 1ms
+POST /api/users 201 - 1ms
+  ✔ user_ratings_add › POST /api/users/:userId/ratings - adds new rating
+POST /api/users/12/ratings 200 - 1ms
+POST /api/users 201 - 0ms
+POST /api/users/13/ratings 200 - 1ms
+GET /api/users/1/ratings 200 - 8ms
+  ✔ user_ratings_add › POST /api/users/:userId/ratings - returns ratedAt timestamp
+POST /api/users/12/ratings 200 - 1ms
+Total works before filtering: 100
+GET /api/users/14/recommendations 200 - 4ms
+  ✔ user_ratings_add › POST /api/users/:userId/ratings - updates existing rating
+  ✔ user_ratings_list › GET /api/users/:userId/ratings - returns ratings for user
+GET /api/users/999999/ratings 404 - 1ms
+POST /api/users/14/ratings 200 - 1ms
+  ✔ user_ratings_list › GET /api/users/:userId/ratings - 404 for non-existent user
+POST /api/users 201 - 1ms
+Total works before filtering: 100
+GET /api/users/14/recommendations 200 - 8ms
+GET /api/users/11/ratings 200 - 0ms
+  ✔ user_ratings_list › GET /api/users/:userId/ratings - empty for user with no ratings
+  ✔ user_ratings_add › POST /api/users/:userId/ratings - updates recommendation version (116ms)
+POST /api/users/1/ratings 400 - 3ms
+  ✔ user_ratings_validation › POST /api/users/:userId/ratings - 400 for invalid score
+POST /api/users/1/ratings 400 - 1ms
+  ✔ user_ratings_validation › POST /api/users/:userId/ratings - 400 for missing workId
+POST /api/users/999999/ratings 404 - 1ms
+  ✔ user_ratings_validation › POST /api/users/:userId/ratings - 404 for non-existent user
+  - [skip] user_unfollow › DELETE unfollow - 404 for non-existent target
+POST /api/users/8/following/10 200 - 5ms
+DELETE /api/users/999999/following/1 404 - 1ms
+  ✔ user_unfollow › DELETE unfollow - 404 for non-existent user
+DELETE /api/users/8/following/10 200 - 1ms
+POST /api/users 201 - 1ms
+  ✔ user_unfollow › DELETE unfollow - successfully unfollows a user
+POST /api/users 201 - 0ms
+POST /api/users 201 - 0ms
+POST /api/users 201 - 1ms
+POST /api/users/11/following/13 200 - 1ms
+DELETE /api/users/12/following/14 400 - 0ms
+  ✔ user_unfollow › DELETE unfollow - 400 when not following
+POST /api/users 201 - 4ms
+DELETE /api/users/11/following/13 200 - 1ms
+GET /api/users/13/followers 200 - 1ms
+GET /api/users/11/following 200 - 0ms
+  ✔ user_unfollow › DELETE unfollow - removes from both lists
+POST /api/users 201 - 0ms
+PUT /api/users/11 200 - 2ms
+PUT /api/users/999999 404 - 1ms
+  ✔ user_update › PUT /api/users/:userId - updates username
+  ✔ user_update › PUT /api/users/:userId - 404 for non-existent user
+PUT /api/users/12 200 - 0ms
+POST /api/users 201 - 0ms
+  ✔ user_update › PUT /api/users/:userId - updates multiple fields
+PUT /api/users/13 400 - 1ms
+  ✔ user_update › PUT /api/users/:userId - 400 for duplicate username
+Total works before filtering: 100
+GET /api/users/1/recommendations 200 - 8ms
+  ✔ user_recommendations › GET /api/users/:userId/recommendations - returns recommendations
+Total works before filtering: 100
+GET /api/users/1/recommendations 200 - 3ms
+  ✔ user_recommendations › GET /api/users/:userId/recommendations - verifies structure
+Total works before filtering: 100
+GET /api/users/1/recommendations 200 - 3ms
+  ✔ user_recommendations › GET /api/users/:userId/recommendations - returns correct count
+GET /api/users/999999/recommendations 404 - 1ms
+  ✔ user_recommendations › GET /api/users/:userId/recommendations - 404 for non-existent user
+POST /api/users 201 - 1ms
+Total works before filtering: 100
+GET /api/users/11/recommendations 200 - 3ms
+  ✔ user_recommendations › GET /api/users/:userId/recommendations - cold start works
+POST /api/works 201 - 4ms
+  ✔ work_create › POST /api/works - creates new work
+POST /api/works 201 - 1ms
+  ✔ work_create › POST /api/works - creates with minimal fields
+POST /api/works 400 - 1ms
+  ✔ work_create › POST /api/works - 400 for missing fields
+Filters applied: {}
+Total works before filtering: 100
+GET /api/works 200 - 9ms
+  ✔ work_list › GET /api/works - returns all works
+Filters applied: { type: 'movie' }
+Total works before filtering: 100
+Filtering by type: movie
+Works after type filter: 30
+GET /api/works?type=movie 200 - 2ms
+  ✔ work_list › GET /api/works - filters by type
+GET /api/works/popular 200 - 9ms
+Filters applied: {}
+Total works before filtering: 100
+GET /api/works?invalidparam=something 200 - 4ms
+  ✔ work_list › GET /api/works - ignores invalid filter
+  ✔ work_related › GET /api/works/popular - returns popular works
+GET /api/works/1 200 - 1ms
+  ✔ work_list › GET /api/works/:workId - returns work by ID
+DELETE /api/works/999999 404 - 4ms
+GET /api/works/2 200 - 1ms
+  ✔ work_list › GET /api/works/:workId - returns another work
+GET /api/works/999999 404 - 1ms
+GET /api/works/popular 200 - 7ms
+  ✔ work_related › GET /api/works/popular - respects limit
+  ✔ work_list › GET /api/works/:workId - 404 for non-existent work
+  ✔ work_modify › DELETE /api/works/:workId - 404 for non-existent work
+GET /api/works/1/similar 200 - 2ms
+  ✔ work_related › GET /api/works/:workId/similar - returns similar works
+GET /api/works/4/similar 200 - 1ms
+GET /api/works/999999/similar 404 - 1ms
+  ✔ work_related › GET /api/works/:workId/similar - works for music
+  ✔ work_related › GET /api/works/:workId/similar - 404 for non-existent work
+POST /api/works 201 - 1ms
+POST /api/works 201 - 1ms
+PUT /api/works/101 200 - 1ms
+PUT /api/works/999999 404 - 0ms
+  ✔ work_modify › PUT /api/works/:workId - updates work
+PUT /api/works/102 200 - 0ms
+  ✔ work_modify › PUT /api/works/:workId - 404 for non-existent work
+POST /api/works 201 - 1ms
+  ✔ work_modify › PUT /api/works/:workId - updates multiple fields
+POST /api/works 201 - 1ms
+DELETE /api/works/103 204 - 0ms
+DELETE /api/works/104 204 - 1ms
+  ✔ work_modify › DELETE /api/works/:workId - deletes another work
+  ✔ work_modify › DELETE /api/works/:workId - deletes work
+GET /api/works/103 404 - 0ms
+  ─
+
+  163 tests passed
+  7 tests skipped
+---------------------------------|---------|----------|---------|---------|-------------------------
+File                             | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s       
+---------------------------------|---------|----------|---------|---------|-------------------------
+All files                        |   98.28 |    87.54 |   86.36 |   98.28 |                         
+ syncfully-backend               |   94.62 |      100 |     100 |   94.62 |                         
+  app.js                         |   94.62 |      100 |     100 |   94.62 | 66-70                   
+ syncfully-backend/config        |     100 |      100 |     100 |     100 |                         
+  constants.js                   |     100 |      100 |     100 |     100 |                         
+ syncfully-backend/controllers   |   92.07 |    83.73 |     100 |   92.07 |                         
+  authController.js              |    78.5 |    71.42 |     100 |    78.5 | ...,66-72,76-82,105-106 
+  ratingController.js            |   96.87 |    86.36 |     100 |   96.87 | 56-57,70-71             
+  searchController.js            |     100 |    76.47 |     100 |     100 | 65-68                   
+  shelfController.js             |    94.5 |    95.12 |     100 |    94.5 | 49-53,102-106           
+  userController.js              |   90.55 |    77.77 |     100 |   90.55 | ...-243,263-264,284-285 
+  workController.js              |   94.01 |    88.88 |     100 |   94.01 | 38-39,43-47             
+ syncfully-backend/data          |     100 |      100 |     100 |     100 |                         
+  mockRatings.js                 |     100 |      100 |     100 |     100 |                         
+  mockShelves.js                 |     100 |      100 |     100 |     100 |                         
+  mockUsers.js                   |     100 |      100 |     100 |     100 |                         
+  mockWorks.js                   |     100 |      100 |     100 |     100 |                         
+ syncfully-backend/middleware    |   73.04 |      100 |      60 |   73.04 |                         
+  errorHandler.js                |    41.5 |      100 |       0 |    41.5 | 14-43,52                
+  logger.js                      |     100 |      100 |     100 |     100 |                         
+  validation.js                  |     100 |      100 |     100 |     100 |                         
+ syncfully-backend/routes        |     100 |      100 |     100 |     100 |                         
+  authRoutes.js                  |     100 |      100 |     100 |     100 |                         
+  index.js                       |     100 |      100 |     100 |     100 |                         
+  ratingRoutes.js                |     100 |      100 |     100 |     100 |                         
+  searchRoutes.js                |     100 |      100 |     100 |     100 |                         
+  shelfRoutes.js                 |     100 |      100 |     100 |     100 |                         
+  userRoutes.js                  |     100 |      100 |     100 |     100 |                         
+  workRoutes.js                  |     100 |      100 |     100 |     100 |                         
+ syncfully-backend/services      |   98.51 |    92.61 |     100 |   98.51 |                         
+  ratingService.js               |     100 |    96.96 |     100 |     100 | 67                      
+  searchService.js               |     100 |    83.72 |     100 |     100 | 84-86,133-134,140       
+  shelfService.js                |     100 |      100 |     100 |     100 |                         
+  userService.js                 |     100 |      100 |     100 |     100 |                         
+  workService.js                 |   93.16 |    91.89 |     100 |   93.16 | 53-57,61-66             
+ syncfully-backend/services/user |   97.74 |    91.66 |     100 |   97.74 |                         
+  userFollowService.js           |    97.1 |    95.55 |     100 |    97.1 | 82-83,122-123           
+  userRatingService.js           |     100 |      100 |     100 |     100 |                         
+  userService.js                 |   97.61 |    86.79 |     100 |   97.61 | 103-104,121-123         
+ syncfully-backend/utils         |    88.4 |       70 |   62.96 |    88.4 |                         
+  catchAsync.js                  |     100 |      100 |     100 |     100 |                         
+  helpers.js                     |   92.01 |       92 |   66.66 |   92.01 | 39,81-82,86-87,109-120  
+  imageHelpers.js                |   60.86 |       40 |   33.33 |   60.86 | 5,14-26,42-45           
+  logger.js                      |   82.81 |       75 |   28.57 |   82.81 | 23-25,33-35,43-45,54,63 
+  responses.js                   |     100 |      100 |     100 |     100 |                         
+  validators.js                  |   90.42 |    36.84 |     100 |   90.42 | ...-171,178-179,184-185 
+---------------------------------|---------|----------|---------|---------|-------------------------
