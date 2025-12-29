@@ -46,7 +46,7 @@ export const login = catchAsync(async (req, res) => {
  * @route POST /api/auth/signup
  * @body { username, email, password, profilePictureUrl? }
  */
-export const signup = catchAsync(async (req, res, next) => {
+export const signup = catchAsync(async (req, res) => {
   const { username, email, password, profilePictureUrl } = req.body;
 
   // Validate user data structure

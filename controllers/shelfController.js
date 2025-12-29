@@ -29,7 +29,7 @@ export const getUserShelves = catchAsync(async (req, res) => {
  * Create a new shelf for a user
  * @route POST /api/users/:userId/shelves
  */
-export const createShelf = catchAsync(async (req, res, next) => {
+export const createShelf = catchAsync(async (req, res) => {
     const { userId } = req.params;
     const { name, description } = req.body;
 
@@ -72,7 +72,7 @@ export const getShelfById = catchAsync(async (req, res) => {
  * Update a specific shelf
  * @route PUT /api/shelves/:shelfId
  */
-export const updateShelf = catchAsync(async (req, res, next) => {
+export const updateShelf = catchAsync(async (req, res) => {
     const { shelfId } = req.params;
     const { name, description } = req.body;
 
