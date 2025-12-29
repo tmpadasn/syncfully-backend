@@ -15,50 +15,55 @@ import { catchAsync } from '../utils/catchAsync.js';
  * - rating: number (minimum average rating)
  * - year: integer
  */
-export const searchItems = catchAsync(async (req, res) => {
+const extractAndValidateParams = (req) => {
     const { query, genre } = req.query;
-
     const itemType = req.query['item-type'];
     const workType = req.query['work-type'];
 
     const allowedItemTypes = ['user', 'work']; // shelves not supported
 
     if (itemType && !allowedItemTypes.includes(itemType.toLowerCase())) {
-        return sendError(
-            res,
-            HTTP_STATUS.BAD_REQUEST,
-            `Invalid item-type. Allowed values: ${allowedItemTypes.join(', ')}`
-        );
+        return {
+            error: `Invalid item-type. Allowed values: ${allowedItemTypes.join(', ')}`
+        };
     }
 
     // rating (min average rating)
     const minRating = parseQueryFloat(req.query.rating);
     if (req.query.rating && minRating === null) {
-        return sendError(
-            res,
-            HTTP_STATUS.BAD_REQUEST,
-            'Invalid rating parameter. Must be a number.'
-        );
+        return {
+            error: 'Invalid rating parameter. Must be a number.'
+        };
     }
 
     // year
     const year = parseQueryInt(req.query.year);
     if (req.query.year && year === null) {
-        return sendError(
-            res,
-            HTTP_STATUS.BAD_REQUEST,
-            'Invalid year parameter. Must be an integer.'
-        );
+        return {
+            error: 'Invalid year parameter. Must be an integer.'
+        };
     }
 
-    const result = await searchService.searchItems({
-        query,
-        itemType,
-        workType,
-        genre,
-        minRating,
-        year
-    });
+    return {
+        params: {
+            query,
+            itemType,
+            workType,
+            genre,
+            minRating,
+            year
+        }
+    };
+};
+
+export const searchItems = catchAsync(async (req, res) => {
+    const { params, error } = extractAndValidateParams(req);
+
+    if (error) {
+        return sendError(res, HTTP_STATUS.BAD_REQUEST, error);
+    }
+
+    const result = await searchService.searchItems(params);
 
     // Include metadata in the data object for consistency
     const responseData = {
