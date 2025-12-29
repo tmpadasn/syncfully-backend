@@ -7,6 +7,7 @@ import { parseQueryInt, parseQueryFloat } from '../utils/helpers.js';
  * Get all shelves (across all users)
  * @route GET /api/shelves
  */
+// eslint-disable-next-line no-unused-vars
 export const getAllShelves = async (_req, res, next) => {
     try {
         const shelves = await shelfService.getAllShelves();
