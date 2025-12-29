@@ -15,65 +15,87 @@ import { catchAsync } from '../utils/catchAsync.js';
  * - rating: number (minimum average rating)
  * - year: integer
  */
-const extractAndValidateParams = (req) => {
+const ALLOWED_ITEM_TYPES = ['user', 'work'];
+
+/**
+ * Validates the item-type query parameter.
+ * @returns {string|null} Error message or null if valid.
+ */
+const validateItemType = (itemType) => {
+    if (itemType && !ALLOWED_ITEM_TYPES.includes(itemType.toLowerCase())) {
+        return `Invalid item-type. Allowed values: ${ALLOWED_ITEM_TYPES.join(', ')}`;
+    }
+    return null;
+};
+
+/**
+ * Validates and parses the rating query parameter.
+ * @returns {{ value: number|null, error: string|null }}
+ */
+const validateRating = (ratingParam) => {
+    if (!ratingParam) {
+        return { value: null, error: null };
+    }
+    const minRating = parseQueryFloat(ratingParam);
+    if (minRating === null) {
+        return { value: null, error: 'Invalid rating parameter. Must be a number.' };
+    }
+    return { value: minRating, error: null };
+};
+
+/**
+ * Validates and parses the year query parameter.
+ * @returns {{ value: number|null, error: string|null }}
+ */
+const validateYear = (yearParam) => {
+    if (!yearParam) {
+        return { value: null, error: null };
+    }
+    const year = parseQueryInt(yearParam);
+    if (year === null) {
+        return { value: null, error: 'Invalid year parameter. Must be an integer.' };
+    }
+    return { value: year, error: null };
+};
+
+/**
+ * Builds the response data object from search results.
+ */
+const buildResponseData = (result) => ({
+    works: result.works || [],
+    users: result.users || [],
+    totalWorks: result.works?.length ?? 0,
+    totalUsers: result.users?.length ?? 0
+});
+
+export const searchItems = catchAsync(async (req, res) => {
     const { query, genre } = req.query;
     const itemType = req.query['item-type'];
     const workType = req.query['work-type'];
 
-    const allowedItemTypes = ['user', 'work']; // shelves not supported
-
-    if (itemType && !allowedItemTypes.includes(itemType.toLowerCase())) {
-        return {
-            error: `Invalid item-type. Allowed values: ${allowedItemTypes.join(', ')}`
-        };
+    // Validate item-type
+    const itemTypeError = validateItemType(itemType);
+    if (itemTypeError) {
+        return sendError(res, HTTP_STATUS.BAD_REQUEST, itemTypeError);
     }
 
-    // rating (min average rating)
-    const minRating = parseQueryFloat(req.query.rating);
-    if (req.query.rating && minRating === null) {
-        return {
-            error: 'Invalid rating parameter. Must be a number.'
-        };
+    // Validate rating
+    const { value: minRating, error: ratingError } = validateRating(req.query.rating);
+    if (ratingError) {
+        return sendError(res, HTTP_STATUS.BAD_REQUEST, ratingError);
     }
 
-    // year
-    const year = parseQueryInt(req.query.year);
-    if (req.query.year && year === null) {
-        return {
-            error: 'Invalid year parameter. Must be an integer.'
-        };
+    // Validate year
+    const { value: year, error: yearError } = validateYear(req.query.year);
+    if (yearError) {
+        return sendError(res, HTTP_STATUS.BAD_REQUEST, yearError);
     }
 
-    return {
-        params: {
-            query,
-            itemType,
-            workType,
-            genre,
-            minRating,
-            year
-        }
-    };
-};
+    const result = await searchService.searchItems({
+        query, itemType, workType, genre, minRating, year
+    });
 
-export const searchItems = catchAsync(async (req, res) => {
-    const { params, error } = extractAndValidateParams(req);
-
-    if (error) {
-        return sendError(res, HTTP_STATUS.BAD_REQUEST, error);
-    }
-
-    const result = await searchService.searchItems(params);
-
-    // Include metadata in the data object for consistency
-    const responseData = {
-        works: result.works || [],
-        users: result.users || [],
-        totalWorks: result.works?.length ?? 0,
-        totalUsers: result.users?.length ?? 0
-    };
-
-    sendSuccess(res, HTTP_STATUS.OK, responseData, 'Search completed successfully');
+    sendSuccess(res, HTTP_STATUS.OK, buildResponseData(result), 'Search completed successfully');
 });
 
 export default {
