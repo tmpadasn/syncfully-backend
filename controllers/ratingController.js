@@ -47,7 +47,7 @@ export const getWorkRatings = catchAsync(async (req, res) => {
  * Create or update a rating for a work
  * @route POST /api/works/:workId/ratings
  */
-export const createWorkRating = catchAsync(async (req, res, next) => {
+export const createWorkRating = catchAsync(async (req, res) => {
     const { workId } = req.params;
     const { userId, score } = req.body;
 

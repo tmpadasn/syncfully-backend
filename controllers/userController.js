@@ -34,7 +34,7 @@ export const getUserById = catchAsync(async (req, res) => {
  * Create new user
  * @route POST /api/users
  */
-export const createUser = catchAsync(async (req, res, next) => {
+export const createUser = catchAsync(async (req, res) => {
   const { username, email, password, profilePictureUrl } = req.body;
 
   // Validate username
@@ -75,7 +75,7 @@ export const createUser = catchAsync(async (req, res, next) => {
  * Update user
  * @route PUT /api/users/:userId
  */
-export const updateUser = catchAsync(async (req, res, next) => {
+export const updateUser = catchAsync(async (req, res) => {
   const { userId } = req.params;
   const { username, email, password, profilePictureUrl } = req.body;
 
@@ -211,7 +211,7 @@ export const getUserRecommendations = catchAsync(async (req, res) => {
  * Get users that a user is following
  * @route GET /api/users/:userId/following
  */
-export const getUserFollowing = catchAsync(async (req, res, next) => {
+export const getUserFollowing = catchAsync(async (req, res) => {
   const { userId } = req.params;
 
   try {
@@ -229,7 +229,7 @@ export const getUserFollowing = catchAsync(async (req, res, next) => {
  * Get users that follow a user
  * @route GET /api/users/:userId/followers
  */
-export const getUserFollowers = catchAsync(async (req, res, next) => {
+export const getUserFollowers = catchAsync(async (req, res) => {
   const { userId } = req.params;
 
   try {
@@ -247,7 +247,7 @@ export const getUserFollowers = catchAsync(async (req, res, next) => {
  * Follow a user
  * @route POST /api/users/:userId/following/:targetUserId
  */
-export const followUser = catchAsync(async (req, res, next) => {
+export const followUser = catchAsync(async (req, res) => {
   const { userId, targetUserId } = req.params;
 
   try {
@@ -268,7 +268,7 @@ export const followUser = catchAsync(async (req, res, next) => {
  * Unfollow a user
  * @route DELETE /api/users/:userId/following/:targetUserId
  */
-export const unfollowUser = catchAsync(async (req, res, next) => {
+export const unfollowUser = catchAsync(async (req, res) => {
   const { userId, targetUserId } = req.params;
 
   try {
