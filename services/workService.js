@@ -3,7 +3,7 @@ import { mockRatings } from '../data/mockRatings.js';
 import { calculateAverageRating, enrichWorkWithRating, safeParseInt } from '../utils/helpers.js';
 import { buildImageUrl } from '../utils/imageHelpers.js';
 import { devLog } from '../utils/logger.js';
-import { getWorkAverageRating } from './ratingService.js';
+
 import { QUERY_LIMITS } from '../config/constants.js';
 
 /**
@@ -12,8 +12,8 @@ import { QUERY_LIMITS } from '../config/constants.js';
  * @returns {Object|null} Work object or null
  */
 const findMockWorkById = (workId) => {
-  const parsedId = safeParseInt(workId, 'workId');
-  return mockWorks.find(w => w.id === parsedId) || null;
+    const parsedId = safeParseInt(workId, 'workId');
+    return mockWorks.find(w => w.id === parsedId) || null;
 };
 
 /**

@@ -6,17 +6,17 @@
  * @returns {Function} Transform function for toJSON
  */
 export const createToJSONTransform = (idField, fieldsToDelete = []) => {
-    return function (doc, ret) {
+    return function (_doc, ret) {
         // Rename _id to custom field
         ret[idField] = ret._id;
         delete ret._id;
         delete ret.__v;
-        
+
         // Delete additional fields
         fieldsToDelete.forEach(field => {
             delete ret[field];
         });
-        
+
         return ret;
     };
 };
@@ -32,10 +32,10 @@ export const createToJSONOptions = (idField, fieldsToDelete = [], includeVirtual
     const options = {
         transform: createToJSONTransform(idField, fieldsToDelete)
     };
-    
+
     if (includeVirtuals) {
         options.virtuals = true;
     }
-    
+
     return options;
 };

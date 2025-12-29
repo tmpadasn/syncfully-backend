@@ -7,7 +7,7 @@ import { sendError } from '../utils/responses.js';
  * @param {Object} res - Express response object
  * @param {Function} next - Express next middleware function
  */
-export const authenticate = (req, res, next) => {
+export const authenticate = (_req, _res, next) => {
     // For now, we'll allow all requests
     // In production, implement JWT verification here
     next();
