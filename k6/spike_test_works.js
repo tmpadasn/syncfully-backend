@@ -1,3 +1,4 @@
+/* global __ENV */
 import http from 'k6/http';
 import { sleep } from 'k6';
 
@@ -18,8 +19,8 @@ export let options = {
         { duration: '2m', target: 200 },
     ],
     thresholds: {
-    http_req_failed: [{ threshold: 'rate<0.001', abortOnFail: true}],
-    http_req_duration: [{ threshold: 'p(95)<500', abortOnFail: true}],
+        http_req_failed: [{ threshold: 'rate<0.001', abortOnFail: true }],
+        http_req_duration: [{ threshold: 'p(95)<500', abortOnFail: true }],
     },
 };
 

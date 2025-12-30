@@ -7,8 +7,8 @@ import { safeParseInt } from '../utils/helpers.js';
  * @returns {Object|null} Shelf object or null
  */
 const findMockShelfById = (shelfId) => {
-  const parsedId = safeParseInt(shelfId, 'shelfId');
-  return mockShelves.find(s => s.id === parsedId) || null;
+    const parsedId = safeParseInt(shelfId, 'shelfId');
+    return mockShelves.find(s => s.id === parsedId) || null;
 };
 
 /**
@@ -17,15 +17,15 @@ const findMockShelfById = (shelfId) => {
  * @returns {Object} Formatted shelf data
  */
 const formatShelfData = (shelf) => {
-  return {
-    shelfId: shelf.id,
-    userId: shelf.userId,
-    name: shelf.name,
-    description: shelf.description,
-    works: shelf.works,
-    createdAt: shelf.createdAt,
-    updatedAt: shelf.updatedAt
-  };
+    return {
+        shelfId: shelf.id,
+        userId: shelf.userId,
+        name: shelf.name,
+        description: shelf.description,
+        works: shelf.works,
+        createdAt: shelf.createdAt,
+        updatedAt: shelf.updatedAt
+    };
 };
 
 /**
@@ -118,7 +118,7 @@ export const deleteShelf = async (shelfId) => {
  * @param {Object} filters - Filter options (workType, genre, rating, year)
  * @returns {Promise<Object|null>}
  */
-export const getShelfWorks = async (shelfId, filters = {}) => {
+export const getShelfWorks = async (shelfId) => {
     const shelf = findMockShelfById(shelfId);
     if (!shelf) return null;
 
