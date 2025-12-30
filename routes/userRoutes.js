@@ -7,7 +7,9 @@
  */
 
 import express from 'express';
-import * as userController from '../controllers/userController.js';
+import * as userCrudController from '../controllers/userCrudController.js';
+import * as userRatingsController from '../controllers/userRatingsController.js';
+import * as userSocialController from '../controllers/userSocialController.js';
 import * as shelfController from '../controllers/shelfController.js';
 import { validateRequiredFields, validateIdParam } from '../middleware/validation.js';
 
@@ -27,7 +29,7 @@ const router = express.Router();
  * @access  Public
  * @returns {Array} 200 - Array of user objects
  */
-router.get('/', userController.getAllUsers);
+router.get('/', userCrudController.getAllUsers);
 
 /**
  * Create User
@@ -48,7 +50,7 @@ router.get('/', userController.getAllUsers);
 router.post(
     '/',
     validateRequiredFields(['username', 'email', 'password']),
-    userController.createUser
+    userCrudController.createUser
 );
 
 /**
@@ -67,7 +69,7 @@ router.post(
 router.get(
     '/:userId',
     validateIdParam('userId'),
-    userController.getUserById
+    userCrudController.getUserById
 );
 
 /**
@@ -90,7 +92,7 @@ router.get(
 router.put(
     '/:userId',
     validateIdParam('userId'),
-    userController.updateUser
+    userCrudController.updateUser
 );
 
 /**
@@ -108,7 +110,7 @@ router.put(
 router.delete(
     '/:userId',
     validateIdParam('userId'),
-    userController.deleteUser
+    userCrudController.deleteUser
 );
 
 // ============================================================================
@@ -130,7 +132,7 @@ router.delete(
 router.get(
     '/:userId/ratings',
     validateIdParam('userId'),
-    userController.getUserRatings
+    userRatingsController.getUserRatings
 );
 
 /**
@@ -152,7 +154,7 @@ router.post(
     '/:userId/ratings',
     validateIdParam('userId'),
     validateRequiredFields(['workId', 'score']),
-    userController.addUserRating
+    userRatingsController.addUserRating
 );
 
 // ============================================================================
@@ -174,7 +176,7 @@ router.post(
 router.get(
     '/:userId/recommendations',
     validateIdParam('userId'),
-    userController.getUserRecommendations
+    userRatingsController.getUserRecommendations
 );
 
 // ============================================================================
@@ -237,7 +239,7 @@ router.post(
  * @returns {Array} 200 - Array of user objects
  * @returns {Object} 404 - User not found
  */
-router.get('/:userId/following', userController.getUserFollowing);
+router.get('/:userId/following', userSocialController.getUserFollowing);
 
 /**
  * Get Followers List
@@ -251,7 +253,7 @@ router.get('/:userId/following', userController.getUserFollowing);
  * @returns {Array} 200 - Array of user objects
  * @returns {Object} 404 - User not found
  */
-router.get('/:userId/followers', userController.getUserFollowers);
+router.get('/:userId/followers', userSocialController.getUserFollowers);
 
 /**
  * Follow User
@@ -268,7 +270,7 @@ router.get('/:userId/followers', userController.getUserFollowers);
  * @returns {Object} 404 - User or target user not found
  * @returns {Object} 400 - Cannot follow self or already following
  */
-router.post('/:userId/following/:targetUserId', userController.followUser);
+router.post('/:userId/following/:targetUserId', userSocialController.followUser);
 
 /**
  * Unfollow User
@@ -285,6 +287,6 @@ router.post('/:userId/following/:targetUserId', userController.followUser);
  * @returns {Object} 404 - User or target user not found
  * @returns {Object} 400 - Not currently following this user
  */
-router.delete('/:userId/following/:targetUserId', userController.unfollowUser);
+router.delete('/:userId/following/:targetUserId', userSocialController.unfollowUser);
 
 export default router;
