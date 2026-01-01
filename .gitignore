@@ -1,6 +1,6 @@
 node_modules/
 scripts/
-.env
+.env*
 *.log
 .DS_Store
 coverage/
