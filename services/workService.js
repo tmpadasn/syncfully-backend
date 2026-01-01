@@ -2,8 +2,6 @@ import { mockWorks, getNextWorkId } from '../data/mockWorks.js';
 import { mockRatings } from '../data/mockRatings.js';
 import { enrichWorkWithRating, safeParseInt } from '../utils/helpers.js';
 import { buildImageUrl } from '../utils/imageHelpers.js';
-import { devLog } from '../utils/logger.js';
-
 import { QUERY_LIMITS } from '../config/constants.js';
 
 /**
