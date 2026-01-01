@@ -16,7 +16,8 @@ export const errorHandler = (err, _req, res, next) => {
     }
 
     if (err instanceof ValidationError) {
-        return sendError(res, err.statusCode, err.message, err.errors);
+        const errorField = err.errors && err.errors.length > 0 ? err.errors : undefined;
+        return sendError(res, err.statusCode, err.message, errorField);
     }
 
     if (err instanceof UserExistsError || err instanceof AuthenticationError) {
