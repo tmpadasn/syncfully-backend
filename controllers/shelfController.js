@@ -1,3 +1,26 @@
+/**
+ * @fileoverview Shelf Controller
+ * @description Handles CRUD operations for user shelves (collections).
+ *
+ * Shelves are user-created collections for organizing works (like playlists).
+ * Examples: "To Watch", "Favorites", "Summer Reading List"
+ *
+ * Routes handled:
+ *   GET    /api/shelves                    - List all shelves (admin)
+ *   GET    /api/shelves/:shelfId           - Get shelf by ID
+ *   PUT    /api/shelves/:shelfId           - Update shelf
+ *   DELETE /api/shelves/:shelfId           - Delete shelf
+ *   GET    /api/shelves/:shelfId/works     - Get works in shelf (with filters)
+ *   POST   /api/shelves/:shelfId/works/:workId  - Add work to shelf
+ *   DELETE /api/shelves/:shelfId/works/:workId  - Remove work from shelf
+ *   GET    /api/users/:userId/shelves      - Get user's shelves
+ *   POST   /api/users/:userId/shelves      - Create shelf for user
+ *
+ * @module controllers/shelfController
+ * @see services/shelfService - Business logic for shelves
+ * @see models/Shelf - Shelf data model
+ */
+
 import * as shelfService from '../services/shelfService.js';
 import { sendSuccess, sendError } from '../utils/responses.js';
 import { HTTP_STATUS } from '../config/constants.js';

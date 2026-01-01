@@ -1,3 +1,25 @@
+/**
+ * @fileoverview Work Controller
+ * @description Handles CRUD operations and discovery features for media works.
+ *
+ * This controller manages movies, books, music, series, and graphic novels.
+ * It provides endpoints for listing, filtering, creating, updating, and
+ * deleting works, as well as finding similar and popular content.
+ *
+ * Routes handled:
+ *   GET    /api/works           - List all works (with filters)
+ *   POST   /api/works           - Create new work
+ *   GET    /api/works/:workId   - Get work by ID
+ *   PUT    /api/works/:workId   - Update work
+ *   DELETE /api/works/:workId   - Delete work
+ *   GET    /api/works/popular   - Get popular works
+ *   GET    /api/works/:workId/similar - Get similar works
+ *
+ * @module controllers/workController
+ * @see services/workService - Business logic for works
+ * @see models/Work - Work data model
+ */
+
 import * as workService from '../services/workService.js';
 import { sendSuccess, sendError } from '../utils/responses.js';
 import { HTTP_STATUS } from '../config/constants.js';

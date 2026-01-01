@@ -1,3 +1,24 @@
+/**
+ * @fileoverview Rating Controller
+ * @description Handles rating operations for works.
+ *
+ * Ratings allow users to score works from 1-5 stars.
+ * Each user can have one rating per work (upsert behavior).
+ *
+ * Routes handled:
+ *   GET    /api/ratings                    - List all ratings (admin)
+ *   GET    /api/ratings/:ratingId          - Get rating by ID
+ *   PUT    /api/ratings/:ratingId          - Update rating
+ *   DELETE /api/ratings/:ratingId          - Delete rating
+ *   GET    /api/works/:workId/ratings      - Get ratings for work
+ *   POST   /api/works/:workId/ratings      - Submit rating for work
+ *   GET    /api/works/:workId/ratings/average - Get average rating
+ *
+ * @module controllers/ratingController
+ * @see services/ratingService - Business logic for ratings
+ * @see models/Rating - Rating data model
+ */
+
 import * as ratingService from '../services/ratingService.js';
 import { sendSuccess, sendError } from '../utils/responses.js';
 import { HTTP_STATUS } from '../config/constants.js';
