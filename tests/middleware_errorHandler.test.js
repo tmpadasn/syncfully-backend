@@ -1,3 +1,8 @@
+/**
+ * Error Handler Middleware Tests
+ * Tests all error types handled by errorHandler and notFoundHandler
+ * Coverage: custom errors, JWT errors, generic errors, 404 handler
+ */
 import test from 'ava';
 import got from 'got';
 import listen from 'test-listen';
@@ -12,9 +17,11 @@ const createTestApp = () => {
   return app;
 };
 
+// Setup test server with routes that trigger different error types
 test.before(async (t) => {
   const app = createTestApp();
 
+  // Custom error class routes
   app.get('/not-found-error', () => {
     throw new NotFoundError('Resource not found');
   });
@@ -23,6 +30,7 @@ test.before(async (t) => {
     throw new ValidationError('Validation failed', ['Field 1 is required', 'Field 2 is invalid']);
   });
 
+  // Edge case: empty errors array should return undefined
   app.get('/validation-error-empty', () => {
     throw new ValidationError('Validation failed', []);
   });
@@ -35,6 +43,7 @@ test.before(async (t) => {
     throw new AuthenticationError('Invalid credentials');
   });
 
+  // JWT error routes - simulate JWT library errors
   app.get('/jwt-invalid', () => {
     const err = new Error('Invalid token');
     err.name = 'JsonWebTokenError';
@@ -47,6 +56,7 @@ test.before(async (t) => {
     throw err;
   });
 
+  // Generic error fallback
   app.get('/generic-error', () => {
     throw new Error('Unexpected error');
   });
@@ -63,10 +73,12 @@ test.before(async (t) => {
   });
 });
 
+// Cleanup server after all tests
 test.after.always((t) => {
   t.context.server.close();
 });
 
+// Custom error class tests
 test('errorHandler - handles NotFoundError', async (t) => {
   const { body, statusCode } = await t.context.got.get('not-found-error');
   t.is(statusCode, 404);
@@ -105,6 +117,7 @@ test('errorHandler - handles AuthenticationError', async (t) => {
   t.is(body.message, 'Invalid credentials');
 });
 
+// JWT error tests
 test('errorHandler - handles JWT JsonWebTokenError', async (t) => {
   const { body, statusCode } = await t.context.got.get('jwt-invalid');
   t.is(statusCode, 401);
@@ -119,6 +132,7 @@ test('errorHandler - handles JWT TokenExpiredError', async (t) => {
   t.is(body.message, 'Token expired');
 });
 
+// Default error handler test
 test('errorHandler - handles generic error with 500', async (t) => {
   const { body, statusCode } = await t.context.got.get('generic-error');
   t.is(statusCode, 500);
@@ -126,6 +140,7 @@ test('errorHandler - handles generic error with 500', async (t) => {
   t.is(body.message, 'Internal server error');
 });
 
+// 404 handler test
 test('notFoundHandler - returns 404 for non-existent route', async (t) => {
   const { body, statusCode } = await t.context.got.get('non-existent-route');
   t.is(statusCode, 404);
