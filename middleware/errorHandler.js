@@ -24,23 +24,6 @@ export const errorHandler = (err, _req, res, next) => {
         return sendError(res, err.statusCode, err.message);
     }
 
-    // Mongoose validation error
-    if (err.name === 'ValidationError') {
-        const errors = Object.values(err.errors).map(e => e.message);
-        return sendError(res, HTTP_STATUS.BAD_REQUEST, 'Validation error', errors);
-    }
-
-    // Mongoose duplicate key error
-    if (err.code === 11000) {
-        const field = Object.keys(err.keyPattern)[0];
-        return sendError(res, HTTP_STATUS.BAD_REQUEST, `${field} already exists`);
-    }
-
-    // Mongoose cast error
-    if (err.name === 'CastError') {
-        return sendError(res, HTTP_STATUS.BAD_REQUEST, 'Invalid ID format');
-    }
-
     // JWT errors
     if (err.name === 'JsonWebTokenError') {
         return sendError(res, HTTP_STATUS.UNAUTHORIZED, 'Invalid token');
