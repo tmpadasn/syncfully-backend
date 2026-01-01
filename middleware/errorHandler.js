@@ -1,17 +1,27 @@
 import { HTTP_STATUS } from '../config/constants.js';
 import { sendError } from '../utils/responses.js';
 import { prodError } from '../utils/logger.js';
+import { NotFoundError, ValidationError, UserExistsError, AuthenticationError } from '../utils/errors.js';
 
 /**
  * Global error handling middleware
- * @param {Error} err - Error object
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
- * @param {Function} next - Express next middleware function
  */
 // eslint-disable-next-line no-unused-vars
 export const errorHandler = (err, _req, res, next) => {
     prodError('Error:', err);
+
+    // Custom error classes
+    if (err instanceof NotFoundError) {
+        return sendError(res, err.statusCode, err.message);
+    }
+
+    if (err instanceof ValidationError) {
+        return sendError(res, err.statusCode, err.message, err.errors);
+    }
+
+    if (err instanceof UserExistsError || err instanceof AuthenticationError) {
+        return sendError(res, err.statusCode, err.message);
+    }
 
     // Mongoose validation error
     if (err.name === 'ValidationError') {

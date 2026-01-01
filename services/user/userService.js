@@ -2,6 +2,7 @@ import { mockUsers, getNextUserId } from '../../data/mockUsers.js';
 import { isValidEmail } from '../../utils/validators.js';
 import { buildImageUrl } from '../../utils/imageHelpers.js';
 import { safeParseInt } from '../../utils/helpers.js';
+import { NotFoundError, UserExistsError, AuthenticationError, ValidationError } from '../../utils/errors.js';
 
 /**
  * Helper: Find mock user by ID
@@ -55,17 +56,17 @@ export const createUser = async (userData) => {
 
   // Validate email format
   if (!isValidEmail(email)) {
-    throw new Error('Invalid email format');
+    throw new ValidationError('Invalid email format');
   }
 
   // Check if user exists
   const existingUser = mockUsers.find(u => u.email === email || u.username === username);
   if (existingUser) {
     if (existingUser.email === email) {
-      throw new Error('Email already exists');
+      throw new UserExistsError('Email already exists');
     }
     if (existingUser.username === username) {
-      throw new Error('Username already exists');
+      throw new UserExistsError('Username already exists');
     }
   }
 
@@ -100,7 +101,7 @@ export const updateUser = async (userId, updateData) => {
   const { username, email, password, profilePictureUrl } = updateData;
 
   if (email && !isValidEmail(email)) {
-    throw new Error('Invalid email format');
+    throw new ValidationError('Invalid email format');
   }
 
   const parsedId = safeParseInt(userId, 'userId');
@@ -116,10 +117,10 @@ export const updateUser = async (userId, updateData) => {
 
     if (existingUser) {
       if (existingUser.username === username) {
-        throw new Error('Username already exists');
+        throw new UserExistsError('Username already exists');
       }
       if (existingUser.email === email) {
-        throw new Error('Email already exists');
+        throw new UserExistsError('Email already exists');
       }
     }
   }
@@ -168,11 +169,11 @@ export const authenticateUser = async (identifier, password) => {
   );
 
   if (!user) {
-    throw new Error('User not found');
+    throw new AuthenticationError('User not found');
   }
 
   if (user.password !== password) {
-    throw new Error('Invalid credentials');
+    throw new AuthenticationError();
   }
 
   return {

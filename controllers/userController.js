@@ -54,21 +54,14 @@ export const createUser = catchAsync(async (req, res) => {
     return sendError(res, HTTP_STATUS.BAD_REQUEST, 'Invalid input', ['email is required']);
   }
 
-  try {
-    const user = await userService.createUser({
-      username,
-      email,
-      password,
-      profilePictureUrl
-    });
+  const user = await userService.createUser({
+    username,
+    email,
+    password,
+    profilePictureUrl
+  });
 
-    sendSuccess(res, HTTP_STATUS.CREATED, user, 'User successfully created');
-  } catch (error) {
-    if (error.message.includes('already exists')) {
-      return sendError(res, HTTP_STATUS.BAD_REQUEST, error.message);
-    }
-    throw error;
-  }
+  sendSuccess(res, HTTP_STATUS.CREATED, user, 'User successfully created');
 });
 
 /**
@@ -95,25 +88,18 @@ export const updateUser = catchAsync(async (req, res) => {
     }
   }
 
-  try {
-    const user = await userService.updateUser(userId, {
-      username,
-      email,
-      password,
-      profilePictureUrl
-    });
+  const user = await userService.updateUser(userId, {
+    username,
+    email,
+    password,
+    profilePictureUrl
+  });
 
-    if (!user) {
-      return sendError(res, HTTP_STATUS.NOT_FOUND, 'User not found');
-    }
-
-    sendSuccess(res, HTTP_STATUS.OK, user, 'User information updated');
-  } catch (error) {
-    if (error.message.includes('already exists')) {
-      return sendError(res, HTTP_STATUS.BAD_REQUEST, error.message);
-    }
-    throw error;
+  if (!user) {
+    return sendError(res, HTTP_STATUS.NOT_FOUND, 'User not found');
   }
+
+  sendSuccess(res, HTTP_STATUS.OK, user, 'User information updated');
 });
 
 /**

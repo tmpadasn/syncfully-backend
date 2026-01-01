@@ -59,30 +59,6 @@ const validateSignupData = ({ username, email, password }) => {
   return { valid: true, errors: [] };
 };
 
-// ============================================================================
-// ERROR HANDLERS
-// ============================================================================
-
-/**
- * Handles signup-specific errors and sends appropriate response.
- * @param {Object} res - Express response object
- * @param {Error} error - Error to handle
- * @returns {Object|undefined} Response object or undefined if error should be rethrown
- */
-const handleSignupError = (res, error) => {
-  if (error.message.includes('already exists')) {
-    return sendError(res, HTTP_STATUS.BAD_REQUEST, error.message);
-  }
-  if (error.message.includes('Invalid email format')) {
-    return sendError(res, HTTP_STATUS.BAD_REQUEST, 'Invalid email format');
-  }
-  return null;
-};
-
-// ============================================================================
-// ROUTE HANDLERS
-// ============================================================================
-
 /**
  * Authenticates a user with identifier (username/email) and password.
  * 
@@ -108,12 +84,8 @@ export const login = catchAsync(async (req, res) => {
     );
   }
 
-  try {
-    const user = await authenticateUser(identifier, password);
-    return sendSuccess(res, HTTP_STATUS.OK, user, 'Login successful');
-  } catch (authError) {
-    return sendError(res, HTTP_STATUS.UNAUTHORIZED, authError.message);
-  }
+  const user = await authenticateUser(identifier, password);
+  return sendSuccess(res, HTTP_STATUS.OK, user, 'Login successful');
 });
 
 /**
@@ -140,18 +112,12 @@ export const signup = catchAsync(async (req, res) => {
     return sendError(res, HTTP_STATUS.BAD_REQUEST, message, validation.errors);
   }
 
-  try {
-    const user = await createUserService({
-      username,
-      email,
-      password,
-      profilePictureUrl
-    });
+  const user = await createUserService({
+    username,
+    email,
+    password,
+    profilePictureUrl
+  });
 
-    return sendSuccess(res, HTTP_STATUS.CREATED, user, 'User successfully created');
-  } catch (error) {
-    const handled = handleSignupError(res, error);
-    if (handled) return handled;
-    throw error;
-  }
+  return sendSuccess(res, HTTP_STATUS.CREATED, user, 'User successfully created');
 });
