@@ -1,7 +1,30 @@
 /**
- * Format user data for API response
+ * @fileoverview Response Formatters
+ * @description Utility functions to format mock data for API responses.
+ *
+ * These formatters provide consistent data transformation across the application.
+ * They handle:
+ * - Renaming internal ID fields to API-friendly names (id -> userId, workId, etc.)
+ * - Computing derived fields (e.g., ratedWorks count)
+ * - Selecting only public-facing fields (excluding passwords, internal state)
+ *
+ * Naming Convention:
+ * - format{Entity}Response - Transforms entity for HTTP response
+ *
+ * @module services/common/formatters
+ * @see services/*Service - Business logic that uses these formatters
+ */
+
+// =============================================================================
+// USER FORMATTERS
+// =============================================================================
+
+/**
+ * Formats a user object for API response.
+ * Excludes sensitive data like passwords.
+ *
  * @param {Object} user - User object from mock data
- * @returns {Object} Formatted user data
+ * @returns {Object} Formatted user with safe public fields
  */
 export const formatUserResponse = (user) => {
     return {
@@ -9,9 +32,13 @@ export const formatUserResponse = (user) => {
         username: user.username,
         email: user.email,
         profilePictureUrl: user.profilePictureUrl,
-        ratedWorks: Object.keys(user.ratedWorks || {}).length
+        ratedWorks: Object.keys(user.ratedWorks || {}).length  // Count, not data
     };
 };
+
+// =============================================================================
+// RATING FORMATTERS
+// =============================================================================
 
 /**
  * Format rating data for API response

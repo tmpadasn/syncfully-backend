@@ -1,24 +1,62 @@
+/**
+ * @fileoverview Search Service
+ * @description Provides search functionality across works and users.
+ *
+ * This service enables full-text search with filtering capabilities for
+ * the application's content. It searches through mock data and returns
+ * formatted, sorted results with rating information.
+ *
+ * Search Features:
+ * - Text search on titles, descriptions, creators (works)
+ * - Text search on usernames and emails (users)
+ * - Filter by work type, genre, minimum rating, and year
+ * - Results sorted by rating (works) or alphabetically (users)
+ * - Maximum 50 results per query to prevent performance issues
+ *
+ * @module services/searchService
+ * @see controllers/searchController - HTTP endpoint handler
+ */
+
 import { mockWorks } from '../data/mockWorks.js';
 import { mockUsers } from '../data/mockUsers.js';
 import { mockRatings } from '../data/mockRatings.js';
 import { calculateAverageRating } from '../utils/helpers.js';
 
-const MAX_RESULTS = 50;
-
-
+// =============================================================================
+// CONSTANTS
+// =============================================================================
 
 /**
- * Helper: Format work with rating and count
- * @param {Object} work - Work object
- * @returns {Object} Formatted work with rating
+ * Maximum number of search results to return per query.
+ * Prevents performance issues with large result sets.
+ * @constant {number}
+ */
+const MAX_RESULTS = 50;
+
+// =============================================================================
+// FORMATTING HELPERS
+// =============================================================================
+
+/**
+ * Formats a work object with calculated rating for API response.
+ * Enriches the work with average rating from mockRatings data.
+ *
+ * @param {Object} work - Work object from mock data
+ * @returns {Object} Formatted work with rating and ratingCount
  */
 const formatWorkWithRating = (work) => {
+    // Extract work ID (handles different ID field names)
     const id = work.workId || work._id || work.id;
+
+    // Find all ratings for this work
     const ratingsForWork = mockRatings.filter(
         (r) => String(r.workId) === String(id)
     );
+
+    // Calculate average rating from all ratings
     const rating = calculateAverageRating(ratingsForWork.map(r => ({ score: r.score })));
 
+    // Return formatted work object
     return {
         workId: id,
         title: work.title,

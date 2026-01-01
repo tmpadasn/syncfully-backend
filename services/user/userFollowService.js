@@ -1,21 +1,54 @@
+/**
+ * @fileoverview User Follow Service
+ * @description Handles social follow/unfollow operations between users.
+ *
+ * This service manages the bidirectional follow relationships between users.
+ * When user A follows user B:
+ * - User A's 'following' array includes user B's ID
+ * - User B's 'followers' array includes user A's ID
+ *
+ * Both arrays are kept in sync during follow/unfollow operations.
+ *
+ * Business Rules:
+ * - Users cannot follow themselves
+ * - Duplicate follows are prevented
+ * - Unfollowing requires an existing follow relationship
+ *
+ * @module services/user/userFollowService
+ * @see controllers/userSocialController - HTTP endpoint handler
+ */
+
 import { mockUsers } from '../../data/mockUsers.js';
 
+// =============================================================================
+// FOLLOW LIST QUERIES
+// =============================================================================
+
 /**
- * Get users that a user is following
- * @param {number|string} userId - User ID
- * @returns {Promise<Array>}
- * @throws {Error} if user not found
+ * Retrieves the list of users that a specific user is following.
+ *
+ * @async
+ * @param {number|string} userId - ID of the user whose following list to fetch
+ * @returns {Promise<Array>} Array of user objects being followed
+ * @throws {Error} If the user is not found
+ *
+ * @example
+ * const following = await getUserFollowing(1);
+ * // Returns: [{ userId: 2, username: 'bob', ... }, ...]
  */
 export const getUserFollowing = async (userId) => {
+  // Find the user in mock data
   const user = mockUsers.find(u => u.id === parseInt(userId));
   if (!user) {
     throw new Error('User not found');
   }
 
+  // Return empty array if user has no following list
   if (!user.following || user.following.length === 0) {
     return [];
   }
 
+  // Map following IDs to full user objects, filtering out any invalid references
   return user.following.map(followedUserId => {
     const followedUser = mockUsers.find(u => u.id === followedUserId);
     if (followedUser) {
@@ -27,7 +60,7 @@ export const getUserFollowing = async (userId) => {
         createdAt: followedUser.createdAt || new Date().toISOString()
       };
     }
-  }).filter(Boolean);
+  }).filter(Boolean);  // Remove undefined entries
 };
 
 /**

@@ -1,9 +1,39 @@
 /**
- * Development logger utility
- * Only logs in development mode (NODE_ENV !== 'production')
+ * @fileoverview Logging Utilities
+ * @description Environment-aware logging functions for development and production.
+ *
+ * This module provides logging wrappers that respect the NODE_ENV setting:
+ * - dev* functions: Only log in development mode (silent in production)
+ * - prod* functions: Always log (for critical production messages)
+ *
+ * Environment Modes:
+ * - development (default): Full logging enabled
+ * - production: Only prod* functions output logs
+ *
+ * Usage:
+ * - devLog('Debug info', data);     // Development only
+ * - devError('Debug error', err);   // Development only  
+ * - prodLog('Server started');      // Always logs
+ * - prodError('Fatal error', err);  // Always logs
+ *
+ * @module utils/logger
  */
 
+// =============================================================================
+// ENVIRONMENT DETECTION
+// =============================================================================
+
+/**
+ * Checks if the application is running in development mode.
+ * Default is 'development' if NODE_ENV is not set.
+ *
+ * @returns {boolean} True if in development mode
+ */
 const isDevelopment = () => (process.env.NODE_ENV || 'development') !== 'production';
+
+// =============================================================================
+// DEVELOPMENT LOGGING (Silent in production)
+// =============================================================================
 
 /**
  * Log message in development mode only

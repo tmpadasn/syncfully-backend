@@ -1,16 +1,45 @@
+/**
+ * @fileoverview User Rating Service
+ * @description Handles user-specific rating operations.
+ *
+ * This service manages the user-side of rating operations:
+ * - Retrieving a user's ratings (what works they've rated)
+ * - Adding/updating a user's rating for a work
+ *
+ * Data Structure:
+ * User ratings are stored in two locations for different access patterns:
+ * - user.ratedWorks: Map for quick "has user rated this work?" lookups
+ * - mockRatings: Array for aggregation/average calculations
+ *
+ * Side Effects:
+ * Adding a rating triggers recommendation version update for cache invalidation.
+ *
+ * @module services/user/userRatingService
+ * @see controllers/userRatingsController - HTTP endpoint handler
+ */
+
 import { mockUsers } from '../../data/mockUsers.js';
 import { safeParseInt } from '../../utils/helpers.js';
 import { updateRecommendationVersion } from './userService.js';
 
+// =============================================================================
+// HELPER FUNCTIONS
+// =============================================================================
+
 /**
- * Helper: Find mock user by ID
- * @param {number|string} userId - User ID
- * @returns {Object|null} User object or null
+ * Finds a mock user by their ID.
+ *
+ * @param {number|string} userId - User ID to search for
+ * @returns {Object|null} User object if found, null otherwise
  */
 const findMockUserById = (userId) => {
   const parsedId = safeParseInt(userId, 'userId');
   return mockUsers.find(u => u.id === parsedId) || null;
 };
+
+// =============================================================================
+// READ OPERATIONS
+// =============================================================================
 
 /**
  * Get user's ratings

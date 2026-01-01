@@ -1,21 +1,57 @@
+/**
+ * @fileoverview User Service
+ * @description Core user management operations including CRUD and authentication.
+ *
+ * This service handles all user-related business logic:
+ * - User CRUD operations (create, read, update, delete)
+ * - User authentication (login via email or username)
+ * - Recommendation version management for cache invalidation
+ *
+ * Data Storage:
+ * Currently uses in-memory mock data for development.
+ * Designed for easy migration to MongoDB/Mongoose.
+ *
+ * Security Notes:
+ * - Passwords are stored in plain text in mock data (NOT production-safe)
+ * - Email format validation is performed on create/update
+ * - Duplicate username/email prevention
+ *
+ * @module services/user/userService
+ * @see controllers/userCrudController - CRUD HTTP endpoints
+ * @see controllers/authController - Authentication endpoints
+ */
+
 import { mockUsers, getNextUserId } from '../../data/mockUsers.js';
 import { isValidEmail } from '../../utils/validators.js';
 import { buildImageUrl } from '../../utils/imageHelpers.js';
 import { safeParseInt } from '../../utils/helpers.js';
 
+// =============================================================================
+// HELPER FUNCTIONS
+// =============================================================================
+
 /**
- * Helper: Find mock user by ID
- * @param {number|string} userId - User ID
- * @returns {Object|null} User object or null
+ * Finds a mock user by their ID.
+ * Uses safeParseInt to handle string/number ID conversion.
+ *
+ * @param {number|string} userId - User ID to search for
+ * @returns {Object|null} User object if found, null otherwise
  */
 const findMockUserById = (userId) => {
   const parsedId = safeParseInt(userId, 'userId');
   return mockUsers.find(u => u.id === parsedId) || null;
 };
 
+// =============================================================================
+// READ OPERATIONS
+// =============================================================================
+
 /**
- * Get all users
- * @returns {Promise<Array>}
+ * Retrieves all users from the mock data.
+ * Returns a lightweight list suitable for directory views.
+ *
+ * @async
+ * @returns {Promise<Array>} Array of user summary objects
  */
 export const getAllUsers = async () => {
   return mockUsers.map(user => ({
@@ -23,7 +59,7 @@ export const getAllUsers = async () => {
     username: user.username,
     email: user.email,
     profilePictureUrl: user.profilePictureUrl,
-    ratedWorks: Object.keys(user.ratedWorks).length
+    ratedWorks: Object.keys(user.ratedWorks).length  // Count only, not data
   }));
 };
 

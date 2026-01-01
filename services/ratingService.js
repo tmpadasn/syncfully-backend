@@ -1,13 +1,42 @@
+/**
+ * @fileoverview Rating Service
+ * @description Business logic for managing work ratings.
+ *
+ * This service handles all rating-related operations:
+ * - Creating and updating ratings (upsert behavior)
+ * - Retrieving ratings by ID, work, or all ratings
+ * - Calculating average ratings for works
+ * - Deleting ratings
+ *
+ * Data Synchronization:
+ * When a rating is created/updated/deleted, this service also:
+ * - Updates the user's ratedWorks map for quick lookup
+ * - Triggers recommendation version update for cache invalidation
+ *
+ * Rating Constraints:
+ * - Score must be integer 1-5
+ * - One rating per user per work (upsert on conflict)
+ *
+ * @module services/ratingService
+ * @see controllers/ratingController - HTTP endpoint handler
+ * @see models/Rating - Mongoose schema
+ */
+
 import { mockRatings, getNextRatingId } from '../data/mockRatings.js';
 import { mockUsers } from '../data/mockUsers.js';
 import { mockWorks } from '../data/mockWorks.js';
 import { calculateAverageRating, safeParseInt } from '../utils/helpers.js';
 import { updateRecommendationVersion } from './userService.js';
 
+// =============================================================================
+// HELPER FUNCTIONS
+// =============================================================================
+
 /**
- * Helper: Find mock rating by ID
- * @param {number|string} ratingId - Rating ID
- * @returns {Object|null} Rating object or null
+ * Finds a mock rating by its ID.
+ *
+ * @param {number|string} ratingId - Rating ID to search for
+ * @returns {Object|null} Rating object if found, null otherwise
  */
 const findMockRatingById = (ratingId) => {
     const parsedId = safeParseInt(ratingId, 'ratingId');
@@ -15,9 +44,11 @@ const findMockRatingById = (ratingId) => {
 };
 
 /**
- * Helper: Format rating data for response
+ * Formats a rating object for API response.
+ * Standardizes field names (id -> ratingId).
+ *
  * @param {Object} rating - Rating object from mock data
- * @returns {Object} Formatted rating data
+ * @returns {Object} Formatted rating with standardized field names
  */
 const formatRatingData = (rating) => {
     return {
@@ -28,6 +59,10 @@ const formatRatingData = (rating) => {
         ratedAt: rating.ratedAt
     };
 };
+
+// =============================================================================
+// READ OPERATIONS
+// =============================================================================
 
 /**
  * Get rating by ID

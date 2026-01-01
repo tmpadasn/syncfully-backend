@@ -1,10 +1,34 @@
+/**
+ * @fileoverview Shelf Service
+ * @description Business logic for managing user shelf collections.
+ *
+ * Shelves are user-created collections for organizing works (similar to playlists).
+ * This service provides:
+ * - CRUD operations on shelves
+ * - Adding/removing works from shelves
+ * - Querying shelves by user or ID
+ *
+ * Shelf-Work Relationship:
+ * - A shelf belongs to one user
+ * - A shelf can contain multiple works (stored as work ID array)
+ * - Works can be in multiple shelves
+ *
+ * @module services/shelfService
+ * @see controllers/shelfController - HTTP endpoint handler
+ */
+
 import { mockShelves, getNextShelfId } from '../data/mockShelves.js';
 import { safeParseInt } from '../utils/helpers.js';
 
+// =============================================================================
+// HELPER FUNCTIONS
+// =============================================================================
+
 /**
- * Helper: Find mock shelf by ID
- * @param {number|string} shelfId - Shelf ID
- * @returns {Object|null} Shelf object or null
+ * Finds a mock shelf by its ID.
+ *
+ * @param {number|string} shelfId - Shelf ID to search for
+ * @returns {Object|null} Shelf object if found, null otherwise
  */
 const findMockShelfById = (shelfId) => {
     const parsedId = safeParseInt(shelfId, 'shelfId');
@@ -12,9 +36,11 @@ const findMockShelfById = (shelfId) => {
 };
 
 /**
- * Helper: Format shelf data for response
+ * Formats a shelf object for API response.
+ * Standardizes field names (id -> shelfId).
+ *
  * @param {Object} shelf - Shelf object from mock data
- * @returns {Object} Formatted shelf data
+ * @returns {Object} Formatted shelf with standardized field names
  */
 const formatShelfData = (shelf) => {
     return {
@@ -27,6 +53,10 @@ const formatShelfData = (shelf) => {
         updatedAt: shelf.updatedAt
     };
 };
+
+// =============================================================================
+// READ OPERATIONS
+// =============================================================================
 
 /**
  * Get all shelves (across all users)

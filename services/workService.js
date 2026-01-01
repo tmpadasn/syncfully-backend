@@ -1,20 +1,48 @@
+/**
+ * @fileoverview Work Service
+ * @description Business logic for managing media works (movies, books, music, etc.).
+ *
+ * This service provides operations for:
+ * - CRUD operations on works
+ * - Filtering and searching works
+ * - Finding similar works based on type/genre
+ * - Retrieving popular works sorted by rating
+ *
+ * All works are enriched with calculated average ratings from the ratings data.
+ *
+ * Work Types Supported:
+ * - movie, series, book, music, graphic-novel
+ *
+ * @module services/workService
+ * @see controllers/workController - HTTP endpoint handler
+ * @see models/Work - Mongoose schema (for future DB integration)
+ */
+
 import { mockWorks, getNextWorkId } from '../data/mockWorks.js';
 import { mockRatings } from '../data/mockRatings.js';
 import { enrichWorkWithRating, safeParseInt } from '../utils/helpers.js';
 import { buildImageUrl } from '../utils/imageHelpers.js';
 import { devLog } from '../utils/logger.js';
-
 import { QUERY_LIMITS } from '../config/constants.js';
 
+// =============================================================================
+// HELPER FUNCTIONS
+// =============================================================================
+
 /**
- * Helper: Find mock work by ID
- * @param {number|string} workId - Work ID
- * @returns {Object|null} Work object or null
+ * Finds a mock work by its ID.
+ *
+ * @param {number|string} workId - Work ID to search for
+ * @returns {Object|null} Work object if found, null otherwise
  */
 const findMockWorkById = (workId) => {
     const parsedId = safeParseInt(workId, 'workId');
     return mockWorks.find(w => w.id === parsedId) || null;
 };
+
+// =============================================================================
+// READ OPERATIONS
+// =============================================================================
 
 /**
  * Get work by ID

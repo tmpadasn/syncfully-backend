@@ -1,11 +1,44 @@
+/**
+ * @fileoverview Mock Shelf Data
+ * @description In-memory mock data for user shelf collections.
+ *
+ * Shelves are user-created collections for organizing works (similar to playlists).
+ * Each shelf belongs to a single user and can contain multiple work IDs.
+ *
+ * Data Structure:
+ * - id: Unique shelf identifier (auto-incremented)
+ * - userId: Owner of the shelf (references mockUsers)
+ * - name: Display name of the shelf
+ * - description: Optional description of shelf contents
+ * - works: Array of work IDs contained in this shelf
+ * - createdAt: Timestamp when shelf was created
+ * - updatedAt: Timestamp of last modification
+ *
+ * @module data/mockShelves
+ * @see services/shelfService - Business logic for shelf operations
+ */
+
+// =============================================================================
+// MOCK SHELF DATA
+// =============================================================================
+
+/**
+ * Mock shelf collection data.
+ * Contains sample shelves for 10 users with various genres and themes.
+ * Work IDs reference entries in mockWorks.js.
+ *
+ * @type {Array<Object>}
+ */
 export const mockShelves = [
+    // -------------------------------------------------------------------------
     // Alice's shelves (userId: 1)
+    // -------------------------------------------------------------------------
     {
         id: 1,
         userId: 1,
         name: 'Drama Favorites',
         description: 'My favorite dramatic films and shows',
-        works: [1, 2, 11, 20, 28, 45],
+        works: [1, 2, 11, 20, 28, 45],  // Work IDs from mockWorks
         createdAt: new Date('2024-01-15'),
         updatedAt: new Date('2024-11-20')
     },
@@ -18,8 +51,10 @@ export const mockShelves = [
         createdAt: new Date('2024-02-01'),
         updatedAt: new Date('2024-10-15')
     },
-    
+
+    // -------------------------------------------------------------------------
     // Bob's shelves (userId: 2)
+    // -------------------------------------------------------------------------
     {
         id: 3,
         userId: 2,
@@ -38,7 +73,7 @@ export const mockShelves = [
         createdAt: new Date('2024-03-05'),
         updatedAt: new Date('2024-11-05')
     },
-    
+
     // Carol's shelves (userId: 3)
     {
         id: 5,
@@ -58,7 +93,7 @@ export const mockShelves = [
         createdAt: new Date('2024-04-01'),
         updatedAt: new Date('2024-10-20')
     },
-    
+
     // David's shelves (userId: 4)
     {
         id: 7,
@@ -78,7 +113,7 @@ export const mockShelves = [
         createdAt: new Date('2024-03-15'),
         updatedAt: new Date('2024-10-30')
     },
-    
+
     // Emma's shelves (userId: 5)
     {
         id: 9,
@@ -98,7 +133,7 @@ export const mockShelves = [
         createdAt: new Date('2024-04-10'),
         updatedAt: new Date('2024-11-01')
     },
-    
+
     // Frank's shelves (userId: 6)
     {
         id: 11,
@@ -118,7 +153,7 @@ export const mockShelves = [
         createdAt: new Date('2024-03-20'),
         updatedAt: new Date('2024-10-25')
     },
-    
+
     // Grace's shelves (userId: 7)
     {
         id: 13,
@@ -138,7 +173,7 @@ export const mockShelves = [
         createdAt: new Date('2024-05-01'),
         updatedAt: new Date('2024-11-10')
     },
-    
+
     // Henry's shelves (userId: 8)
     {
         id: 15,
@@ -158,7 +193,7 @@ export const mockShelves = [
         createdAt: new Date('2024-04-15'),
         updatedAt: new Date('2024-10-28')
     },
-    
+
     // Iris's shelves (userId: 9)
     {
         id: 17,
@@ -178,7 +213,7 @@ export const mockShelves = [
         createdAt: new Date('2024-05-10'),
         updatedAt: new Date('2024-11-05')
     },
-    
+
     // Jack's shelves (userId: 10)
     {
         id: 19,

@@ -1,9 +1,36 @@
 /**
- * Get base URL for images
+ * @fileoverview Image URL Helpers
+ * @description Utilities for constructing and handling image URLs.
+ *
+ * This module centralizes image URL logic to ensure consistency across the app.
+ * It handles:
+ * - Base URL construction from environment variables
+ * - Placeholder/fallback images by type
+ * - Full URL building from relative paths
+ *
+ * Environment Variables:
+ * - IMAGE_BASE_URL: Base URL for image assets (default: http://localhost:3000/uploads)
+ *
+ * @module utils/imageHelpers
+ */
+
+// =============================================================================
+// BASE URL CONFIGURATION
+// =============================================================================
+
+/**
+ * Gets the base URL for serving images.
+ * Uses IMAGE_BASE_URL environment variable with localhost fallback.
+ *
+ * @returns {string} Base URL for image assets
  */
 export const getImageBaseUrl = () => {
     return process.env.IMAGE_BASE_URL || 'http://localhost:3000/uploads';
 };
+
+// =============================================================================
+// PLACEHOLDER IMAGES
+// =============================================================================
 
 /**
  * Get placeholder image URL
