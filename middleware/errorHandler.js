@@ -1,7 +1,19 @@
 import { HTTP_STATUS } from '../config/constants.js';
 import { sendError } from '../utils/responses.js';
 import { prodError } from '../utils/logger.js';
-import { NotFoundError, ValidationError, UserExistsError, AuthenticationError } from '../utils/errors.js';
+
+// Error handler map for different error types
+const errorHandlers = {
+    NotFoundError: (err, res) => sendError(res, err.statusCode, err.message),
+    ValidationError: (err, res) => {
+        const errorField = err.errors?.length > 0 ? err.errors : undefined;
+        return sendError(res, err.statusCode, err.message, errorField);
+    },
+    UserExistsError: (err, res) => sendError(res, err.statusCode, err.message),
+    AuthenticationError: (err, res) => sendError(res, err.statusCode, err.message),
+    JsonWebTokenError: (_err, res) => sendError(res, HTTP_STATUS.UNAUTHORIZED, 'Invalid token'),
+    TokenExpiredError: (_err, res) => sendError(res, HTTP_STATUS.UNAUTHORIZED, 'Token expired')
+};
 
 /**
  * Global error handling middleware
@@ -10,30 +22,9 @@ import { NotFoundError, ValidationError, UserExistsError, AuthenticationError } 
 export const errorHandler = (err, _req, res, next) => {
     prodError('Error:', err);
 
-    // Custom error classes
-    if (err instanceof NotFoundError) {
-        return sendError(res, err.statusCode, err.message);
-    }
+    const handler = errorHandlers[err.constructor.name] || errorHandlers[err.name];
+    if (handler) return handler(err, res);
 
-    if (err instanceof ValidationError) {
-        const errorField = err.errors && err.errors.length > 0 ? err.errors : undefined;
-        return sendError(res, err.statusCode, err.message, errorField);
-    }
-
-    if (err instanceof UserExistsError || err instanceof AuthenticationError) {
-        return sendError(res, err.statusCode, err.message);
-    }
-
-    // JWT errors
-    if (err.name === 'JsonWebTokenError') {
-        return sendError(res, HTTP_STATUS.UNAUTHORIZED, 'Invalid token');
-    }
-
-    if (err.name === 'TokenExpiredError') {
-        return sendError(res, HTTP_STATUS.UNAUTHORIZED, 'Token expired');
-    }
-
-    // Default to 500 server error
     sendError(res, HTTP_STATUS.INTERNAL_SERVER_ERROR, 'Internal server error', err.message);
 };
 
