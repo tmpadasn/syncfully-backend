@@ -1,4 +1,5 @@
 import { mockUsers } from '../../data/mockUsers.js';
+import { NotFoundError, ValidationError } from '../../utils/errors.js';
 
 /**
  * Get users that a user is following
@@ -9,7 +10,7 @@ import { mockUsers } from '../../data/mockUsers.js';
 export const getUserFollowing = async (userId) => {
   const user = mockUsers.find(u => u.id === parseInt(userId));
   if (!user) {
-    throw new Error('User not found');
+    throw new NotFoundError('User not found');
   }
 
   if (!user.following || user.following.length === 0) {
@@ -39,7 +40,7 @@ export const getUserFollowing = async (userId) => {
 export const getUserFollowers = async (userId) => {
   const user = mockUsers.find(u => u.id === parseInt(userId));
   if (!user) {
-    throw new Error('User not found');
+    throw new NotFoundError('User not found');
   }
 
   if (!user.followers || user.followers.length === 0) {
@@ -69,17 +70,17 @@ export const getUserFollowers = async (userId) => {
  */
 export const followUser = async (userId, targetUserId) => {
   if (userId === targetUserId || userId == targetUserId) {
-    throw new Error('Cannot follow yourself');
+    throw new ValidationError('Cannot follow yourself');
   }
 
   const userIndex = mockUsers.findIndex(u => u.id === parseInt(userId));
   const targetUserIndex = mockUsers.findIndex(u => u.id === parseInt(targetUserId));
 
   if (userIndex === -1) {
-    throw new Error('User not found');
+    throw new NotFoundError('User not found');
   }
   if (targetUserIndex === -1) {
-    throw new Error('Target user not found');
+    throw new NotFoundError('Target user not found');
   }
 
   if (!mockUsers[userIndex].following) {
@@ -90,7 +91,7 @@ export const followUser = async (userId, targetUserId) => {
   }
 
   if (mockUsers[userIndex].following.includes(parseInt(targetUserId))) {
-    throw new Error('Already following this user');
+    throw new ValidationError('Already following this user');
   }
 
   mockUsers[userIndex].following.push(parseInt(targetUserId));
@@ -116,14 +117,14 @@ export const unfollowUser = async (userId, targetUserId) => {
   const targetUserIndex = mockUsers.findIndex(u => u.id === parseInt(targetUserId));
 
   if (userIndex === -1) {
-    throw new Error('User not found');
+    throw new NotFoundError('User not found');
   }
   if (targetUserIndex === -1) {
-    throw new Error('Target user not found');
+    throw new NotFoundError('Target user not found');
   }
 
   if (!mockUsers[userIndex].following || !mockUsers[userIndex].following.includes(parseInt(targetUserId))) {
-    throw new Error('Not following this user');
+    throw new ValidationError('Not following this user');
   }
 
   mockUsers[userIndex].following = mockUsers[userIndex].following.filter(id => id !== parseInt(targetUserId));

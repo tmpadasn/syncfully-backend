@@ -199,16 +199,8 @@ export const getUserRecommendations = catchAsync(async (req, res) => {
  */
 export const getUserFollowing = catchAsync(async (req, res) => {
   const { userId } = req.params;
-
-  try {
-    const following = await userService.getUserFollowing(userId);
-    sendSuccess(res, HTTP_STATUS.OK, { following });
-  } catch (error) {
-    if (error.message === 'User not found') {
-      return sendError(res, HTTP_STATUS.NOT_FOUND, error.message);
-    }
-    throw error;
-  }
+  const following = await userService.getUserFollowing(userId);
+  sendSuccess(res, HTTP_STATUS.OK, { following });
 });
 
 /**
@@ -217,16 +209,8 @@ export const getUserFollowing = catchAsync(async (req, res) => {
  */
 export const getUserFollowers = catchAsync(async (req, res) => {
   const { userId } = req.params;
-
-  try {
-    const followers = await userService.getUserFollowers(userId);
-    sendSuccess(res, HTTP_STATUS.OK, { followers });
-  } catch (error) {
-    if (error.message === 'User not found') {
-      return sendError(res, HTTP_STATUS.NOT_FOUND, error.message);
-    }
-    throw error;
-  }
+  const followers = await userService.getUserFollowers(userId);
+  sendSuccess(res, HTTP_STATUS.OK, { followers });
 });
 
 /**
@@ -235,19 +219,8 @@ export const getUserFollowers = catchAsync(async (req, res) => {
  */
 export const followUser = catchAsync(async (req, res) => {
   const { userId, targetUserId } = req.params;
-
-  try {
-    const result = await userService.followUser(userId, targetUserId);
-    sendSuccess(res, HTTP_STATUS.OK, result);
-  } catch (error) {
-    if (error.message === 'User not found') {
-      return sendError(res, HTTP_STATUS.NOT_FOUND, error.message);
-    }
-    if (error.message === 'Cannot follow yourself' || error.message === 'Already following this user') {
-      return sendError(res, HTTP_STATUS.BAD_REQUEST, error.message);
-    }
-    throw error;
-  }
+  const result = await userService.followUser(userId, targetUserId);
+  sendSuccess(res, HTTP_STATUS.OK, result);
 });
 
 /**
@@ -256,17 +229,6 @@ export const followUser = catchAsync(async (req, res) => {
  */
 export const unfollowUser = catchAsync(async (req, res) => {
   const { userId, targetUserId } = req.params;
-
-  try {
-    const result = await userService.unfollowUser(userId, targetUserId);
-    sendSuccess(res, HTTP_STATUS.OK, result);
-  } catch (error) {
-    if (error.message === 'User not found') {
-      return sendError(res, HTTP_STATUS.NOT_FOUND, error.message);
-    }
-    if (error.message === 'Not following this user') {
-      return sendError(res, HTTP_STATUS.BAD_REQUEST, error.message);
-    }
-    throw error;
-  }
+  const result = await userService.unfollowUser(userId, targetUserId);
+  sendSuccess(res, HTTP_STATUS.OK, result);
 });
