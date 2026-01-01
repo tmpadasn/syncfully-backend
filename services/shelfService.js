@@ -1,14 +1,18 @@
 import { mockShelves, getNextShelfId } from '../data/mockShelves.js';
 import { safeParseInt } from '../utils/helpers.js';
+import { NotFoundError } from '../utils/errors.js';
 
 /**
- * Helper: Find mock shelf by ID
+ * Helper: Find and return shelf or throw error
  * @param {number|string} shelfId - Shelf ID
- * @returns {Object|null} Shelf object or null
+ * @returns {Object} Shelf object
+ * @throws {NotFoundError} If shelf not found
  */
-const findMockShelfById = (shelfId) => {
+const findShelfOrThrow = (shelfId) => {
     const parsedId = safeParseInt(shelfId, 'shelfId');
-    return mockShelves.find(s => s.id === parsedId) || null;
+    const shelf = mockShelves.find(s => s.id === parsedId);
+    if (!shelf) throw new NotFoundError('Shelf not found');
+    return shelf;
 };
 
 /**
@@ -51,12 +55,10 @@ export const getUserShelves = async (userId) => {
 /**
  * Get a specific shelf by ID
  * @param {string} shelfId - Shelf ID
- * @returns {Promise<Object|null>}
+ * @returns {Promise<Object>}
  */
 export const getShelfById = async (shelfId) => {
-    const shelf = findMockShelfById(shelfId);
-    if (!shelf) return null;
-    return formatShelfData(shelf);
+    return formatShelfData(findShelfOrThrow(shelfId));
 };
 
 /**
@@ -85,11 +87,10 @@ export const createShelf = async (userId, shelfData) => {
  * Update a shelf
  * @param {string} shelfId - Shelf ID
  * @param {Object} updateData - Data to update
- * @returns {Promise<Object|null>}
+ * @returns {Promise<Object>}
  */
 export const updateShelf = async (shelfId, updateData) => {
-    const shelf = findMockShelfById(shelfId);
-    if (!shelf) return null;
+    const shelf = findShelfOrThrow(shelfId);
 
     if (updateData.name !== undefined) shelf.name = updateData.name;
     if (updateData.description !== undefined) shelf.description = updateData.description;
@@ -115,35 +116,22 @@ export const deleteShelf = async (shelfId) => {
 /**
  * Get all works in a shelf
  * @param {string} shelfId - Shelf ID
- * @param {Object} filters - Filter options (workType, genre, rating, year)
- * @returns {Promise<Object|null>}
+ * @returns {Promise<Object>}
  */
 export const getShelfWorks = async (shelfId) => {
-    const shelf = findMockShelfById(shelfId);
-    if (!shelf) return null;
-
-    return {
-        shelfId: shelf.id,
-        userId: shelf.userId,
-        name: shelf.name,
-        description: shelf.description,
-        works: shelf.works,
-        createdAt: shelf.createdAt,
-        updatedAt: shelf.updatedAt
-    };
+    return formatShelfData(findShelfOrThrow(shelfId));
 };
 
 /**
  * Add a work to a shelf
  * @param {string} shelfId - Shelf ID
  * @param {string} workId - Work ID
- * @returns {Promise<Object|null>}
+ * @returns {Promise<Object>}
  */
 export const addWorkToShelf = async (shelfId, workId) => {
-    const shelf = findMockShelfById(shelfId);
-    if (!shelf) return null;
-
+    const shelf = findShelfOrThrow(shelfId);
     const workIdInt = safeParseInt(workId, 'workId');
+
     if (!shelf.works.includes(workIdInt)) {
         shelf.works.push(workIdInt);
         shelf.updatedAt = new Date();
@@ -156,14 +144,13 @@ export const addWorkToShelf = async (shelfId, workId) => {
  * Remove a work from a shelf
  * @param {string} shelfId - Shelf ID
  * @param {string} workId - Work ID
- * @returns {Promise<Object|null>}
+ * @returns {Promise<Object>}
  */
 export const removeWorkFromShelf = async (shelfId, workId) => {
-    const shelf = findMockShelfById(shelfId);
-    if (!shelf) return null;
-
+    const shelf = findShelfOrThrow(shelfId);
     const workIdInt = safeParseInt(workId, 'workId');
     const index = shelf.works.indexOf(workIdInt);
+
     if (index > -1) {
         shelf.works.splice(index, 1);
         shelf.updatedAt = new Date();
