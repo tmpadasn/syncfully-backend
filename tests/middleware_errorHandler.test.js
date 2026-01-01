@@ -91,8 +91,8 @@ test('errorHandler - handles ValidationError with errors array', async (t) => {
   t.is(statusCode, 400);
   t.false(body.success);
   t.is(body.message, 'Validation failed');
-  t.true(Array.isArray(body.errors));
-  t.is(body.errors.length, 2);
+  t.true(Array.isArray(body.error));
+  t.is(body.error.length, 2);
 });
 
 test('errorHandler - handles ValidationError with empty errors array', async (t) => {
@@ -100,7 +100,7 @@ test('errorHandler - handles ValidationError with empty errors array', async (t)
   t.is(statusCode, 400);
   t.false(body.success);
   t.is(body.message, 'Validation failed');
-  t.is(body.errors, undefined);
+  t.is(body.error, 'Validation failed');
 });
 
 test('errorHandler - handles UserExistsError', async (t) => {
