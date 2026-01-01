@@ -2,7 +2,7 @@ import { mockUsers, getNextUserId } from '../../data/mockUsers.js';
 import { isValidEmail } from '../../utils/validators.js';
 import { buildImageUrl } from '../../utils/imageHelpers.js';
 import { safeParseInt } from '../../utils/helpers.js';
-import { NotFoundError, UserExistsError, AuthenticationError, ValidationError } from '../../utils/errors.js';
+import { UserExistsError, AuthenticationError, ValidationError } from '../../utils/errors.js';
 
 /**
  * Helper: Find mock user by ID

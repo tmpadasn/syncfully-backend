@@ -1,11 +1,3 @@
-/**
- * Application Constants
- * Central configuration for application-wide constants.
- */
-
-/**
- * Supported work types across the platform
- */
 export const WORK_TYPES = {
     MOVIE: 'movie',
     SERIES: 'series',
@@ -14,42 +6,22 @@ export const WORK_TYPES = {
     GRAPHIC_NOVEL: 'graphic-novel'
 };
 
-/**
- * Base URL for serving uploaded images
- * Configurable via IMAGE_BASE_URL environment variable
- */
 export const IMAGE_BASE_URL = process.env.IMAGE_BASE_URL || 'http://localhost:3000/uploads';
 
-/**
- * Rating system constraints (1-5 stars, integers only)
- */
-export const RATING_CONSTRAINTS = {
-    MIN: 1,
-    MAX: 5,
-    STEP: 1
-};
+export const RATING_CONSTRAINTS = { MIN: 1, MAX: 5, STEP: 1 };
 
-/**
- * User input validation constraints
- */
 export const USER_CONSTRAINTS = {
     USERNAME_MIN_LENGTH: 3,
     USERNAME_MAX_LENGTH: 20,
     PASSWORD_MIN_LENGTH: 6
 };
 
-/**
- * Query result limits for expensive operations
- */
 export const QUERY_LIMITS = {
     SIMILAR_WORKS: 10,
     POPULAR_WORKS: 10,
-    POPULAR_WORKS_FETCH: 50  // Fetch 50, sort by rating, return top 10
+    POPULAR_WORKS_FETCH: 50
 };
 
-/**
- * HTTP status codes
- */
 export const HTTP_STATUS = {
     OK: 200,
     CREATED: 201,
@@ -60,23 +32,8 @@ export const HTTP_STATUS = {
     INTERNAL_SERVER_ERROR: 500
 };
 
-/**
- * Supported content genres (alphabetically ordered)
- */
 export const GENRES = [
-    'Action',
-    'Adventure',
-    'Animation',
-    'Biography',
-    'Comedy',
-    'Crime',
-    'Documentary',
-    'Drama',
-    'Fantasy',
-    'History',
-    'Horror',
-    'Mystery',
-    'Romance',
-    'Sci-Fi',
-    'Thriller'
+    'Action', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime',
+    'Documentary', 'Drama', 'Fantasy', 'History', 'Horror', 'Mystery',
+    'Romance', 'Sci-Fi', 'Thriller'
 ];
