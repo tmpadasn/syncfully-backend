@@ -39,30 +39,10 @@ export const getWorkById = async (workId) => {
 export const getAllWorks = async (filters = {}) => {
     let works = [...mockWorks];
 
-    devLog('Total works before filtering:', works.length);
-
-    // Apply type filter
-    if (filters.type) {
-        devLog('Filtering by type:', filters.type);
-        works = works.filter(w => w.type === filters.type);
-        devLog('Works after type filter:', works.length);
-    }
-
-    // Apply year filter
-    if (filters.year) {
-        devLog('Filtering by year:', filters.year);
-        const yearInt = Number(filters.year);
-        works = works.filter(w => w.year >= yearInt);
-        devLog('Works after year filter:', works.length);
-    }
-
-    // Apply genres filter
-    if (filters.genres && filters.genres.length > 0) {
-        devLog('Filtering by genres:', filters.genres);
-        works = works.filter(w =>
-            w.genres && w.genres.some(g => filters.genres.includes(g))
-        );
-        devLog('Works after genres filter:', works.length);
+    if (filters.type) works = works.filter(w => w.type === filters.type);
+    if (filters.year) works = works.filter(w => w.year >= Number(filters.year));
+    if (filters.genres?.length) {
+        works = works.filter(w => w.genres?.some(g => filters.genres.includes(g)));
     }
 
     return works.map(work => enrichWorkWithRating(work, mockRatings));
@@ -93,20 +73,14 @@ export const getSimilarWorks = async (workId) => {
  * @returns {Promise<Array>}
  */
 export const getPopularWorks = async () => {
-    const worksWithRatings = mockWorks.map(work => {
-        const workRatings = mockRatings.filter(r => r.workId === work.id);
+    const all = await getAllWorks();
+    const popular = all
+        .filter(w => w.rating >= 4 && w.ratingCount >= 3)
+        .sort((a, b) => b.rating - a.rating || b.ratingCount - a.ratingCount)
+        .slice(0, QUERY_LIMITS.POPULAR_WORKS_FETCH);
 
-        const enrichedWork = enrichWorkWithRating(work, mockRatings);
-        enrichedWork.ratingsCount = workRatings.length;
-        return enrichedWork;
-    });
-
-    // Sort by rating and number of ratings
-    return worksWithRatings
-        .sort((a, b) => {
-            if (b.rating !== a.rating) return b.rating - a.rating;
-            return b.ratingsCount - a.ratingsCount;
-        })
+    return popular
+        .sort(() => Math.random() - 0.5)
         .slice(0, QUERY_LIMITS.POPULAR_WORKS);
 };
 
