@@ -1,3 +1,4 @@
+// Application constants
 export const WORK_TYPES = {
     MOVIE: 'movie',
     SERIES: 'series',
@@ -8,6 +9,7 @@ export const WORK_TYPES = {
 
 export const IMAGE_BASE_URL = process.env.IMAGE_BASE_URL || 'http://localhost:3000/uploads';
 
+// Rating: 1-5 stars, integers only
 export const RATING_CONSTRAINTS = { MIN: 1, MAX: 5, STEP: 1 };
 
 export const USER_CONSTRAINTS = {
@@ -32,6 +34,7 @@ export const HTTP_STATUS = {
     INTERNAL_SERVER_ERROR: 500
 };
 
+// Supported genres (alphabetically ordered)
 export const GENRES = [
     'Action', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime',
     'Documentary', 'Drama', 'Fantasy', 'History', 'Horror', 'Mystery',

@@ -1,3 +1,4 @@
+// Work routes: CRUD, discovery, ratings
 import express from 'express';
 import * as workController from '../controllers/workController.js';
 import * as ratingController from '../controllers/ratingController.js';
@@ -7,6 +8,7 @@ const router = express.Router();
 const v = validateIdParam;
 const vrf = validateRequiredFields;
 
+// Discovery (must be before /:workId)
 router.get('/popular', workController.getPopularWorks);
 router.get('/', workController.getAllWorks);
 router.post('/', vrf(['title', 'type']), workController.createWork);

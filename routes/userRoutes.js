@@ -1,3 +1,4 @@
+// User routes: CRUD, ratings, recommendations, shelves, social
 import express from 'express';
 import * as userController from '../controllers/userController.js';
 import * as shelfController from '../controllers/shelfController.js';
@@ -17,6 +18,7 @@ router.post('/:userId/ratings', v('userId'), vrf(['workId', 'score']), userContr
 router.get('/:userId/recommendations', v('userId'), userController.getUserRecommendations);
 router.get('/:userId/shelves', v('userId'), shelfController.getUserShelves);
 router.post('/:userId/shelves', v('userId'), vrf(['name']), shelfController.createShelf);
+// Social features
 router.get('/:userId/following', userController.getUserFollowing);
 router.get('/:userId/followers', userController.getUserFollowers);
 router.post('/:userId/following/:targetUserId', userController.followUser);
