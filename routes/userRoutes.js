@@ -5,6 +5,8 @@ import * as shelfController from '../controllers/shelfController.js';
 import { validateRequiredFields, validateIdParam } from '../middleware/validation.js';
 
 const router = express.Router();
+// Middleware aliases for cleaner route definitions
+// v = validateIdParam, vrf = validateRequiredFields
 const v = validateIdParam;
 const vrf = validateRequiredFields;
 

@@ -7,6 +7,7 @@ export const WORK_TYPES = {
     GRAPHIC_NOVEL: 'graphic-novel'
 };
 
+// Override via env var for cloud deployments (e.g., Render, AWS S3)
 export const IMAGE_BASE_URL = process.env.IMAGE_BASE_URL || 'http://localhost:3000/uploads';
 
 // Rating: 1-5 stars, integers only
@@ -18,6 +19,8 @@ export const USER_CONSTRAINTS = {
     PASSWORD_MIN_LENGTH: 6
 };
 
+// POPULAR_WORKS_FETCH: retrieve pool size for random sampling
+// POPULAR_WORKS: final count returned to client
 export const QUERY_LIMITS = {
     SIMILAR_WORKS: 10,
     POPULAR_WORKS: 10,
