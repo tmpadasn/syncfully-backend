@@ -4,6 +4,7 @@
 
 **SyncFully** bridges the gap between different kinds of entertainment - movies, books, music, TV series, and graphic novels - helping users discover new content based on their preferences and ratings.
 
+[![Cyclopt rating](https://server.cyclopt.com/api/badges/6913775b2a66d21e430c382b)](https://panorama.cyclopt.com)
 ---
 
 ## 📚 Table of Contents
