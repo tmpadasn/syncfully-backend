@@ -11,8 +11,8 @@ const errorHandlers = {
     },
     UserExistsError: (err, res) => sendError(res, err.statusCode, err.message),
     AuthenticationError: (err, res) => sendError(res, err.statusCode, err.message),
-    JsonWebTokenError: (err, res) => sendError(res, HTTP_STATUS.UNAUTHORIZED, 'Invalid token'),
-    TokenExpiredError: (err, res) => sendError(res, HTTP_STATUS.UNAUTHORIZED, 'Token expired')
+    JsonWebTokenError: (_err, res) => sendError(res, HTTP_STATUS.UNAUTHORIZED, 'Invalid token'),
+    TokenExpiredError: (_err, res) => sendError(res, HTTP_STATUS.UNAUTHORIZED, 'Token expired')
 };
 
 /**
