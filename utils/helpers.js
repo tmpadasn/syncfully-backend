@@ -1,21 +1,28 @@
 /**
- * Generate unique ID for mock data
- * @returns {number}
+ * Utility Helper Functions
+ * Common utilities for data manipulation, validation, and formatting.
  */
+
 let currentId = 1;
+
+/**
+ * Generate unique ID for mock data
+ * @returns {number} Next available ID
+ */
 export const generateId = () => currentId++;
 
 /**
- * Reset ID counter (useful for testing)
+ * Reset ID counter (primarily for tests)
+ * @returns {void}
  */
 export const resetIdCounter = () => {
     currentId = 1;
 };
 
 /**
- * Calculate average rating from ratings array
- * @param {Array} ratings - Array of rating objects
- * @returns {number}
+ * Calculate average rating rounded to 2 decimals
+ * @param {Array<{score: number}>} ratings - Array of rating objects
+ * @returns {number} Average rating or 0 if no ratings
  */
 export const calculateAverageRating = (ratings) => {
     if (!ratings || ratings.length === 0) return 0;
@@ -24,32 +31,32 @@ export const calculateAverageRating = (ratings) => {
 };
 
 /**
- * Safely parse an ID to integer with validation
+ * Parse and validate ID as positive integer
  * @param {string|number} id - ID to parse
- * @param {string} fieldName - Name of the field (for error messages)
- * @returns {number} Parsed integer ID
- * @throws {Error} If ID is invalid or not a positive integer
+ * @param {string} [fieldName='ID'] - Field name for error messages
+ * @returns {number} Validated positive integer
+ * @throws {Error} If ID is invalid or not positive
  */
 export const safeParseInt = (id, fieldName = 'ID') => {
     const parsed = parseInt(id, 10);
-    
+
     if (isNaN(parsed)) {
         throw new Error(`Invalid ${fieldName}: must be a number`);
     }
-    
+
     if (parsed <= 0) {
         throw new Error(`Invalid ${fieldName}: must be a positive integer`);
     }
-    
+
     return parsed;
 };
 
 /**
- * Filter items by search query
- * @param {Array} items - Items to filter
- * @param {string} query - Search query
- * @param {Array} fields - Fields to search in
- * @returns {Array}
+ * Filter array by case-insensitive text search across fields
+ * @param {Array<Object>} items - Array of objects to search
+ * @param {string} query - Search text (case-insensitive)
+ * @param {string[]} fields - Object keys to search within
+ * @returns {Array<Object>} Filtered items matching query
  */
 export const searchItems = (items, query, fields) => {
     if (!query) return items;
@@ -64,10 +71,11 @@ export const searchItems = (items, query, fields) => {
 };
 
 /**
- * Format work data for consistent API response
+ * Format work object with rating for API response
+ * Maps 'id' to 'workId' for API consistency
  * @param {Object} work - Work object from mock data
- * @param {number} rating - Calculated rating
- * @returns {Object} Formatted work data
+ * @param {number} [rating=0] - Calculated average rating
+ * @returns {Object} Formatted work with 'workId'
  */
 export const formatWorkData = (work, rating = 0) => {
     return {
@@ -85,10 +93,10 @@ export const formatWorkData = (work, rating = 0) => {
 };
 
 /**
- * Enrich work with rating from mock ratings
+ * Enrich work with calculated rating from ratings array
  * @param {Object} work - Work object from mock data
- * @param {Array} mockRatings - Array of mock ratings
- * @returns {Object} Work data with calculated rating
+ * @param {Array<{workId: number, score: number}>} mockRatings - All ratings
+ * @returns {Object} Work with calculated rating field
  */
 export const enrichWorkWithRating = (work, mockRatings) => {
     const workRatings = mockRatings.filter(r => r.workId === work.id);
@@ -97,24 +105,22 @@ export const enrichWorkWithRating = (work, mockRatings) => {
 };
 
 /**
- * Safely parse query param to integer
- * @param {string} value - Query param value
- * @param {string} fieldName - Name of the field (for error messages)
- * @returns {number|null} Parsed integer or null if invalid
+ * Parse query parameter to integer (returns null if invalid)
+ * @param {string|undefined} value - Query parameter value
+ * @returns {number|null} Parsed integer or null
  */
-export const parseQueryInt = (value, fieldName = 'value') => {
+export const parseQueryInt = (value) => {
     if (value === undefined || value === '') return null;
     const parsed = parseInt(value, 10);
     return Number.isNaN(parsed) ? null : parsed;
 };
 
 /**
- * Safely parse query param to float
- * @param {string} value - Query param value
- * @param {string} fieldName - Name of the field (for error messages)
- * @returns {number|null} Parsed float or null if invalid
+ * Parse query parameter to float (returns null if invalid)
+ * @param {string|undefined} value - Query parameter value
+ * @returns {number|null} Parsed float or null
  */
-export const parseQueryFloat = (value, fieldName = 'value') => {
+export const parseQueryFloat = (value) => {
     if (value === undefined || value === '') return null;
     const parsed = parseFloat(value);
     return Number.isNaN(parsed) ? null : parsed;

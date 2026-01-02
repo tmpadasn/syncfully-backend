@@ -1,8 +1,31 @@
+/**
+ * ============================================================
+ * USER RECOMMENDATIONS TESTS
+ * ============================================================
+ * Tests for user recommendation operations.
+ * 
+ * This file covers fetching personalized recommendations
+ * for both existing users and cold-start scenarios.
+ * 
+ * Endpoints covered:
+ * - GET /api/users/:userId/recommendations - Get recommendations
+ * 
+ * Test categories:
+ * - Happy Path: Existing user, cold start user
+ * - Unhappy Path: Non-existent user
+ * 
+ * @module tests/user_recommendations
+ */
+
 import test from 'ava';
 import got from 'got';
 import listen from 'test-listen';
 import http from 'http';
 import app from '../app.js';
+
+// ============================================================
+// TEST SETUP & TEARDOWN
+// ============================================================
 
 test.before(async (t) => {
     t.context.server = http.createServer(app);
@@ -14,8 +37,15 @@ test.after.always((t) => {
     t.context.server.close();
 });
 
-// GET /api/users/:userId/recommendations
-test('GET /api/users/:userId/recommendations returns recommendations for existing user (Happy Path 1)', async (t) => {
+// ============================================================
+// GET /api/users/:userId/recommendations - GET RECOMMENDATIONS
+// ============================================================
+
+/**
+ * Happy Path: Get recommendations for existing user.
+ * Expected: 200 OK, current and profile arrays, version number.
+ */
+test('GET /api/users/:userId/recommendations - returns recommendations', async (t) => {
     const { body } = await t.context.got('api/users/1/recommendations');
     t.true(body.success);
     t.truthy(body.data.current);
@@ -23,7 +53,11 @@ test('GET /api/users/:userId/recommendations returns recommendations for existin
     t.truthy(body.data.version);
 });
 
-test('GET /api/users/:userId/recommendations verifies structure (Happy Path 2)', async (t) => {
+/**
+ * Happy Path: Verify response structure.
+ * Expected: current and profile are arrays, version is number.
+ */
+test('GET /api/users/:userId/recommendations - verifies structure', async (t) => {
     const { body } = await t.context.got('api/users/1/recommendations');
     t.true(Array.isArray(body.data.current));
     t.true(Array.isArray(body.data.profile));
@@ -35,24 +69,22 @@ test('GET /api/users/:userId/recommendations verifies structure (Happy Path 2)',
     }
 });
 
-test('GET /api/users/:userId/recommendations returns 404 for non-existent user (Unhappy Path 1)', async (t) => {
-    try {
-        await t.context.got('api/users/999999/recommendations');
-    } catch (error) {
-        t.is(error.response.statusCode, 404);
-        t.regex(error.response.body.error, /User not found/);
-    }
-});
-
-test('GET /api/users/:userId/recommendations returns correct number of items (Happy Path 3)', async (t) => {
-    // Assuming mock data has enough works (at least 10)
+/**
+ * Happy Path: Recommendations are limited (default 5 each).
+ * Expected: current.length <= 5, profile.length <= 5.
+ */
+test('GET /api/users/:userId/recommendations - returns correct count', async (t) => {
     const { body } = await t.context.got('api/users/1/recommendations');
     t.true(body.success);
     t.is(body.data.current.length, 5);
     t.is(body.data.profile.length, 5);
 });
 
-test('GET /api/users/:userId/recommendations works for cold start (Happy Path 4)', async (t) => {
+/**
+ * Happy Path: Cold start (new user with no ratings).
+ * Expected: 200 OK, still returns recommendations.
+ */
+test('GET /api/users/:userId/recommendations - cold start works', async (t) => {
     // Create new user with no ratings
     const newUser = {
         username: 'coldstart',
@@ -68,3 +100,15 @@ test('GET /api/users/:userId/recommendations works for cold start (Happy Path 4)
     t.is(body.data.profile.length, 5);
 });
 
+/**
+ * Unhappy Path: Non-existent user.
+ * Expected: 404 Not Found.
+ */
+test('GET /api/users/:userId/recommendations - 404 for non-existent user', async (t) => {
+    try {
+        await t.context.got('api/users/999999/recommendations');
+    } catch (error) {
+        t.is(error.response.statusCode, 404);
+        t.regex(error.response.body.error, /User not found/);
+    }
+});

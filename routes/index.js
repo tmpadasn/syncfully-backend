@@ -1,3 +1,8 @@
+/**
+ * API Routes Index - /api
+ * Aggregates all route modules.
+ */
+
 import express from 'express';
 import userRoutes from './userRoutes.js';
 import workRoutes from './workRoutes.js';
@@ -8,9 +13,7 @@ import shelfRoutes from './shelfRoutes.js';
 
 const router = express.Router();
 
-// Auth routes
 router.use('/auth', authRoutes);
-
 router.use('/users', userRoutes);
 router.use('/works', workRoutes);
 router.use('/ratings', ratingRoutes);

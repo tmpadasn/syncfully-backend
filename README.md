@@ -4,6 +4,7 @@
 
 **SyncFully** bridges the gap between different kinds of entertainment - movies, books, music, TV series, and graphic novels - helping users discover new content based on their preferences and ratings.
 
+[![Cyclopt rating](https://server.cyclopt.com/api/badges/6913775b2a66d21e430c382b)](https://panorama.cyclopt.com)
 ---
 
 ## 📚 Table of Contents
@@ -233,15 +234,26 @@ curl http://localhost:3000/api/users/1/recommendations
 
 ---
 
+## 🔐 Security Features
+
+- **Password Hashing:** bcrypt for secure password storage
+- **Input Validation:** Middleware-based validation on all user inputs
+- **Error Sanitization:** Stack traces hidden in production environment
+- **Environment Configuration:** Sensitive data stored in .env files (excluded from git)
+
+---
+
 ## 🛠 Tech Stack
 
 ### Backend
-- **Runtime:** Node.js v25+
-- **Framework:** Express.js 5.x
+- **Runtime:** Node.js v18+
+- **Framework:** Express.js 5.1.0
 - **Database:** MongoDB with Mongoose ODM
 - **Authentication:** bcrypt
 - **Architecture:** MVC + Service Layer
 - **API Spec:** OpenAPI 3.0.3 (Swagger)
+- **Testing:** AVA with c8 coverage
+- **Linting:** ESLint (ES2022, 2-space indent, single quotes)
 
 ### Frontend
 - **Library:** React 18.2
@@ -277,7 +289,8 @@ Syncfully/
 │   ├── middleware/             # Auth, validation, error handling
 │   ├── utils/                  # Helper functions
 │   ├── data/                   # Mock data for testing
-│   ├── swagger.json            # OpenAPI 3.0 specification
+│   ├── docs/
+│   │   └── swagger.json        # OpenAPI 3.0 specification
 │   ├── app.js                  # Express app configuration
 │   ├── server.js               # Server entry point
 │   └── package.json
@@ -365,7 +378,7 @@ http://localhost:3000/api
 ### Complete API Documentation
 
 For the full OpenAPI 3.0 specification, see:
-- **File:** `syncfully-backend/swagger.json`
+- **File:** `syncfully-backend/docs/swagger.json`
 - **Import into:** [Swagger Editor](https://editor.swagger.io/) or [Postman](https://www.postman.com/)
 
 ---

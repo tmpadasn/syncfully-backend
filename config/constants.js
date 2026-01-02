@@ -1,3 +1,4 @@
+// Application constants
 export const WORK_TYPES = {
     MOVIE: 'movie',
     SERIES: 'series',
@@ -6,14 +7,11 @@ export const WORK_TYPES = {
     GRAPHIC_NOVEL: 'graphic-novel'
 };
 
-// Image Base URL from environment or default
+// Override via env var for cloud deployments (e.g., Render, AWS S3)
 export const IMAGE_BASE_URL = process.env.IMAGE_BASE_URL || 'http://localhost:3000/uploads';
 
-export const RATING_CONSTRAINTS = {
-    MIN: 1,
-    MAX: 5,
-    STEP: 1  // Only integer ratings allowed
-};
+// Rating: 1-5 stars, integers only
+export const RATING_CONSTRAINTS = { MIN: 1, MAX: 5, STEP: 1 };
 
 export const USER_CONSTRAINTS = {
     USERNAME_MIN_LENGTH: 3,
@@ -21,10 +19,12 @@ export const USER_CONSTRAINTS = {
     PASSWORD_MIN_LENGTH: 6
 };
 
+// POPULAR_WORKS_FETCH: retrieve pool size for random sampling
+// POPULAR_WORKS: final count returned to client
 export const QUERY_LIMITS = {
     SIMILAR_WORKS: 10,
     POPULAR_WORKS: 10,
-    POPULAR_WORKS_FETCH: 50  // Fetch more for sorting
+    POPULAR_WORKS_FETCH: 50
 };
 
 export const HTTP_STATUS = {
@@ -37,20 +37,9 @@ export const HTTP_STATUS = {
     INTERNAL_SERVER_ERROR: 500
 };
 
+// Supported genres (alphabetically ordered)
 export const GENRES = [
-    'Action',
-    'Adventure',
-    'Comedy',
-    'Drama',
-    'Fantasy',
-    'Horror',
-    'Mystery',
-    'Romance',
-    'Sci-Fi',
-    'Thriller',
-    'Documentary',
-    'Animation',
-    'Crime',
-    'Biography',
-    'History'
+    'Action', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime',
+    'Documentary', 'Drama', 'Fantasy', 'History', 'Horror', 'Mystery',
+    'Romance', 'Sci-Fi', 'Thriller'
 ];

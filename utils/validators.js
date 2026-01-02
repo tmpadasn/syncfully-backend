@@ -1,9 +1,14 @@
+/**
+ * Input Validation Utilities
+ * Provides validation functions for user input, credentials, and ratings.
+ */
+
 import { USER_CONSTRAINTS, RATING_CONSTRAINTS } from '../config/constants.js';
 
 /**
- * Validate email format
- * @param {string} email - Email to validate
- * @returns {boolean}
+ * Validate email address format using basic regex
+ * @param {string} email - Email address to validate
+ * @returns {boolean} True if format is valid
  */
 export const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -11,9 +16,9 @@ export const isValidEmail = (email) => {
 };
 
 /**
- * Validate username
+ * Validate username length requirements
  * @param {string} username - Username to validate
- * @returns {Object} - { valid: boolean, errors: string[] }
+ * @returns {Object} Validation result with `valid` boolean and `errors` array
  */
 export const validateUsername = (username) => {
     const errors = [];
@@ -29,9 +34,9 @@ export const validateUsername = (username) => {
 };
 
 /**
- * Validate password
+ * Validate password minimum length requirement
  * @param {string} password - Password to validate
- * @returns {Object} - { valid: boolean, errors: string[] }
+ * @returns {Object} Validation result with `valid` boolean and `errors` array
  */
 export const validatePassword = (password) => {
     const errors = [];
@@ -46,20 +51,23 @@ export const validatePassword = (password) => {
 };
 
 /**
- * Validate rating score
+ * Validate rating score (must be integer between MIN-MAX range)
  * @param {number} score - Rating score to validate
- * @returns {Object} - { valid: boolean, errors: string[] }
+ * @returns {Object} Validation result with `valid` boolean and `errors` array
  */
 export const validateRatingScore = (score) => {
     const errors = [];
 
     if (score === undefined || score === null) {
         errors.push('score is required');
-    } else if (typeof score !== 'number') {
+    }
+    else if (typeof score !== 'number') {
         errors.push('score must be a number');
-    } else if (!Number.isInteger(score)) {
+    }
+    else if (!Number.isInteger(score)) {
         errors.push('score must be an integer (no decimals)');
-    } else if (score < RATING_CONSTRAINTS.MIN || score > RATING_CONSTRAINTS.MAX) {
+    }
+    else if (score < RATING_CONSTRAINTS.MIN || score > RATING_CONSTRAINTS.MAX) {
         errors.push(`score must be between ${RATING_CONSTRAINTS.MIN} and ${RATING_CONSTRAINTS.MAX}`);
     }
 
@@ -67,16 +75,16 @@ export const validateRatingScore = (score) => {
 };
 
 /**
- * Validate user registration/update data
+ * Validate user registration or update data
+ * In update mode (isUpdate=true), all fields become optional
  * @param {Object} data - User data to validate
- * @param {boolean} isUpdate - Whether this is an update (makes fields optional)
- * @returns {Object} - { valid: boolean, errors: string[] }
+ * @param {boolean} [isUpdate=false] - If true, makes all fields optional
+ * @returns {Object} Validation result with `valid` boolean and `errors` array
  */
 export const validateUserData = (data, isUpdate = false) => {
     const { username, email, password } = data;
     const errors = [];
 
-    // Validate username if provided or required
     if (username || !isUpdate) {
         const usernameValidation = validateUsername(username);
         if (!usernameValidation.valid) {
@@ -84,7 +92,6 @@ export const validateUserData = (data, isUpdate = false) => {
         }
     }
 
-    // Validate password if provided or required
     if (password || !isUpdate) {
         const passwordValidation = validatePassword(password);
         if (!passwordValidation.valid) {
@@ -92,7 +99,6 @@ export const validateUserData = (data, isUpdate = false) => {
         }
     }
 
-    // Validate email if provided or required
     if (!isUpdate && !email) {
         errors.push('email is required');
     }
