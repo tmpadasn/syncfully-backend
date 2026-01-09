@@ -75,9 +75,10 @@ export const searchItems = (items, query, fields) => {
  * Maps 'id' to 'workId' for API consistency
  * @param {Object} work - Work object from mock data
  * @param {number} [rating=0] - Calculated average rating
+ * @param {number} [ratingCount=0] - Number of ratings
  * @returns {Object} Formatted work with 'workId'
  */
-export const formatWorkData = (work, rating = 0) => {
+export const formatWorkData = (work, rating = 0, ratingCount = 0) => {
     return {
         workId: work.id,
         title: work.title,
@@ -87,6 +88,7 @@ export const formatWorkData = (work, rating = 0) => {
         genres: work.genres,
         creator: work.creator,
         rating,
+        ratingCount,
         coverUrl: work.coverUrl,
         foundAt: work.foundAt
     };
@@ -96,12 +98,12 @@ export const formatWorkData = (work, rating = 0) => {
  * Enrich work with calculated rating from ratings array
  * @param {Object} work - Work object from mock data
  * @param {Array<{workId: number, score: number}>} mockRatings - All ratings
- * @returns {Object} Work with calculated rating field
+ * @returns {Object} Work with calculated rating and ratingCount fields
  */
 export const enrichWorkWithRating = (work, mockRatings) => {
     const workRatings = mockRatings.filter(r => r.workId === work.id);
     const rating = calculateAverageRating(workRatings);
-    return formatWorkData(work, rating);
+    return formatWorkData(work, rating, workRatings.length);
 };
 
 /**
